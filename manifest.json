@@ -2,7 +2,7 @@
   "name": "Anestheticks",
   "short_name": "Anestheticks",
   "description": "Comprehensive anesthesia study planner for EDAIC and FRCA preparation.",
-  "start_url": "/anestheticks/index.html",
+  "start_url": "/Anestheticks/index.html",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#0b1120",
