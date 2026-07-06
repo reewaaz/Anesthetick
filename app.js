@@ -13,20 +13,20 @@
       const raw = localStorage.getItem(LS_KEY);
       if (raw) {
         const parsed = JSON.parse(raw);
-        // Migrate old notes key to topicNotes
         if (parsed.notes && !parsed.topicNotes) {
           parsed.topicNotes = parsed.notes;
         }
         delete parsed.notes;
-        // Ensure all keys exist (backward compat)
         if (!parsed.subBookmarks) parsed.subBookmarks = [];
         if (!parsed.customSubs) parsed.customSubs = {};
         if (!parsed.topicNotes) parsed.topicNotes = {};
+        if (!parsed.githubUser) parsed.githubUser = '';
+        if (!parsed.githubPin) parsed.githubPin = '';
         return parsed;
       }
     } catch (_) {}
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, installDismissed: false, theme: prefersDark ? 'dark' : 'light' };
+    return { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', installDismissed: false, theme: prefersDark ? 'dark' : 'light' };
   }
 
   function saveState() {
@@ -235,6 +235,7 @@
     sun: '<svg viewBox="0 0 24 24" class="ic" style="width:16px;height:16px"><circle cx="12" cy="12" r="5" fill="currentColor"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
     link: '<svg viewBox="0 0 24 24" class="ic link-icon"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.5 1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.5-1.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     download: '<svg viewBox="0 0 24 24" class="ic" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    upload: '<svg viewBox="0 0 24 24" class="ic" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     gauge: '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8zm-1-11.5V14a1 1 0 0 0 2 0V8.5a3.5 3.5 0 1 0-2 0z" fill="currentColor"/></svg>',
     flask: '<svg viewBox="0 0 24 24"><path d="M8 2h8M9 2v6.4a4 4 0 0 1-.6 2.2L4 18a2 2 0 0 0 1.7 3h12.6A2 2 0 0 0 20 18l-4.4-7.4a4 4 0 0 1-.6-2.2V2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     activity: '<svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
@@ -663,6 +664,31 @@
       </div>
 
       <div class="set-group">
+        <div class="set-group-title">Cloud Sync</div>
+        <div class="set-row">
+          <div class="set-info">
+            <div class="lbl">GitHub Backup</div>
+            <div class="desc">Sync your data across devices via GitHub</div>
+          </div>
+          <span class="gh-status ${isGithubConnected() ? 'connected' : ''}" id="ghStatusDot"></span>
+        </div>
+        <div class="gh-login" id="ghLoginForm" style="${isGithubConnected() ? 'display:none' : ''}">
+          <input type="text" id="ghUserInput" placeholder="GitHub username" value="${state.githubUser || ''}" />
+          <input type="password" id="ghPinInput" placeholder="Personal Access Token (PIN)" />
+          <button class="btn-primary" data-action="gh-connect" style="width:100%;margin-top:6px">${ICONS.download} Connect</button>
+        </div>
+        <div class="gh-connected" id="ghConnected" style="${isGithubConnected() ? '' : 'display:none'}">
+          <div class="gh-user">${ICONS.check} ${state.githubUser}</div>
+          <div class="gh-actions">
+            <button class="btn-ghost" data-action="gh-save" style="font-size:12px">${ICONS.upload} Save to GitHub</button>
+            <button class="btn-ghost" data-action="gh-load" style="font-size:12px">${ICONS.download} Load from GitHub</button>
+            <button class="btn-ghost" data-action="gh-disconnect" style="font-size:12px;color:var(--danger);border-color:color-mix(in srgb, var(--danger) 40%, var(--line))">Disconnect</button>
+          </div>
+          <div class="gh-info">Data syncs to ${state.githubUser}/anesthetick/${GITHUB_DATA_PATH}</div>
+        </div>
+      </div>
+
+      <div class="set-group">
         <div class="set-group-title">Data</div>
         <div class="set-row" style="border-color:color-mix(in srgb, var(--danger) 30%, var(--line))">
           <div class="set-info">
@@ -832,6 +858,79 @@
     }, 2200);
   }
 
+  /* ── Confirm dialog ─────────────────────────────────────── */
+  function showConfirm(title, msg, confirmLabel, cancelLabel) {
+    return new Promise(resolve => {
+      const backdrop = document.createElement('div');
+      backdrop.className = 'dialog-backdrop';
+      const dlg = document.createElement('div');
+      dlg.className = 'dialog';
+      dlg.innerHTML = `
+        <h3>${title}</h3>
+        <p>${msg}</p>
+        <div class="dialog-actions">
+          <button class="btn-ghost" data-dlg="cancel">${cancelLabel || 'Cancel'}</button>
+          <button class="btn-primary" data-dlg="confirm">${confirmLabel || 'Confirm'}</button>
+        </div>`;
+      backdrop.appendChild(dlg);
+      document.body.appendChild(backdrop);
+      requestAnimationFrame(() => backdrop.classList.add('show'));
+      const close = result => {
+        backdrop.classList.remove('show');
+        setTimeout(() => backdrop.remove(), 300);
+        resolve(result);
+      };
+      backdrop.addEventListener('click', e => { if (e.target === backdrop) close(false); });
+      dlg.querySelector('[data-dlg="cancel"]').addEventListener('click', () => close(false));
+      dlg.querySelector('[data-dlg="confirm"]').addEventListener('click', () => close(true));
+    });
+  }
+
+  /* ── GitHub sync ─────────────────────────────────────────── */
+  const GITHUB_API = 'https://api.github.com';
+  const GITHUB_DATA_PATH = 'userdata/data.json';
+
+  function isGithubConnected() {
+    return !!(state.githubUser && state.githubPin);
+  }
+
+  function getGithubAuth() {
+    return btoa(state.githubUser + ':' + state.githubPin);
+  }
+
+  async function syncToGithub(data) {
+    if (!isGithubConnected()) throw new Error('Not connected to GitHub');
+    const url = GITHUB_API + '/repos/' + state.githubUser + '/' + 'anesthetick' + '/contents/' + GITHUB_DATA_PATH;
+    const auth = getGithubAuth();
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(data))));
+    let sha = null;
+    try {
+      const existing = await fetch(url, { headers: { Authorization: 'Basic ' + auth } });
+      if (existing.ok) {
+        const ex = await existing.json();
+        sha = ex.sha;
+      }
+    } catch (_) {}
+    const body = { message: 'sync anesthetick data', content };
+    if (sha) body.sha = sha;
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: { Authorization: 'Basic ' + auth, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) throw new Error('Sync failed: ' + res.status);
+    return true;
+  }
+
+  async function syncFromGithub() {
+    if (!isGithubConnected()) throw new Error('Not connected to GitHub');
+    const url = 'https://raw.githubusercontent.com/' + state.githubUser + '/anesthetick/main/' + GITHUB_DATA_PATH;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error('Pull failed: ' + res.status);
+    const data = await res.json();
+    return data;
+  }
+
   /* ── event delegation ───────────────────────────────────── */
 
   // View history for back navigation
@@ -843,7 +942,16 @@
   }
 
   function goBack() {
-    if (navHistory.length < 2) { navigate('home'); return; }
+    if (navHistory.length < 2) {
+      showConfirm('Exit Anesthetick?', 'Your progress is saved locally on this device.', 'Exit', 'Stay').then(ok => {
+        if (ok) {
+          // Let the browser navigation proceed
+        } else {
+          history.pushState(null, '');
+        }
+      });
+      return;
+    }
     navHistory.pop(); // current
     const prev = navHistory.pop() || { view: 'home' };
     navigate(prev.view, prev.data);
@@ -1017,23 +1125,77 @@
     }
 
     // Install from settings
-    if (action === 'install-app') {
-      if (window.matchMedia('(display-mode: standalone)').matches) {
-        toast('App is already installed');
-      } else if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(result => {
-          if (result.outcome === 'accepted') {
-            state.installDismissed = true;
-            saveState();
-          }
-          deferredPrompt = null;
-        });
-      } else {
-        toast('Open this page in Chrome and visit again — the install prompt will appear');
+      if (action === 'install-app') {
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+          toast('App is already installed');
+        } else if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(result => {
+            if (result.outcome === 'accepted') {
+              state.installDismissed = true;
+              saveState();
+            }
+            deferredPrompt = null;
+          });
+        } else {
+          toast('Open this page in Chrome and visit again — the install prompt will appear');
+        }
+        return;
       }
-      return;
-    }
+
+      // GitHub actions
+      if (action === 'gh-connect') {
+        const user = document.getElementById('ghUserInput')?.value.trim();
+        const pin = document.getElementById('ghPinInput')?.value.trim();
+        if (!user || !pin) { toast('Enter both username and token'); return; }
+        toast('Verifying connection…');
+        const auth = btoa(user + ':' + pin);
+        fetch('https://api.github.com/user', { headers: { Authorization: 'Basic ' + auth } }).then(r => {
+          if (!r.ok) throw new Error('Invalid credentials (' + r.status + ')');
+          state.githubUser = user;
+          state.githubPin = pin;
+          saveState();
+          toast('Connected to GitHub');
+          navigate('settings');
+        }).catch(err => {
+          toast('Connection failed: ' + err.message);
+        });
+        return;
+      }
+      if (action === 'gh-save') {
+        toast('Saving to GitHub…');
+        const data = {
+          progress: state.progress,
+          bookmarks: state.bookmarks,
+          subBookmarks: state.subBookmarks,
+          customSubs: state.customSubs,
+          topicNotes: state.topicNotes
+        };
+        syncToGithub(data).then(() => toast('Saved to GitHub')).catch(err => toast('Save failed: ' + err.message));
+        return;
+      }
+      if (action === 'gh-load') {
+        toast('Loading from GitHub…');
+        syncFromGithub().then(data => {
+          if (data.progress) state.progress = data.progress;
+          if (data.bookmarks) state.bookmarks = data.bookmarks;
+          if (data.subBookmarks) state.subBookmarks = data.subBookmarks;
+          if (data.customSubs) state.customSubs = data.customSubs;
+          if (data.topicNotes) state.topicNotes = data.topicNotes;
+          saveState();
+          toast('Data loaded from GitHub');
+          navigate('home');
+        }).catch(err => toast('Load failed: ' + err.message));
+        return;
+      }
+      if (action === 'gh-disconnect') {
+        state.githubUser = '';
+        state.githubPin = '';
+        saveState();
+        toast('Disconnected');
+        navigate('settings');
+        return;
+      }
 
     // Theme toggle
     if (action === 'toggle-theme') {
@@ -1047,26 +1209,33 @@
 
     // Reset actions in settings
     if (action === 'reset-progress') {
-      if (!confirm('Reset all progress? This cannot be undone.')) return;
-      state.progress = {};
-      saveState();
-      toast('Progress reset');
+      showConfirm('Reset Progress', 'Clear all checkmarks? This cannot be undone.', 'Reset', 'Cancel').then(ok => {
+        if (!ok) return;
+        state.progress = {};
+        saveState();
+        toast('Progress reset');
+      });
       return;
     }
     if (action === 'reset-bookmarks') {
-      if (!confirm('Clear all bookmarks? This cannot be undone.')) return;
-      state.bookmarks = [];
-      saveState();
-      toast('Bookmarks cleared');
+      showConfirm('Clear Bookmarks', 'Remove all saved topics and sub-items? This cannot be undone.', 'Clear', 'Cancel').then(ok => {
+        if (!ok) return;
+        state.bookmarks = [];
+        state.subBookmarks = [];
+        saveState();
+        toast('Bookmarks cleared');
+      });
       return;
     }
     if (action === 'reset-all') {
-      if (!confirm('Wipe all local data? This cannot be undone.')) return;
-      state = { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, installDismissed: false, theme: 'dark' };
-      applyTheme('dark');
-      saveState();
-      toast('All data wiped');
-      navigate('home');
+      showConfirm('Reset Everything', 'Wipe all local data including progress, bookmarks, notes, and theme? This cannot be undone.', 'Wipe', 'Cancel').then(ok => {
+        if (!ok) return;
+        state = { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', installDismissed: false, theme: 'dark' };
+        applyTheme('dark');
+        saveState();
+        toast('All data wiped');
+        navigate('home');
+      });
       return;
     }
   });

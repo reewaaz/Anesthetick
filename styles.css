@@ -1957,3 +1957,114 @@ main::-webkit-scrollbar-thumb {
   .ripple { display: none !important; }
   .navbtn:active svg { animation: none !important; }
 }
+
+/* ── Confirm dialog ────────────────────────────────────── */
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: grid;
+  place-items: center;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.25s var(--ease);
+  backdrop-filter: blur(2px);
+}
+.dialog-backdrop.show {
+  opacity: 1;
+}
+.dialog {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 28px 24px 20px;
+  max-width: 340px;
+  width: 90%;
+  box-shadow: 0 12px 48px rgba(0,0,0,0.3);
+  transform: scale(0.9);
+  transition: transform 0.25s var(--ease);
+}
+.dialog-backdrop.show .dialog {
+  transform: scale(1);
+}
+.dialog h3 {
+  font-size: 18px;
+  font-weight: 650;
+  margin: 0 0 8px;
+  color: var(--text);
+}
+.dialog p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+  margin: 0 0 24px;
+  font-weight: 400;
+}
+.dialog-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.dialog-actions button {
+  min-width: 72px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ── GitHub sync ────────────────────────────────────────── */
+.gh-status {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--danger);
+  flex-shrink: 0;
+}
+.gh-status.connected {
+  background: var(--ok);
+  box-shadow: 0 0 6px var(--ok);
+}
+.gh-login,
+.gh-connected {
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.gh-login input {
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: var(--font);
+}
+.gh-login input:focus {
+  border-color: var(--accent2);
+}
+.gh-user {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent2);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.gh-user svg {
+  width: 14px;
+  height: 14px;
+}
+.gh-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.gh-info {
+  font-size: 11px;
+  color: var(--muted);
+  font-weight: 400;
+  word-break: break-all;
+}
