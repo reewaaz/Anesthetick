@@ -975,13 +975,16 @@ main::-webkit-scrollbar-thumb {
   border: none;
   color: var(--muted);
   cursor: pointer;
-  width: 28px;
-  height: 28px;
-  border-radius: 6px;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
   display: grid;
   place-items: center;
   flex-shrink: 0;
   transition: 0.2s;
+}
+.sub-bookmark:hover {
+  background: var(--hover);
 }
 .sub-bookmark.active {
   color: var(--accent2);
@@ -990,8 +993,8 @@ main::-webkit-scrollbar-thumb {
   transform: scale(0.85);
 }
 .sub-bookmark svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 }
 
 /* Topic-level notes */
