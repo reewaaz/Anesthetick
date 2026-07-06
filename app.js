@@ -16,8 +16,12 @@
         // Migrate old notes key to topicNotes
         if (parsed.notes && !parsed.topicNotes) {
           parsed.topicNotes = parsed.notes;
-          delete parsed.notes;
         }
+        delete parsed.notes;
+        // Ensure all keys exist (backward compat)
+        if (!parsed.subBookmarks) parsed.subBookmarks = [];
+        if (!parsed.customSubs) parsed.customSubs = {};
+        if (!parsed.topicNotes) parsed.topicNotes = {};
         return parsed;
       }
     } catch (_) {}
