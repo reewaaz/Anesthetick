@@ -154,6 +154,10 @@ a:hover {
   pointer-events: none;
 }
 
+.search-wrap.open ~ .top-title {
+  display: none;
+}
+
 .icon-btn {
   width: 40px;
   height: 40px;
@@ -175,28 +179,25 @@ a:hover {
 }
 
 .search-wrap {
-  flex: 0;
   position: relative;
+  flex: 0 0 auto;
   display: flex;
   align-items: center;
-  justify-content: center;
   background: var(--surface);
-  border: 1.5px solid var(--accent2);
+  border: 1.5px solid var(--line);
   border-radius: var(--radius-sm);
-  height: 44px;
+  height: 40px;
   padding: 0;
   transition: 0.3s var(--ease);
-  width: 44px;
+  width: 48px;
   cursor: pointer;
-  overflow: hidden;
   flex-shrink: 0;
-  margin-right: 4px;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent2) 20%, transparent);
+  box-shadow: none;
 }
 
 .search-wrap:hover {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent2) 30%, transparent);
+  border-color: var(--accent2);
+  background: var(--surface2);
 }
 
 .search-wrap.open {
@@ -204,24 +205,33 @@ a:hover {
   width: auto;
   padding: 0 10px 0 0;
   justify-content: flex-start;
+  border-color: var(--accent2);
 }
 
 .search-ic {
-  width: 20px;
-  height: 20px;
-  color: var(--muted);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  color: var(--text2);
   pointer-events: none;
   transition: 0.25s var(--ease);
-  flex-shrink: 0;
+  z-index: 1;
 }
 
 .search-wrap.open .search-ic {
+  position: static;
+  transform: none;
   color: var(--accent);
   margin: 0 6px 0 10px;
+  flex-shrink: 0;
 }
 
 .search-wrap input {
   flex: 1;
+  min-width: 0;
   background: none;
   border: none;
   outline: none;
@@ -252,6 +262,7 @@ main {
   padding: 16px 14px calc(var(--nav-h) + var(--safe-b) + 16px);
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
+  overscroll-behavior-y: contain;
 }
 
 main::-webkit-scrollbar {
@@ -271,6 +282,35 @@ main::-webkit-scrollbar-thumb {
   max-width: var(--maxw);
   margin: 0 auto;
   width: 100%;
+}
+
+/* ── Pull to refresh ──────────────────────────────────── */
+.pull-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 60px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.pull-indicator.loading {
+  opacity: 0.5;
+}
+.pull-arrow {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  font-size: 18px;
+  transition: transform 0.2s ease-out;
+  flex-shrink: 0;
+}
+.pull-text {
+  white-space: nowrap;
 }
 
 /* ── Hero ──────────────────────────────────────────────── */
@@ -1522,6 +1562,10 @@ main::-webkit-scrollbar-thumb {
 }
 
 .navbtn.active {
+  color: var(--accent2);
+}
+
+.navbtn.is-back {
   color: var(--accent2);
 }
 

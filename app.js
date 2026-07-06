@@ -811,22 +811,58 @@
     sfxCelebrate();
   }
 
-  function navigate(view, data) {
+  function navigate(view, data, { replace = false } = {}) {
     switch (view) {
       case 'home': showView(viewHome); break;
       case 'bookmarks': showView(viewBookmarks); break;
       case 'settings': showView(viewCombinedSettings); break;
+      case 'progress': showView(viewProgress); break;
       case 'category': showView(viewCategory, data); break;
       case 'topic': showView(viewTopic, data); break;
       case 'search': showView(viewSearch, data); break;
       default: showView(viewHome);
     }
     const navView = ['home', 'bookmarks', 'settings'].includes(view) ? view : 'home';
-    updateNav(navView);
-    history.pushState({ view, data }, '');
+    updateNav(navView, view);
+    const lastState = history.state;
+    const isDuplicate = lastState && lastState.view === view &&
+      JSON.stringify(lastState.data) === JSON.stringify(data);
+    if (replace || isDuplicate) {
+      history.replaceState({ view, data }, '');
+    } else {
+      history.pushState({ view, data }, '');
+    }
   }
 
-  function updateNav(activeView) {
+  function navigateToState(state) {
+    if (!state) return;
+    switch (state.view) {
+      case 'home': showView(viewHome); break;
+      case 'bookmarks': showView(viewBookmarks); break;
+      case 'settings': showView(viewCombinedSettings); break;
+      case 'progress': showView(viewProgress); break;
+      case 'category': showView(viewCategory, state.data); break;
+      case 'topic': showView(viewTopic, state.data); break;
+      case 'search': showView(viewSearch, state.data); break;
+      default: showView(viewHome);
+    }
+    const navView = ['home', 'bookmarks', 'settings'].includes(state.view) ? state.view : 'home';
+    updateNav(navView, state.view);
+  }
+
+  const HOME_BTN_HTML = `<svg viewBox="0 0 24 24" class="ic"><path d="M3 11.5 12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg><span>Home</span>`;
+  const BACK_BTN_HTML = `<svg viewBox="0 0 24 24" class="ic" style="width:22px;height:22px"><path d="M19 12H5M12 19l-7-7 7-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Back</span>`;
+  const DEEP_VIEWS = ['category', 'topic', 'progress', 'search'];
+
+  function isDeepView(view) { return DEEP_VIEWS.includes(view); }
+
+  function updateNav(activeView, actualView) {
+    const homeBtn = $('.navbtn[data-view="home"]');
+    if (homeBtn) {
+      const isDeep = isDeepView(actualView != null ? actualView : activeView);
+      homeBtn.classList.toggle('is-back', isDeep);
+      homeBtn.innerHTML = isDeep ? BACK_BTN_HTML : HOME_BTN_HTML;
+    }
     $$('.navbtn').forEach(btn => {
       btn.classList.toggle('active', btn.dataset.view === activeView);
     });
@@ -1079,27 +1115,6 @@
 
   /* ── event delegation ───────────────────────────────────── */
 
-  // View history for back navigation
-  let navHistory = [];
-
-  function pushNav(view, data) {
-    navHistory.push({ view, data });
-    if (navHistory.length > 20) navHistory.shift();
-  }
-
-  function goBack() {
-    if (navHistory.length === 0) {
-      showConfirm('Exit Anesthetick?', 'Your progress is saved locally on this device.', 'Exit', 'Stay').then(ok => {
-        if (!ok) history.pushState(null, '');
-      });
-      return;
-    }
-    navHistory.pop(); // current view
-    const prev = navHistory.length > 0 ? navHistory[navHistory.length - 1] : { view: 'home' };
-    navigate(prev.view, prev.data);
-  }
-
-  // Title click → home
   $('#topTitle').addEventListener('click', () => {
     sfxNav();
     navigate('home');
@@ -1120,10 +1135,65 @@
     // Swipe right from left edge → go back
     if (dx > 80 && Math.abs(dy) < 60 && touchStartX < 40) {
       e.preventDefault();
-      goBack();
+      window.history.back();
       touchStartX = 0;
     }
   }, { passive: false });
+
+  // Pull to refresh
+  let pullY = 0, pulling = false, pullDist = 0;
+  let $pullEl = null;
+
+  const VIEW_FN = { home: viewHome, bookmarks: viewBookmarks, settings: viewCombinedSettings, progress: viewProgress, category: viewCategory, topic: viewTopic, search: viewSearch };
+
+  function createPullEl() {
+    const el = document.createElement('div');
+    el.className = 'pull-indicator';
+    el.innerHTML = '<div class="pull-arrow">↓</div><div class="pull-text">Pull to refresh</div>';
+    return el;
+  }
+
+  function pullRefresh() {
+    const state = history.state;
+    if (!state) return;
+    if ($pullEl) $pullEl.classList.add('loading');
+    const fn = VIEW_FN[state.view] || viewHome;
+    showView(fn, state.data);
+    toast('Refreshed');
+  }
+
+  $view.addEventListener('touchstart', e => {
+    if (Math.round($view.scrollTop) > 0 || e.touches.length !== 1) return;
+    pullY = e.touches[0].clientY;
+    pullDist = 0;
+    pulling = true;
+  }, { passive: true });
+
+  $view.addEventListener('touchmove', e => {
+    if (!pulling || e.touches.length !== 1) return;
+    const dy = e.touches[0].clientY - pullY;
+    if (dy < 0) { pulling = false; removePullEl(); return; }
+    e.preventDefault();
+    pullDist = Math.min(dy * 0.4, 140);
+    if (!$pullEl) { $pullEl = createPullEl(); $view.prepend($pullEl); }
+    $pullEl.style.transform = `translateY(${pullDist - 60}px)`;
+    const arrow = $pullEl.querySelector('.pull-arrow');
+    if (arrow) arrow.style.transform = `rotate(${Math.min(pullDist / 80 * 180, 180)}deg)`;
+    const text = $pullEl.querySelector('.pull-text');
+    if (text) text.textContent = pullDist > 75 ? 'Release to refresh' : 'Pull to refresh';
+  }, { passive: false });
+
+  function removePullEl() {
+    if ($pullEl) { $pullEl.remove(); $pullEl = null; }
+  }
+
+  $view.addEventListener('touchend', () => {
+    if (!pulling) return;
+    pulling = false;
+    if (pullDist > 75) pullRefresh();
+    removePullEl();
+    pullDist = 0;
+  }, { passive: true });
 
   // Main view events
   $view.addEventListener('click', e => {
@@ -1131,7 +1201,6 @@
 
     if (!target) return;
 
-    // Navigation
     if (target.dataset.nav) {
       const nav = target.dataset.nav;
       sfxNav();
@@ -1142,7 +1211,6 @@
 
     // Category card
     if (target.dataset.cat) {
-      pushNav('category', target.dataset.cat);
       sfxNav();
       navigate('category', target.dataset.cat);
       return;
@@ -1150,7 +1218,6 @@
 
     // Topic click (click on topic row, not inside sub-item)
     if (target.dataset.topicId && !target.dataset.action && !e.target.closest('.sub-item, .sub-bookmark, .sub-del')) {
-      pushNav('topic', target.dataset.topicId);
       sfxNav();
       navigate('topic', target.dataset.topicId);
       return;
@@ -1453,7 +1520,12 @@
     $topTitle.classList.remove('hidden');
     $searchInput.value = '';
     clearTimeout(searchTimeout);
-    navigate('home');
+    const st = history.state;
+    if (st && st.view !== 'search') {
+      navigateToState(st);
+    } else {
+      showView(viewHome);
+    }
   }
 
   $searchWrap.addEventListener('click', (e) => {
@@ -1491,6 +1563,11 @@
   $$('.navbtn').forEach(btn => {
     btn.addEventListener('click', () => {
       const view = btn.dataset.view;
+      if (btn.classList.contains('is-back')) {
+        sfxNav();
+        window.history.back();
+        return;
+      }
       sfxNav();
       if ($searchWrap.classList.contains('open')) {
         $searchWrap.classList.remove('open');
@@ -1504,12 +1581,6 @@
   // Sheet backdrop
   $sheetBackdrop.addEventListener('click', closeSheet);
 
-  // Stats button
-  $('#statsBtn').addEventListener('click', () => {
-    sfxNav();
-    collapseSearch();
-    navigate('bookmarks');
-  });
 
   /* ── PWA install ────────────────────────────────────────── */
   const $installBanner = $('#installBanner');
@@ -1551,15 +1622,15 @@
   });
 
   /* ── Browser back button ────────────────────────────────── */
-  let exiting = false;
   window.addEventListener('popstate', e => {
-    if (exiting) return;
-    if (navHistory.length > 1) { goBack(); return; }
-    // On home page — push state to stay, then ask
-    history.pushState(null, '');
-    showConfirm('Exit Anesthetick?', 'Your progress is saved locally on this device.', 'Exit', 'Stay').then(ok => {
-      if (ok) { exiting = true; history.back(); }
-    });
+    const state = e.state;
+    if (!state) {
+      showConfirm('Exit Anesthetick?', 'Your progress is saved locally on this device.', 'Exit', 'Stay').then(ok => {
+        if (!ok) history.pushState({ view: 'home' }, '');
+      });
+      return;
+    }
+    navigateToState(state);
   });
 
   /* ── Ripple + global interaction ──────────────────────── */
