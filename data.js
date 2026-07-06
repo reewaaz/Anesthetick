@@ -1,4 +1,4 @@
-// Anestheticks — Comprehensive Anesthesia Curriculum Database
+// Anesthetick — Comprehensive Anesthesia Curriculum Database
 // Target: EDAIC / FRCA
 // References legend:
 //   MM = Morgan & Mikhail's Clinical Anesthesiology (6th ed)
@@ -31,7 +31,8 @@ const CURRICULUM = [
             "Pre-use checklist (ASA 2008)",
             "Newer workstation self-tests & limitations",
             "Data streams & integration"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","https://www.apsf.org/","",""],
         },
         {
           id: "gas-supply",
@@ -45,7 +46,8 @@ const CURRICULUM = [
             "Pressure regulation & regulators",
             "Oxygen supply failure devices (fail-safe, proportioning)",
             "O2 failure alarm"
-          ]
+          ],
+          subLinks: ["","","","","","",""],
         },
         {
           id: "flowmeters",
@@ -56,7 +58,8 @@ const CURRICULUM = [
             "Turbulent vs laminar flow (Hagen-Poiseuille)",
             "Sequence of flowmeter arrangement",
             "Problems: sticking bobbin, static, leaks"
-          ]
+          ],
+          subLinks: ["","","",""],
         },
         {
           id: "vaporizers",
@@ -71,7 +74,8 @@ const CURRICULUM = [
             "Vaporizer-in-circuit (VIC) draw-over",
             "Effects of altitude & flow on output",
             "Tipping / overfilling hazards"
-          ]
+          ],
+          subLinks: ["","","","","","","","https://litfl.com/"],
         },
         {
           id: " scavenging",
@@ -83,7 +87,8 @@ const CURRICULUM = [
             "Open vs closed scavenging interface",
             "Pressure relief (positive & negative)",
             "Room ventilation requirements"
-          ]
+          ],
+          subLinks: ["","https://www.stopbang.ca/","","",""],
         },
         {
           id: "machine-checks",
@@ -95,7 +100,8 @@ const CURRICULUM = [
             "Circle system leak test",
             "Ventilator & alarm checks",
             "Common gas outlet verification"
-          ]
+          ],
+          subLinks: ["","","","",""],
         }
       ]
     },
@@ -114,7 +120,8 @@ const CURRICULUM = [
             "Soda lime & absorbents (Amsorb, lithium hydroxide)",
             "CO absorption compounds & degradation products (compound A, carbon monoxide)",
             "Malfunction of unidirectional valves"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "mapleson",
@@ -126,7 +133,8 @@ const CURRICULUM = [
             "Fresh gas flow requirements",
             "Bain circuit (coaxial Mapleson D)",
             "Lack & Humphrey circuits"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "drawover",
@@ -137,7 +145,8 @@ const CURRICULUM = [
             "Epstein Mackintosh Oxford (EMO)",
             "Pneupac / transport ventilators",
             "Gloved bag / WHO emergency setups"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     },
@@ -155,7 +164,8 @@ const CURRICULUM = [
             "Pressure vs volume control",
             "Tidal volume compensation (compressible volume)",
             "Leaks in descending bellows (hidden)"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "advanced-vents",
@@ -166,7 +176,8 @@ const CURRICULUM = [
             "PRVC, APV, auto-flow",
             "Non-invasive ventilation interfaces",
             "High-flow nasal cannula principles"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     },
@@ -184,7 +195,8 @@ const CURRICULUM = [
             "i-gel, Air-Q, Ambu AuraGain",
             "Insertion technique & cuff pressure",
             "Indications, contraindications, complications"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "eett",
@@ -197,7 +209,8 @@ const CURRICULUM = [
             "Cuff design (high vs low pressure), cuff pressure monitoring",
             "Tube exchange catheters",
             "Tracheostomy tube types (Shiley, Portex)"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "laryngoscopes",
@@ -210,7 +223,8 @@ const CURRICULUM = [
             "Hyperangulated vs standard blades",
             "Rigid fiberoptic (Bullard, Upsherscope)",
             "Channelled vs non-channelled devices"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/","https://litfl.com/",""],
         },
         {
           id: "fiberoptic",
@@ -222,7 +236,8 @@ const CURRICULUM = [
             "Topicalization techniques & nerve blocks",
             "Antisialogogue use",
             "Troubleshooting & failure rescue"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "emergency-airway",
@@ -235,7 +250,8 @@ const CURRICULUM = [
             "Laryngeal tube (LT)",
             "Cricothyrotomy kits (Melker, QuickTrach)",
             "Cannot intubate cannot oxygenate (CICO) algorithm"
-          ]
+          ],
+          subLinks: ["","","","","","https://www.das.uk.com/"],
         },
         {
           id: "humidification",
@@ -246,7 +262,8 @@ const CURRICULUM = [
             "Heated humidifiers",
             "Bacterial/viral filters",
             "Ideal properties"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     },
@@ -264,7 +281,8 @@ const CURRICULUM = [
             "Alarms & prioritization",
             "Capnography as mandatory",
             "Vigilance & situational awareness"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","","https://litfl.com/","https://www.openanesthesia.org/"],
         },
         {
           id: "bp-monitoring",
@@ -277,7 +295,8 @@ const CURRICULUM = [
             "Allen test & complications",
             "Square wave test interpretation",
             "Mean arterial pressure calculation"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "ecg",
@@ -289,7 +308,8 @@ const CURRICULUM = [
             "Arrhythmia recognition",
             "Ischemia detection (lead V5, II)",
             "Pacemaker spikes"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/","",""],
         },
         {
           id: "pulse-ox",
@@ -302,7 +322,8 @@ const CURRICULUM = [
             "Causes of error: dyshemoglobins (COHb, MetHb), nail polish, motion, low perfusion",
             "Masimo SET & signal extraction",
             "Plethysmographic variability index (PVI)"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "capnography",
@@ -315,7 +336,8 @@ const CURRICULUM = [
             "Causes of altered EtCO2 (high, low, absent, rising)",
             "Agents analysis (Raman, mass spec, photoacoustic)",
             "V/Q relationships & PaCO2-EtCO2 gradient"
-          ]
+          ],
+          subLinks: ["","","","","","https://derangedphysiology.com/main/required-reading/physiology"],
         },
         {
           id: "cvp-pa",
@@ -329,7 +351,8 @@ const CURRICULUM = [
             "Derived parameters (CO, SVR, PVR, oxygen delivery)",
             "Indications & controversy (ESCAPE trial)",
             "Ultrasound guidance"
-          ]
+          ],
+          subLinks: ["","","","","","",""],
         },
         {
           id: "cardiac-output",
@@ -342,7 +365,8 @@ const CURRICULUM = [
             "Esophageal Doppler",
             "Transesophageal echo (basic)",
             "Bioimpedance & bioreactance"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "eeg-bis",
@@ -354,7 +378,8 @@ const CURRICULUM = [
             "Evoked potentials (SSEP, MEP, BAEP)",
             "Cerebral oximetry (NIRS, rSO2)",
             "Limitations of depth monitors"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "neuromuscular",
@@ -365,7 +390,8 @@ const CURRICULUM = [
             "Sites: ulnar, facial, posterior tibial",
             "Acceleromyography vs mechanomyography",
             "Reversal criteria (TOF ratio ≥0.9)"
-          ]
+          ],
+          subLinks: ["","","","https://www.openanesthesia.org/"],
         },
         {
           id: "temp-glucose",
@@ -377,7 +403,8 @@ const CURRICULUM = [
             "Glucose measurement & perioperative",
             "ABG, lactate, hemoglobin point-of-care",
             "Thromboelastography (TEG/ROTEM)"
-          ]
+          ],
+          subLinks: ["","","","","https://www.openanesthesia.org/"],
         },
         {
           id: "ultrasound",
@@ -387,7 +414,8 @@ const CURRICULUM = [
             "Piezoelectric effect & frequency/depth tradeoff",
             "Modes: B, M, Doppler",
             "Probes: linear, curvilinear, phased array",
-          ]
+          ],
+          subLinks: ["","",""],
         }
       ]
     },
@@ -405,7 +433,8 @@ const CURRICULUM = [
             "Ground fault circuit interrupters",
             "Leakage current",
             "Equipotential grounding in OR"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","","",""],
         },
         {
           id: "fires",
@@ -417,7 +446,8 @@ const CURRICULUM = [
             "Bowel prep & methane explosion risk",
             "Fire risk assessment score",
             "Waste anesthetic gas exposure limits"
-          ]
+          ],
+          subLinks: ["https://www.apsf.org/","","","",""],
         }
       ]
     }
@@ -447,7 +477,8 @@ const CURRICULUM = [
             "Protein binding & factors affecting",
             "Multi-compartment models",
             "Effect-site concentration (ke0)"
-          ]
+          ],
+          subLinks: ["","","","","","","","",""],
         },
         {
           id: "pd",
@@ -460,7 +491,8 @@ const CURRICULUM = [
             "Therapeutic index & margin of safety",
             "Tachyphylaxis & tolerance",
             "Synergism, additivity, antagonism (isobologram)"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "uptake-distribution",
@@ -473,7 +505,8 @@ const CURRICULUM = [
             "Concentration effect & second gas effect",
             "Overpressurization",
             "Effect of minute ventilation"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","","","",""],
         },
         {
           id: "genetics",
@@ -484,7 +517,8 @@ const CURRICULUM = [
             "CYP variants & metabolism",
             "Malignant hyperthermia susceptibility",
             "Pain receptor polymorphisms"
-          ]
+          ],
+          subLinks: ["https://litfl.com/eras/","","https://www.mhaus.org/",""],
         }
       ]
     },
@@ -502,7 +536,8 @@ const CURRICULUM = [
             "Vapor pressure & boiling points",
             "Halogenation & stability",
             "Greenhouse & ozone effects"
-          ]
+          ],
+          subLinks: ["","","","","https://litfl.com/green-anesthesia/"],
         },
         {
           id: "sevo",
@@ -514,7 +549,8 @@ const CURRICULUM = [
             "Renal effects debate",
             "Slow washout vs desflurane",
             "Use in inhalational induction"
-          ]
+          ],
+          subLinks: ["","","https://derangedphysiology.com/main/required-reading/physiology","","https://www.openanesthesia.org/"],
         },
         {
           id: "iso-des-nt",
@@ -524,7 +560,8 @@ const CURRICULUM = [
             "Isoflurane: vasodilation, pungency",
             "Desflurane: airway irritation, Tec 6 vaporizer, sympathetic surge",
             "N2O: diffusion hypoxia, expansion of gas spaces, B12/methionine synthase, PONV, teratogenicity"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/"],
         },
         {
           id: "inha-physics",
@@ -538,7 +575,8 @@ const CURRICULUM = [
             "Metabolism & toxicity (halothane hepatitis, compound A)",
             "Effects on CMR, CBF, ICP, cerebral autoregulation",
             "Effects on bronchial tone, hypoxic pulmonary vasoconstriction"
-          ]
+          ],
+          subLinks: ["","","","","","","https://derangedphysiology.com/main/required-reading/physiology"],
         }
       ]
     },
@@ -557,7 +595,8 @@ const CURRICULUM = [
             "Pain on injection, lipid formulation",
             "Propofol infusion syndrome (PRIS)",
             "Target controlled infusion (TCI) models (Marsh, Schnider, Eleveld)"
-          ]
+          ],
+          subLinks: ["","","","","https://www.openanesthesia.org/","https://www.openanesthesia.org/"],
         },
         {
           id: "thiopental-etomidate",
@@ -567,7 +606,8 @@ const CURRICULUM = [
             "Thiopental: pharmacokinetics, status epilepticus, porphyria contraindication",
             "Etomidate: adrenal suppression, hemodynamic stability, myoclonus, pain",
             "Induction doses & contexts"
-          ]
+          ],
+          subLinks: ["","https://www.openanesthesia.org/","https://www.openanesthesia.org/"],
         },
         {
           id: "ketamine-benzodiazepines",
@@ -577,7 +617,8 @@ const CURRICULUM = [
             "Ketamine: NMDA antagonism, dissociative anesthesia, bronchodilation, sympathetic stimulation, emergence phenomena, catecholamine depletion risk",
             "Midazolam vs diazepam vs lorazepam pharmacokinetics",
             "Flumazenil reversal & risks"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","https://www.openanesthesia.org/"],
         },
         {
           id: "dexmedetomidine",
@@ -588,7 +629,8 @@ const CURRICULUM = [
             "Cooperative sedation, analgesia, no respiratory depression",
             "Hemodynamic effects (biphasic BP)",
             "Uses in extubation, awake intubation, delirium"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/"],
         },
         {
           id: "droperidol-haloperidol",
@@ -597,7 +639,8 @@ const CURRICULUM = [
           sub: [
             "Droperidol: dopamine antagonist, QT prolongation, PONV dosing & black box warning debate",
             "Haloperidol for delirium"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","https://litfl.com/"],
         }
       ]
     },
@@ -616,7 +659,8 @@ const CURRICULUM = [
             "Remifentanil: ester hydrolysis, context-insensitive half-time",
             "Methadone: NMDA action, long half-life",
             "Tramadol & tapentadol mechanisms"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "opioid-effects",
@@ -629,7 +673,8 @@ const CURRICULUM = [
             "Opioid-induced constipation & mu antagonists (methylnaltrexone)",
             "Rapid opioid tolerance",
             "Serotonin syndrome risk (tramadol, meperidine, fentanyl)"
-          ]
+          ],
+          subLinks: ["","","","https://www.openanesthesia.org/","https://www.openanesthesia.org/",""],
         },
         {
           id: "nonopioid",
@@ -641,7 +686,8 @@ const CURRICULUM = [
             "Gabapentinoids (gabapentin, pregabalin)",
             "Ketamine (low dose), lidocaine infusion, dexmedetomidine",
             "Magnesium, alpha-2 agonists as adjuncts"
-          ]
+          ],
+          subLinks: ["","","","https://www.openanesthesia.org/",""],
         }
       ]
     },
@@ -661,7 +707,8 @@ const CURRICULUM = [
             "Phase II block",
             "Pseudocholinesterase deficiency (genetics, dibucaine number)",
             "Bradycardia, myalgia, increased ICP/IOP/Intragastric pressure"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/eras/","","https://www.mhaus.org/","","https://litfl.com/eras/","https://litfl.com/"],
         },
         {
           id: "nondep",
@@ -674,7 +721,8 @@ const CURRICULUM = [
             "Histamine release (atracurium, mivacurium)",
             "Vagolytic & sympathomimetic (pancuronium)",
             "Onset/duration comparison & dosing"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "reversal",
@@ -686,7 +734,8 @@ const CURRICULUM = [
             "Sugammadex: encapsulation, dosing, contraindications, allergic reactions",
             "Comparison of reversal strategies",
             "Residual blockade detection"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","https://www.openanesthesia.org/","https://www.openanesthesia.org/",""],
         }
       ]
     },
@@ -705,7 +754,8 @@ const CURRICULUM = [
             "Differential block (small fibers first)",
             "pH and effect of additives",
             "Pregnancy effects on LA"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "la-toxicity",
@@ -718,7 +768,8 @@ const CURRICULUM = [
             "Lipid emulsion therapy protocol (20%)",
             "Prevention: test dose, incremental dosing, aspiration",
             "Treatment algorithm (ASRA)"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","https://litfl.com/","","","https://www.asra.com/"],
         },
         {
           id: "la-additives",
@@ -730,7 +781,8 @@ const CURRICULUM = [
             "Clonidine, dexmedetomidine, opioids",
             "Dextran for prolonged effect",
             "EMLA cream"
-          ]
+          ],
+          subLinks: ["","","https://www.openanesthesia.org/","",""],
         },
         {
           id: "la-agents",
@@ -741,7 +793,8 @@ const CURRICULUM = [
             "Maximum doses with/without epinephrine",
             "Methemoglobinemia (prilocaine, benzocaine)",
             "Plain vs hyperbaric formulations for spinal"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","",""],
         }
       ]
     },
@@ -759,7 +812,8 @@ const CURRICULUM = [
             "Receptor profiles & clinical choice",
             "Dobutamine vs milrinone (PDE inhibitor)",
             "Vasopressin in vasodilatory shock"
-          ]
+          ],
+          subLinks: ["","","","","https://litfl.com/"],
         },
         {
           id: "antiarrhythmics",
@@ -771,7 +825,8 @@ const CURRICULUM = [
             "Esmolol, labetalol, metoprolol",
             "Nitroglycerin, nitroprusside, hydralazine",
             "ACE-I, ARBs, alpha-blockers"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "anticoag-antiplatelet",
@@ -784,7 +839,8 @@ const CURRICULUM = [
             "Aspirin, clopidogrel, prasugrel, ticagrelor, GPIIb/IIIa",
             "Coagulation monitoring (aPTT, anti-Xa, viscoelastic)",
             "Neuraxial timing guidelines (ASRA)"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","https://www.openanesthesia.org/","","https://www.openanesthesia.org/","https://www.asra.com/"],
         }
       ]
     }
@@ -810,7 +866,8 @@ const CURRICULUM = [
             "Adrenergic receptor distribution & effects",
             "Baroreceptor reflex",
             "Direct vs reflex effects of drugs"
-          ]
+          ],
+          subLinks: ["","","","",""],
         }
       ]
     },
@@ -829,7 +886,8 @@ const CURRICULUM = [
             "Determinants of myocardial oxygen supply/demand",
             "Coronary perfusion & autoregulation",
             "Compliance & elastance"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","","https://litfl.com/","","https://www.openanesthesia.org/"],
         },
         {
           id: "conduction",
@@ -841,7 +899,8 @@ const CURRICULUM = [
             "Refractory periods",
             "Effect of anesthetics on conduction",
             "Mechanisms of arrhythmia"
-          ]
+          ],
+          subLinks: ["","","","","https://litfl.com/"],
         },
         {
           id: "cv-regulation",
@@ -853,7 +912,8 @@ const CURRICULUM = [
             "Vasopressin",
             "Local metabolic control",
             "Effects of ventilation & intrathoracic pressure"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "shock-physio",
@@ -864,7 +924,8 @@ const CURRICULUM = [
             "Hypovolemic, cardiogenic, distributive, obstructive",
             "Compensated vs decompensated",
             "Lactate & base excess"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","",""],
         }
       ]
     },
@@ -884,7 +945,8 @@ const CURRICULUM = [
             "Lung volumes & capacities (definitions)",
             "Closing capacity & aging",
             "Flow-volume loops"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","","","","",""],
         },
         {
           id: "gas-exchange",
@@ -897,7 +959,8 @@ const CURRICULUM = [
             "Diffusion capacity & Fick law",
             "A-a gradient causes",
             "Hypoxic pulmonary vasoconstriction"
-          ]
+          ],
+          subLinks: ["https://derangedphysiology.com/main/required-reading/physiology","","","","","https://derangedphysiology.com/main/required-reading/physiology"],
         },
         {
           id: "oxygen-co2",
@@ -910,7 +973,8 @@ const CURRICULUM = [
             "CO2 transport (bicarbonate, carbamino, dissolved)",
             "Henderson-Hasselbalch",
             "CO2 stores & apneic diffusion"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "control-vent",
@@ -922,7 +986,8 @@ const CURRICULUM = [
             "Hypoxic ventilatory response",
             "Apneic threshold & CO2 response curve",
             "Sleep-disordered breathing"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "anesthesia-resp",
@@ -934,7 +999,8 @@ const CURRICULUM = [
             "Apnea, altered CO2 response",
             "Changes in dead space & compliance",
             "Positioning & cephalad diaphragm shift"
-          ]
+          ],
+          subLinks: ["https://derangedphysiology.com/main/required-reading/physiology","https://derangedphysiology.com/main/required-reading/physiology","","",""],
         }
       ]
     },
@@ -951,7 +1017,8 @@ const CURRICULUM = [
             "GFR determinants & clearance concepts",
             "Tubuloglomerular feedback",
             "Effects of anesthesia on RBF"
-          ]
+          ],
+          subLinks: ["","","",""],
         },
         {
           id: "tubular",
@@ -963,7 +1030,8 @@ const CURRICULUM = [
             "ADH/vasopressin & aquaporins",
             "RAAS & aldosterone",
             "Acid-base regulation by kidney"
-          ]
+          ],
+          subLinks: ["","","","","https://derangedphysiology.com/main/required-reading/physiology"],
         },
         {
           id: "renal-evaluation",
@@ -975,7 +1043,8 @@ const CURRICULUM = [
             "AKI biomarkers (NGAL, KIM-1)",
             "Contrast nephropathy & prevention",
             "Effects of drugs (NSAIDs, ACE-I)"
-          ]
+          ],
+          subLinks: ["","","","",""],
         }
       ]
     },
@@ -993,7 +1062,8 @@ const CURRICULUM = [
             "Bilirubin metabolism",
             "Coagulation factor synthesis",
             "Protein synthesis & drug binding"
-          ]
+          ],
+          subLinks: ["https://derangedphysiology.com/main/required-reading/physiology","","","https://derangedphysiology.com/main/required-reading/physiology",""],
         },
         {
           id: "anesthesia-liver",
@@ -1005,7 +1075,8 @@ const CURRICULUM = [
             "Altered pharmacokinetics in cirrhosis",
             "Hepatorenal syndrome",
             "Hepatic encephalopathy"
-          ]
+          ],
+          subLinks: ["https://derangedphysiology.com/main/required-reading/physiology","","","https://derangedphysiology.com/main/required-reading/physiology","https://derangedphysiology.com/main/required-reading/physiology"],
         }
       ]
     },
@@ -1023,7 +1094,8 @@ const CURRICULUM = [
             "DKA & HHS",
             "Perioperative insulin management & glucose targets",
             "Hypoglycemia recognition"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "thyroid",
@@ -1035,7 +1107,8 @@ const CURRICULUM = [
             "Adrenal insufficiency & steroid replacement",
             "Pheochromocytoma physiology & blockade",
             "Cushing & Addison"
-          ]
+          ],
+          subLinks: ["","","https://derangedphysiology.com/main/required-reading/physiology","",""],
         }
       ]
     },
@@ -1053,7 +1126,8 @@ const CURRICULUM = [
             "Intracranial compliance & Monro-Kellie",
             "Cerebral metabolic rate & anesthetics",
             "Lund vs CPP-targeted therapy"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "neuro-protection",
@@ -1065,7 +1139,8 @@ const CURRICULUM = [
             "Ischemic preconditioning",
             "Hypothermia",
             "Glucose control in neuro injury"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/",""],
         }
       ]
     },
@@ -1084,7 +1159,8 @@ const CURRICULUM = [
             "Strong ion difference",
             "Compensatory mechanisms & expected values",
             "Common perioperative derangements"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "electrolytes",
@@ -1096,7 +1172,8 @@ const CURRICULUM = [
             "Calcium: ionized vs total, citrate chelation",
             "Magnesium: treatment of pre-eclampsia, arrhythmias",
             "Phosphate"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","","https://litfl.com/",""],
         }
       ]
     },
@@ -1115,7 +1192,8 @@ const CURRICULUM = [
             "Fibrinolysis & D-dimer",
             "Inherited disorders (vWD, hemophilia A/B)",
             "Viscoelastic testing interpretation"
-          ]
+          ],
+          subLinks: ["https://derangedphysiology.com/main/required-reading/physiology","https://derangedphysiology.com/main/required-reading/physiology","","","","https://www.openanesthesia.org/"],
         },
         {
           id: "transfusion-physio",
@@ -1127,7 +1205,8 @@ const CURRICULUM = [
             "Massive transfusion ratios",
             "TACO vs TRALI",
             "Transfusion reactions"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/","","https://litfl.com/"],
         }
       ]
     }
@@ -1153,7 +1232,8 @@ const CURRICULUM = [
             "Cardiac risk stratification (RCRI/Revised Cardiac Risk Index)",
             "Functional capacity (METs)",
             "Preoperative testing indications"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/","","https://www.openanesthesia.org/"],
         },
         {
           id: "npo",
@@ -1164,7 +1244,8 @@ const CURRICULUM = [
             "Aspiration risk factors",
             "Pulmonary aspiration prophylaxis",
             "Obstetric & bowel obstruction special considerations"
-          ]
+          ],
+          subLinks: ["","","https://derangedphysiology.com/main/required-reading/physiology",""],
         },
         {
           id: "premed",
@@ -1176,7 +1257,8 @@ const CURRICULUM = [
             "PONV prophylaxis",
             "PPI/H2 blockers",
             "Beta-blockade (POISE trial)"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","https://litfl.com/","",""],
         },
         {
           id: "preop-cardiac",
@@ -1188,7 +1270,8 @@ const CURRICULUM = [
             "Beta-blocker & statin continuation",
             "Heart failure optimization",
             "Valvular disease assessment"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "preop-pulm",
@@ -1200,7 +1283,8 @@ const CURRICULUM = [
             "Smoking cessation timing",
             "OSA screening (STOP-BANG)",
             "Pulmonary hypertension risk"
-          ]
+          ],
+          subLinks: ["","","","https://www.stopbang.ca/","https://derangedphysiology.com/main/required-reading/physiology"],
         }
       ]
     },
@@ -1218,7 +1302,8 @@ const CURRICULUM = [
             "Difficult airway predictors",
             "LEMON, 3-3-2 rule",
             "Multivariate predictors (El-Ganzouri)"
-          ]
+          ],
+          subLinks: ["","","","","https://www.openanesthesia.org/"],
         },
         {
           id: "airway-algo",
@@ -1231,7 +1316,8 @@ const CURRICULUM = [
             "CICO & eFONA",
             "Vortex approach",
             "Difficult airway society extubation guidelines"
-          ]
+          ],
+          subLinks: ["https://www.das.uk.com/","https://www.das.uk.com/","","https://www.das.uk.com/","",""],
         },
         {
           id: "extubation",
@@ -1243,7 +1329,8 @@ const CURRICULUM = [
             "Airway exchange catheters",
             "Deep vs awake extubation",
             "Staged extubation"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "rapid-sequence",
@@ -1255,7 +1342,8 @@ const CURRICULUM = [
             "Cricoid pressure debate (Sellick)",
             "Preoxygenation & apneic oxygenation (THRIVE)",
             "Backup airway plans"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "obstructed-airway",
@@ -1267,7 +1355,8 @@ const CURRICULUM = [
             "Foreign body airway obstruction",
             "Airway tumor & stent considerations",
             "Heliox utility"
-          ]
+          ],
+          subLinks: ["","","","",""],
         }
       ]
     },
@@ -1285,7 +1374,8 @@ const CURRICULUM = [
             "Preoxygenation & denitrogenation",
             "Apneic oxygenation (THRIVE)",
             "End-tidal anesthetic targets"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","","",""],
         },
         {
           id: "maintenance",
@@ -1297,7 +1387,8 @@ const CURRICULUM = [
             "TIVA vs inhalational",
             "Adjuvant use (opioid, NMB, lidocaine)",
             "Awareness prevention & BIS"
-          ]
+          ],
+          subLinks: ["","","https://www.openanesthesia.org/","https://www.openanesthesia.org/","https://www.openanesthesia.org/"],
         },
         {
           id: "emergence",
@@ -1309,7 +1400,8 @@ const CURRICULUM = [
             "PACU recovery scoring (Aldrete)",
             "Delayed emergence causes",
             "Shivering treatment"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","","https://www.openanesthesia.org/",""],
         },
         {
           id: "tci-tiva",
@@ -1321,7 +1413,8 @@ const CURRICULUM = [
             "Context-sensitive half-time concepts",
             "Closed-loop systems",
             "Advantages/pitfalls of TIVA"
-          ]
+          ],
+          subLinks: ["","","","","https://www.openanesthesia.org/"],
         }
       ]
     },
@@ -1338,7 +1431,8 @@ const CURRICULUM = [
             "Nerve stimulation principles",
             "Factors affecting onset, block quality & duration",
             "Complications (LAST, nerve injury, infection)"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/"],
         },
         {
           id: "neuraxial",
@@ -1353,7 +1447,8 @@ const CURRICULUM = [
             "Post-dural puncture headache & treatment (EBP)",
             "Total spinal management",
             "Anticoagulation & neuraxial timing (ASRA)"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","","","","","https://www.asra.com/","https://www.asra.com/"],
         },
         {
           id: "upper-limb",
@@ -1365,7 +1460,8 @@ const CURRICULUM = [
             "Axillary block",
             "Phrenic nerve paralysis risk",
             "Complications (pneumothorax, intrathecal)"
-          ]
+          ],
+          subLinks: ["https://www.nysora.com/","https://www.nysora.com/","https://www.nysora.com/","",""],
         },
         {
           id: "lower-limb",
@@ -1376,7 +1472,8 @@ const CURRICULUM = [
             "Sciatic (anterior/posterior, popliteal)",
             "TAP block, PECS, erector spinae plane",
             "Quadratus lumborum block"
-          ]
+          ],
+          subLinks: ["https://www.nysora.com/","https://www.nysora.com/","https://www.nysora.com/",""],
         },
         {
           id: "ivra-pnb",
@@ -1387,7 +1484,8 @@ const CURRICULUM = [
             "Ophthalmic blocks (retrobulbar, peribulbar, topical)",
             "ENT blocks",
             "Sphenopalatine ganglion block"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     },
@@ -1405,7 +1503,8 @@ const CURRICULUM = [
             "Rescue airway responsibility",
             "Capnography mandatory",
             "Common drugs (propofol, ketamine, dexmedetomidine, remifentanil)"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/","https://www.openanesthesia.org/"],
         }
       ]
     },
@@ -1424,7 +1523,8 @@ const CURRICULUM = [
             "Goal-directed fluid therapy",
             "Fluid responsiveness indices (SVV, PPV, PLR)",
             "Starches & albumin evidence (SMART, trial)"
-          ]
+          ],
+          subLinks: ["","","https://www.openanesthesia.org/","https://litfl.com/","",""],
         },
         {
           id: "transfusion",
@@ -1436,7 +1536,8 @@ const CURRICULUM = [
             "Cell salvage & contraindications",
             "Factor concentrates (fibrinogen, PCC)",
             "Tranexamic acid evidence"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","https://litfl.com/","","",""],
         }
       ]
     },
@@ -1455,7 +1556,8 @@ const CURRICULUM = [
             "Venous air embolism in sitting",
             "Compartment syndrome & rhabdomyolysis",
             "Eye injury prevention (prone)"
-          ]
+          ],
+          subLinks: ["","https://www.nysora.com/","","","",""],
         }
       ]
     }
@@ -1482,7 +1584,8 @@ const CURRICULUM = [
             "Pulsatile vs non-pulsatile flow",
             "Inflammatory response to CPB",
             "Cerebral & organ protection"
-          ]
+          ],
+          subLinks: ["","","https://derangedphysiology.com/main/required-reading/physiology","","",""],
         },
         {
           id: "cabg-valve",
@@ -1494,7 +1597,8 @@ const CURRICULUM = [
             "Monitoring (PA catheter, TEE)",
             "Weaning from CPB",
             "Vasoactive support"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "aortic-cardiac",
@@ -1506,7 +1610,8 @@ const CURRICULUM = [
             "Left heart bypass",
             "Cardiac tamponade anesthesia",
             "Transplant (orthotopic, VAD)"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/",""],
         },
         {
           id: "cpb-anesthesia",
@@ -1518,7 +1623,8 @@ const CURRICULUM = [
             "TEE basic views",
             "Extubation timing",
             "Postoperative bleeding management"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","https://litfl.com/","","",""],
         }
       ]
     },
@@ -1536,7 +1642,8 @@ const CURRICULUM = [
             "Hypoxemia during OLV management",
             "CPAP to non-dependent lung, PEEP dependent",
             "V/Q & hypoxic pulmonary vasoconstriction"
-          ]
+          ],
+          subLinks: ["","https://www.openanesthesia.org/","","","https://derangedphysiology.com/main/required-reading/physiology"],
         },
         {
           id: "thoracic-procedures",
@@ -1549,7 +1656,8 @@ const CURRICULUM = [
             "Post-lung resection pulmonary edema",
             "Lung transplant",
             "Anesthesia for empyema, decortication"
-          ]
+          ],
+          subLinks: ["","","","https://derangedphysiology.com/main/required-reading/physiology","",""],
         },
         {
           id: "jet-vent",
@@ -1560,7 +1668,8 @@ const CURRICULUM = [
             "Bronchial blocker for airway surgery",
             "Laser airway surgery: fire triangle, tube selection",
             "Rigid bronchoscopy ventilation"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     },
@@ -1577,7 +1686,8 @@ const CURRICULUM = [
             "Cerebral monitoring (EEG, stump pressure, TCD)",
             "Shunt indications",
             "Postoperative hyperperfusion syndrome"
-          ]
+          ],
+          subLinks: ["","","",""],
         },
         {
           id: "aortic-vascular",
@@ -1589,7 +1699,8 @@ const CURRICULUM = [
             "Spinal cord ischemia risk",
             "Peripheral revascularization",
             "Thrombolysis & anticoagulation considerations"
-          ]
+          ],
+          subLinks: ["","","","","https://derangedphysiology.com/main/required-reading/physiology"],
         }
       ]
     },
@@ -1606,7 +1717,8 @@ const CURRICULUM = [
             "Drugs: propofol, thiopental, opioids, ketamine debate",
             "Brain relaxation & mannitol/hypertonic saline",
             "Positioning & venous air embolism"
-          ]
+          ],
+          subLinks: ["","https://www.openanesthesia.org/","",""],
         },
         {
           id: "neuro-spine",
@@ -1618,7 +1730,8 @@ const CURRICULUM = [
             "Venous air embolism in prone/sitting",
             "Spinal cord perfusion pressure",
             "Major blood loss & cell salvage"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "neuro-special",
@@ -1631,7 +1744,8 @@ const CURRICULUM = [
             "Pituitary surgery (transsphenoidal)",
             "Sitting position & VAE management",
             "Carotid & intracranial vascular surgery"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         }
       ]
     },
@@ -1648,7 +1762,8 @@ const CURRICULUM = [
             "Aortocaval compression & left uterine displacement",
             "Decreased MAC, increased block height",
             "Placental transfer & drug effects on fetus"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","",""],
         },
         {
           id: "cs",
@@ -1660,7 +1775,8 @@ const CURRICULUM = [
             "CSE technique",
             "Hypotension management (phenylephrine vs ephedrine)",
             "Failed conversion to GA & general technique"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","","https://litfl.com/",""],
         },
         {
           id: "labor",
@@ -1672,7 +1788,8 @@ const CURRICULUM = [
             "Dural puncture & PDPH",
             "Complications: high block, LAST",
             "Inadequate block troubleshooting"
-          ]
+          ],
+          subLinks: ["","","","https://www.openanesthesia.org/",""],
         },
         {
           id: "ob-emergencies",
@@ -1685,7 +1802,8 @@ const CURRICULUM = [
             "Pre-eclampsia/eclampsia & HELLP",
             "Shoulder dystocia & uterine inversion",
             "Maternal cardiac arrest (MCFPR)"
-          ]
+          ],
+          subLinks: ["","","","","","https://www.resus.org.uk/"],
         },
         {
           id: "ob-fetus",
@@ -1696,7 +1814,8 @@ const CURRICULUM = [
             "Neonatal resuscitation (NRP)",
             "Umbilical cord blood gases",
             "Meconium aspiration"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     },
@@ -1714,7 +1833,8 @@ const CURRICULUM = [
             "Pulmonary vascular transition & PPHN",
             "Thermoregulation & insensible losses",
             "Pediatric dosing & MAC changes"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","https://derangedphysiology.com/main/required-reading/physiology","",""],
         },
         {
           id: "ped-induction",
@@ -1726,7 +1846,8 @@ const CURRICULUM = [
             "Pediatric ETT sizing (uncuffed vs cuffed)",
             "LMA in pediatrics",
             "Difficult pediatric airway algorithm"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","https://www.openanesthesia.org/","","",""],
         },
         {
           id: "ped-surgery",
@@ -1739,7 +1860,8 @@ const CURRICULUM = [
             "Tympanostomy",
             "Hernia & orchiopexy",
             "Inguinal blocks (caudal, ilioinguinal)"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         },
         {
           id: "ped-neonatal",
@@ -1752,7 +1874,8 @@ const CURRICULUM = [
             "Pyloric stenosis (metabolic alkalosis)",
             "Necrotizing enterocolitis",
             "Congenital heart disease considerations"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         }
       ]
     },
@@ -1770,7 +1893,8 @@ const CURRICULUM = [
             "Frailty & delirium risk",
             "Postoperative cognitive dysfunction vs delirium",
             "Polypharmacy & drug interactions"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/","https://litfl.com/",""],
         }
       ]
     },
@@ -1788,7 +1912,8 @@ const CURRICULUM = [
             "PONV prophylaxis multimodal",
             "Post-discharge nausea & vomiting",
             "Discharge criteria"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/","",""],
         }
       ]
     },
@@ -1807,7 +1932,8 @@ const CURRICULUM = [
             "Massive transfusion ratios",
             "Traumatic brain injury (CPP target)",
             "Burns: Parkland formula, escharotomy"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/","https://litfl.com/",""],
         }
       ]
     },
@@ -1825,7 +1951,8 @@ const CURRICULUM = [
             "Drug dosing (LBW vs TBW)",
             "CPAP/BiPAP perioperative",
             "Bariatric procedures (sleeve, bypass) complications"
-          ]
+          ],
+          subLinks: ["https://www.stopbang.ca/","","","",""],
         }
       ]
     },
@@ -1842,7 +1969,8 @@ const CURRICULUM = [
             "Kidney transplant anesthesia",
             "Pancreas & islet transplant",
             "Heart & lung transplant"
-          ]
+          ],
+          subLinks: ["https://derangedphysiology.com/main/required-reading/physiology","","",""],
         }
       ]
     },
@@ -1860,7 +1988,8 @@ const CURRICULUM = [
             "Intraocular pressure & drugs",
             "Open eye + full stomach dilemma",
             "Pediatric strabismus & malignant hyperthermia"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","","","https://www.mhaus.org/"],
         },
         {
           id: "ent",
@@ -1871,7 +2000,8 @@ const CURRICULUM = [
             "Laser airway surgery fire prevention",
             "TMJ & facial trauma",
             "Shared airway cases"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/",""],
         }
       ]
     },
@@ -1889,7 +2019,8 @@ const CURRICULUM = [
             "Fat embolism syndrome",
             "Major joint replacement & ERAS",
             "Scoliosis surgery (SSEP, cell salvage)"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/eras/",""],
         }
       ]
     },
@@ -1906,7 +2037,8 @@ const CURRICULUM = [
             "Intraoperative hemodynamic swings",
             "Hypoglycemia after resection",
             "Adrenal crisis risk"
-          ]
+          ],
+          subLinks: ["https://www.openanesthesia.org/","","","https://derangedphysiology.com/main/required-reading/physiology"],
         },
         {
           id: "abdominal",
@@ -1917,7 +2049,8 @@ const CURRICULUM = [
             "Bowel surgery & fluid shifts",
             "ERAS pathways",
             "Hepatic resection anesthesia"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/eras/","https://derangedphysiology.com/main/required-reading/physiology"],
         }
       ]
     },
@@ -1934,7 +2067,8 @@ const CURRICULUM = [
             "Robotic surgery: steep Trendelenburg, pneumoperitoneum",
             "Cystectomy, nephrectomy",
             "Radical prostatectomy anesthesia"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     }
@@ -1962,7 +2096,8 @@ const CURRICULUM = [
             "Central & peripheral sensitization",
             "Wind-up & NMDA",
             "Chronic pain mechanisms"
-          ]
+          ],
+          subLinks: ["","","","","","",""],
         }
       ]
     },
@@ -1982,7 +2117,8 @@ const CURRICULUM = [
             "ERAS pain protocols",
             "Opioid-tolerant patient management",
             "Acute pain service & monitoring"
-          ]
+          ],
+          subLinks: ["","","","","https://litfl.com/eras/","https://www.openanesthesia.org/",""],
         }
       ]
     },
@@ -2000,7 +2136,8 @@ const CURRICULUM = [
             "Trigeminal neuralgia & facial pain",
             "Fibromyalgia & central sensitization",
             "Pharmacotherapy (gabapentinoids, antidepressants, opioids)"
-          ]
+          ],
+          subLinks: ["","","","","https://www.openanesthesia.org/"],
         },
         {
           id: "cancer-pain",
@@ -2012,7 +2149,8 @@ const CURRICULUM = [
             "Intrathecal drug delivery systems",
             "Neurolytic blocks (celiac plexus)",
             "Palliative sedation"
-          ]
+          ],
+          subLinks: ["","https://www.openanesthesia.org/","","",""],
         },
         {
           id: "pain-interventions",
@@ -2025,7 +2163,8 @@ const CURRICULUM = [
             "Sympathetic blocks (splanchnic, stellate, lumbar)",
             "Spinal cord stimulation",
             "Dorsal root ganglion stimulation"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         }
       ]
     }
@@ -2052,7 +2191,8 @@ const CURRICULUM = [
             "Post-cardiac arrest care & targeted temperature",
             "ECMO & eCPR",
             "Ethics: DNAR in OR"
-          ]
+          ],
+          subLinks: ["https://www.resus.org.uk/","https://www.resus.org.uk/","https://www.resus.org.uk/","https://www.resus.org.uk/","https://www.resus.org.uk/","https://www.resus.org.uk/"],
         },
         {
           id: "shock",
@@ -2064,7 +2204,8 @@ const CURRICULUM = [
             "Cardiogenic shock & mechanical support",
             "Anaphylactic shock",
             "Hemodynamic monitoring in shock"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","https://litfl.com/","https://litfl.com/","https://litfl.com/"],
         }
       ]
     },
@@ -2083,7 +2224,8 @@ const CURRICULUM = [
             "PEEP titration",
             "Weaning & SBT",
             "Airway pressure release ventilation"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/","","",""],
         },
         {
           id: "ards",
@@ -2096,7 +2238,8 @@ const CURRICULUM = [
             "Neuromuscular blockade in ARDS",
             "ECMO indications (V-V vs V-A)",
             "Driving pressure & transpulmonary pressure"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/","https://www.elso.org/","https://derangedphysiology.com/main/required-reading/physiology"],
         }
       ]
     },
@@ -2115,7 +2258,8 @@ const CURRICULUM = [
             "Vasopressor choice & targets",
             "Lactate clearance",
             "Source control"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","","","",""],
         }
       ]
     },
@@ -2133,7 +2277,8 @@ const CURRICULUM = [
             "CRRT vs intermittent HD",
             "Dosing of CRRT",
             "Drug dosing adjustments"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "nutrition",
@@ -2144,7 +2289,8 @@ const CURRICULUM = [
             "Early enteral nutrition",
             "Refeeding syndrome",
             "TPN indications & complications"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     },
@@ -2163,7 +2309,8 @@ const CURRICULUM = [
             "Osmotherapy (mannitol vs hypertonic saline)",
             "Decompressive craniectomy",
             "Multimodality monitoring (PbtO2, microdialysis)"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","","","",""],
         },
         {
           id: "stroke-status",
@@ -2174,7 +2321,8 @@ const CURRICULUM = [
             "Hemorrhagic stroke & BP control",
             "Status epilepticus algorithm",
             "Continuous EEG monitoring"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","https://litfl.com/","",""],
         }
       ]
     }
@@ -2199,7 +2347,8 @@ const CURRICULUM = [
             "Scalpel-bougie-tube technique",
             "Cricothyroidotomy: Melker vs surgical",
             "Team factors & human factors"
-          ]
+          ],
+          subLinks: ["https://www.das.uk.com/","https://www.das.uk.com/","https://www.das.uk.com/",""],
         },
         {
           id: "bronchospasm",
@@ -2210,7 +2359,8 @@ const CURRICULUM = [
             "Treatment: deepening, bronchodilators, ketamine",
             "Anaphylaxis distinction",
             "Ventilator strategy"
-          ]
+          ],
+          subLinks: ["","https://www.openanesthesia.org/","https://litfl.com/",""],
         },
         {
           id: "aspiration",
@@ -2221,7 +2371,8 @@ const CURRICULUM = [
             "Management: head down, suction, PEEP",
             "Steroid & antibiotic debate",
             "Bronchoscopy & lavage"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     },
@@ -2238,7 +2389,8 @@ const CURRICULUM = [
             "Common arrhythmias management",
             "Tachyarrhythmia vs bradyarrhythmia",
             "Pulseless arrest algorithm"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","https://litfl.com/",""],
         },
         {
           id: "hypertensive",
@@ -2249,7 +2401,8 @@ const CURRICULUM = [
             "Drug choice (labetalol, nicardipine, nitroprusside)",
             "Aortic dissection management",
             "Pheochromocytoma crisis"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","",""],
         },
         {
           id: "vae",
@@ -2259,7 +2412,8 @@ const CURRICULUM = [
             "Risk & mechanism",
             "Diagnosis (EtCO2, precordial Doppler, TEE)",
             "Management: stop source, Durant position, aspirate CVP"
-          ]
+          ],
+          subLinks: ["","",""],
         }
       ]
     },
@@ -2276,7 +2430,8 @@ const CURRICULUM = [
             "BIS & monitoring utility",
             "Prevention strategies",
             "Postoperative management & PTSD"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","",""],
         },
         {
           id: "delirium",
@@ -2287,7 +2442,8 @@ const CURRICULUM = [
             "Prevention: multimodal",
             "Pharmacologic vs non-pharmacologic",
             "POCD vs delirium distinction"
-          ]
+          ],
+          subLinks: ["","","","https://litfl.com/"],
         },
         {
           id: "stroke",
@@ -2298,7 +2454,8 @@ const CURRICULUM = [
             "Atrial fibrillation & surgery",
             "Timing after prior stroke",
             "Management algorithm"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/",""],
         }
       ]
     },
@@ -2317,7 +2474,8 @@ const CURRICULUM = [
             "Treatment: dantrolene protocol, cooling, treat hyperkalemia",
             "MHAUS hotline & post-crisis",
             "Testing & family screening"
-          ]
+          ],
+          subLinks: ["","","","https://www.mhaus.org/","https://www.mhaus.org/",""],
         },
         {
           id: "anaphylaxis",
@@ -2329,7 +2487,8 @@ const CURRICULUM = [
             "Diagnosis & tryptase timing",
             "Treatment: epinephrine, fluids, positioning",
             "Post-event investigation"
-          ]
+          ],
+          subLinks: ["","","","",""],
         }
       ]
     },
@@ -2347,7 +2506,8 @@ const CURRICULUM = [
             "Multimodal PONV prophylaxis",
             "Rescue therapy",
             "PDNV"
-          ]
+          ],
+          subLinks: ["","","https://litfl.com/","",""],
         },
         {
           id: "hypothermia",
@@ -2358,7 +2518,8 @@ const CURRICULUM = [
             "Consequences (coagulopathy, infection, prolonged recovery)",
             "Warming devices",
             "Shivering treatment (meperidine, clonidine, dexmedetomidine)"
-          ]
+          ],
+          subLinks: ["","","","https://www.openanesthesia.org/"],
         },
         {
           id: "eye-injury",
@@ -2370,7 +2531,8 @@ const CURRICULUM = [
             "Corneal abrasion prevention",
             "Ischemic optic neuropathy (prone, spine)",
             "ASA practice advisory on positioning"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","https://www.nysora.com/","","",""],
         },
         {
           id: "cholinesterase",
@@ -2381,7 +2543,8 @@ const CURRICULUM = [
             "Acquired causes",
             "Management of prolonged blockade",
             "Genetic counseling"
-          ]
+          ],
+          subLinks: ["","","",""],
         },
         {
           id: "latex",
@@ -2392,7 +2555,8 @@ const CURRICULUM = [
             "Clinical presentation",
             "Latex-free environment",
             "Cross-reactivity (fruits)"
-          ]
+          ],
+          subLinks: ["","","",""],
         }
       ]
     }
@@ -2422,7 +2586,8 @@ const CURRICULUM = [
             "Adiabatic compression/explosion",
             "Latent heat of vaporization",
             "Viscosity, density, Reynolds number"
-          ]
+          ],
+          subLinks: ["","","","","","","","",""],
         },
         {
           id: "pressure-flow",
@@ -2434,7 +2599,8 @@ const CURRICULUM = [
             "Laminar vs turbulent (Hagen-Poiseuille)",
             "Pneumatic vs electronic measurement",
             "Oscillometric BP"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "electric-laser",
@@ -2446,7 +2612,8 @@ const CURRICULUM = [
             "Diathermy & grounding pad",
             "Laser types & physics (CO2, Nd:YAG, KTP)",
             "Surgical fire triangle"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","","",""],
         }
       ]
     },
@@ -2466,7 +2633,8 @@ const CURRICULUM = [
             "Type I & II errors, power",
             "Parametric vs non-parametric tests",
             "Multiple comparisons"
-          ]
+          ],
+          subLinks: ["https://litfl.com/","","","","","",""],
         },
         {
           id: "study-design",
@@ -2479,7 +2647,8 @@ const CURRICULUM = [
             "Forest plots & meta-analysis",
             "Number needed to treat/harm",
             "Intention-to-treat analysis"
-          ]
+          ],
+          subLinks: ["","","","","",""],
         }
       ]
     },
@@ -2498,7 +2667,8 @@ const CURRICULUM = [
             "Heart & great vessels",
             "Celiac plexus & autonomic ganglia",
             "Trigeminal & facial nerve"
-          ]
+          ],
+          subLinks: ["","https://www.nysora.com/","","","",""],
         }
       ]
     }
@@ -2524,7 +2694,8 @@ const CURRICULUM = [
             "Human error & Swiss cheese model",
             "Fatigue & performance",
             "Team communication (SBAR, closed-loop)"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "quality",
@@ -2536,7 +2707,8 @@ const CURRICULUM = [
             "M&M review",
             "Anesthesia Closed Claims",
             "Reporting systems"
-          ]
+          ],
+          subLinks: ["","","","",""],
         }
       ]
     },
@@ -2554,7 +2726,8 @@ const CURRICULUM = [
             "Best interests & surrogate",
             "Advance directives & DNAR in OR",
             "Refusal of blood (Jehovah's Witness)"
-          ]
+          ],
+          subLinks: ["","","","https://www.resus.org.uk/",""],
         },
         {
           id: "medico-legal",
@@ -2565,7 +2738,8 @@ const CURRICULUM = [
             "Documentation standards",
             "Confidentiality & GDPR/HIPAA",
             "Brain death & organ donation ethics"
-          ]
+          ],
+          subLinks: ["","https://litfl.com/","",""],
         }
       ]
     },
@@ -2583,7 +2757,8 @@ const CURRICULUM = [
             "Syllabus topics & blueprint",
             "Recommended reading (Stoelting, Miller, MM)",
             "Mock exam strategy"
-          ]
+          ],
+          subLinks: ["","","","",""],
         },
         {
           id: "frca",
@@ -2594,12 +2769,316 @@ const CURRICULUM = [
             "Final FRCA: written, SOE",
             "Curriculum &competency framework",
             "Recommended texts & question banks"
+          ],
+          subLinks: ["https://www.rcoa.ac.uk/","https://www.rcoa.ac.uk/","",""],
+        }
+      ]
+    }
+  ]
+},
+{
+  id: "emerging",
+  name: "Emerging Topics in Anesthesiology & Critical Care",
+  icon: "activity",
+  color: "#ec4899",
+  sections: [
+    {
+      id: "new-technology",
+      name: "AI, Machine Learning & Digital Health",
+      desc: "How AI, ML, and digital technologies are transforming perioperative care and critical care medicine.",
+      topics: [
+        {
+          id: "ai-ml-applications",
+          name: "AI and machine learning in anesthesiology",
+          desc: "Predictive analytics, clinical decision support, and autonomous systems.",
+          refs: ["BJA 2023-24", "Anesthesiology journals"],
+          sub: [
+            "Predictive modeling: preop risk stratification (mortality, LOS, readmission)",
+            "Hypotension Prediction Index (HPI): ML algorithm predicting hypotension before it occurs",
+            "Depth of anesthesia monitoring: AI-enhanced EEG interpretation",
+            "Ultrasound image analysis: automated structure identification for regional blocks and vascular access",
+            "Closed-loop anesthesia delivery: automated propofol-remifentanil TCI with real-time feedback",
+            "Natural language processing: extracting data from EHR for research and QI",
+            "OR workflow optimization: scheduling, turnover prediction, supply chain",
+            "Limitations: data bias, model generalizability, regulatory challenges"
+          ],
+          links: ["https://litfl.com/ai-in-anesthesia/","https://www.openanesthesia.org/ai-in-anesthesia/"],
+          subLinks: ["","","","https://www.openanesthesia.org/ultrasound-image-analysis/","https://litfl.com/closed-loop-anesthesia/","","",""]
+        },
+        {
+          id: "digital-health",
+          name: "Digital health and telemedicine",
+          desc: "Telemedicine, wearable monitoring, and mobile health applications in perioperative care.",
+          refs: ["MIL Ch.12", "JAMA 2023"],
+          sub: [
+            "Tele-preoperative clinic: virtual assessment, patient education, workflow",
+            "Wearable sensors: continuous HR, SpO2, activity, sleep tracking pre/postop",
+            "Remote postoperative monitoring: early detection of complications (RSBI, SpO2)",
+            "Tele-ICU: remote intensivist coverage, outcomes evidence",
+            "Mobile apps for perioperative optimization: prehabilitation, medication adherence",
+            "Regulatory considerations: HIPAA/GDPR, telehealth licensure, reimbursement"
+          ],
+          links: ["https://litfl.com/telemedicine/","https://www.openanesthesia.org/telemedicine/"],
+          subLinks: ["","","","https://litfl.com/tele-icu/","",""]
+        },
+        {
+          id: "digital-twin-simulation",
+          name: "Digital twins and in silico modeling",
+          desc: "Patient-specific digital replicas for personalized anesthesia planning.",
+          refs: ["J Clin Monit 2024", "BJA Education"],
+          sub: [
+            "Digital twin concept: real-time patient data mirror for decision support",
+            "Pharmacokinetic digital twins: predicting individual drug concentrations",
+            "Hemodynamic digital twins: predicting response to fluids and vasopressors",
+            "Training applications: virtual reality for crisis simulation",
+            "Limitations: data requirements, validation, ethical considerations"
+          ]
+        },
+        {
+          id: "robotics-anesthesia",
+          name: "Robotics and automation in anesthesia",
+          desc: "Robotic systems for airway management, ultrasound, and drug delivery.",
+          refs: ["J Clin Monit 2023", "BJA 2024"],
+          sub: [
+            "Robotic TCI systems: automated target-controlled infusion without manual programming",
+            "Robot-assisted airway management: Keystone, video-laryngoscope robotic arms",
+            "Robotic ultrasound systems: tele-ultrasound for remote guidance",
+            "Automated fluid delivery systems: closed-loop fluid resuscitation",
+            "Outcomes evidence: safety, efficiency, cost-effectiveness"
+          ]
+        }
+      ]
+    },
+    {
+      id: "new-pharmacology",
+      name: "Emerging Pharmacologic Innovations",
+      desc: "New drugs, reversal agents, and pharmacologic strategies entering clinical practice.",
+      topics: [
+        {
+          id: "novel-iv-sedatives",
+          name: "Novel IV sedatives and analgesics",
+          desc: "New drugs including remimazolam, ciprofol, oliceridine.",
+          refs: ["BJA Education 2024", "Anesthesia & Analgesia"],
+          sub: [
+            "Remimazolam: ultra-short-acting benzodiazepine, organ-independent metabolism, approved for procedural sedation",
+            "Ciprofol (HSK3486): propofol analog, GABA-A agonist, less injection pain, similar recovery profile",
+            "Oliceridine: mu-opioid G-protein biased agonist, reduced respiratory depression and GI effects vs morphine",
+            "ET-26: etomidate analog with reduced adrenal suppression, Phase III trials",
+            "HTX-011 (pamoja) and similar long-acting LA formulations",
+            "Novel NSAIDs: intravenous ibuprofen, diclofenac, celecoxib for multimodal"
+          ],
+          links: ["https://litfl.com/new-drugs/","https://www.openanesthesia.org/remimazolam/"],
+          subLinks: ["https://litfl.com/remimazolam/","https://litfl.com/ciprofol/","https://litfl.com/oliceridine/","","",""]
+        },
+        {
+          id: "advanced-reversal-agents",
+          name: "Advanced reversal agents and antidotes",
+          desc: "Novel reversal agents for NMBA, opioids, and anticoagulants.",
+          refs: ["BJA 2024", "Anesthesiology journals"],
+          sub: [
+            "Calabadion: novel reversal of steroidal NMBAs (rocuronium, vecuronium) with faster onset vs sugammadex",
+            "Ciraparantag (PER977): universal reversal agent for DOACs (apixaban, rivaroxaban, edoxaban, dabigatran)",
+            "Naloxegol and methylnaltrexone: peripherally acting mu-opioid antagonists for opioid-induced constipation",
+            "Opidolag: PEG-naloxol for prolonged opioid reversal",
+            "Sugammadex pediatric data: updated dosing, safety in children"
+          ],
+          subLinks: ["","https://litfl.com/ciraparantag/","","",""]
+        },
+        {
+          id: "pharmacogenomic-advances",
+          name: "Pharmacogenomics and personalized anesthesia",
+          desc: "Genetic testing to guide drug selection and dosing.",
+          refs: ["MIL Ch.30", "BJA Education"],
+          sub: [
+            "CYP450 genotyping: CYP2D6, CYP2C9, CYP2C19, CYP3A4 impact on opioid and benzodiazepine metabolism",
+            "OPRM1 polymorphism: A118G variant associated with higher opioid requirement",
+            "MTHFR and B12/folate metabolism: implications for perioperative homocysteine management",
+            "MALBAC and resistance testing: malignant hyperthermia RYR1/ CACNA1S screening",
+            "Pseudocholinesterase variants: prolonged succinylcholine apnea prediction",
+            "Implementation barriers: cost, turnaround time, interpretation, equity"
+          ]
+        }
+      ]
+    },
+    {
+      id: "new-monitoring",
+      name: "Novel Monitoring Technologies",
+      desc: "Advanced monitoring tools entering perioperative and critical care practice.",
+      topics: [
+        {
+          id: "advanced-hemodynamics",
+          name: "Advanced hemodynamic monitoring",
+          desc: "Beyond arterial line and CVP: new noninvasive and minimally invasive technologies.",
+          refs: ["J Clin Monit 2024", "Br J Anaesth"],
+          sub: [
+            "Hypotension Prediction Index (HPI): Acumen IQ sensor, machine learning algorithm predicting hypotension minutes before onset",
+            "ECCO2R (extracorporeal CO2 removal with CRRT): combined renal/respiratory support",
+            "Capillary refill time: validated as resuscitation endpoint in septic shock (ANDROMEDA-SHOCK)",
+            "Dynamic elastance: predicting blood pressure response to ventilation changes",
+            "Pulse wave analysis: calibration-free cardiac output (MostCare, LiDCOrapid)",
+            "Venous-to-arterial CO2 gap (PvaCO2): tissue perfusion indicator"
+          ],
+          subLinks: ["https://litfl.com/hpi/","","https://litfl.com/capillary-refill/","","",""]
+        },
+        {
+          id: "neuro-nociception-monitors",
+          name: "Brain function and nociception monitoring",
+          desc: "New EEG-based indices and automated pupillometry.",
+          refs: ["J Clin Monit 2024", "BJA"],
+          sub: [
+            "Nociception Level (NOL) index: multi-parameter (HR, GSR, HRV, PPG) nociception monitor",
+            "qNOX index: EEG-based probability of response to noxious stimulation",
+            "Pupillometry: automated pupillary reflex dilation (PRD) as analgesia indicator",
+            "Cerebral oximetry (NIRS): updates on thresholds for intervention",
+            "Automated EEG processing: patient state index, narcotrend, entropy in updated contexts"
+          ]
+        },
+        {
+          id: "point-care-technology",
+          name: "Point-of-care technology advances",
+          desc: "POCUS, noninvasive hemoglobin, continuous glucose monitoring in the OR.",
+          refs: ["BJA Education 2024", "J Cardiothorac Vasc Anesth"],
+          sub: [
+            "Point-of-care ultrasound (POCUS) in OR: gastric, lung, airway, cardiac, abdomen",
+            "Noninvasive hemoglobin monitoring: Masimo Rainbow, comparison with lab values",
+            "Continuous glucose monitoring in perioperative period: Dexcom G6, Libre in diabetic patients",
+            "Volumetric capnography: VCO2, alveolar dead space calculation as clinical tool",
+            "Thromboelastography (TEG/ROTEM) updates: newer assays, clinical algorithms for bleeding"
+          ]
+        }
+      ]
+    },
+    {
+      id: "ventilation-respiratory",
+      name: "Advances in Ventilation and Respiratory Support",
+      desc: "New evidence and techniques in perioperative and critical care ventilation.",
+      topics: [
+        {
+          id: "protective-ventilation-updates",
+          name: "Updated lung-protective ventilation strategies",
+          desc: "New evidence on tidal volume, PEEP titration, and driving pressure.",
+          refs: ["NEJM 2023-24", "Intensive Care Med"],
+          sub: [
+            "Driving pressure (plateau-PEEP): individualized target < 15 cmH2O, emerging as primary outcome in ARDS",
+            "PEEP titration: esophageal manometry, EIT, recruitment-to-inflation ratio",
+            "Spontaneous breathing in ARDS: updated evidence for early vs controlled ventilation",
+            "Neuromuscular blockade in ARDS: ROSE trial re-analysis, individualized approach",
+            "Prone positioning: updated evidence, protocol simplification",
+            "Ultraprotective ventilation with ECCO2R: tidal volume < 4 mL/kg in severe ARDS"
+          ],
+          subLinks: ["https://litfl.com/driving-pressure/","","","","",""]
+        },
+        {
+          id: "ecmo-evolution",
+          name: "ECMO evolution and configurations",
+          desc: "Advances in extracorporeal life support.",
+          refs: ["ELSO guidelines 2024", "Lancet Resp Med"],
+          sub: [
+            "Awake ECMO: non-intubated V-V ECMO, benefits for mobilization and weaning",
+            "ECCO2R devices: novel low-flow devices for ultraprotective ventilation",
+            "ECPR (extracorporeal CPR): patient selection, outcomes compared to conventional CPR",
+            "Ambulatory ECMO: mobile ECMO teams, inter-hospital transport protocols",
+            "V-A ECMO weaning: pressure-volume loop assessments, weaning protocols"
+          ],
+          subLinks: ["https://litfl.com/awake-ecmo/","","https://litfl.com/ecpr/","",""]
+        },
+        {
+          id: "hfnc-thrive",
+          name: "High-flow nasal oxygen and THRIVE evidence",
+          desc: "Expanding evidence for HFNO in perioperative and critical care settings.",
+          refs: ["NEJM 2023-24", "BJA"],
+          sub: [
+            "Preoxygenation with HFNO: obese patients, predicted difficult airway",
+            "THRIVE (Transnasal Humidified Rapid-Insufflation Ventilatory Exchange): prolonged apnea time",
+            "Post-extubation HFNO vs conventional oxygen: updated meta-analysis",
+            "Apneic oxygenation principles: dead space washout, flow-dependent CPAP effect",
+            "HFNO in immunocompromised patients: evidence update"
+          ]
+        }
+      ]
+    },
+    {
+      id: "regional-pain-advances",
+      name: "Regional Anesthesia and Pain Management Advances",
+      desc: "New blocks, adjuvants, and evidence in regional and pain medicine.",
+      topics: [
+        {
+          id: "fascial-plane-blocks",
+          name: "Fascial plane blocks update",
+          desc: "ESP, PECS, QL, erector spinae, and other novel interfascial blocks.",
+          refs: ["BJA Education 2024", "Reg Anesth Pain Med"],
+          sub: [
+            "Erector spinae plane (ESP) block: mechanism, evidence, controversies",
+            "PECS blocks: PECS I, PECS II, comparison with paravertebral",
+            "Quadratus lumborum (QL) block: QL1, QL2, QL3, transmuscular vs anterior",
+            "Serratus anterior plane block: as alternative to thoracic paravertebral for thoracotomy",
+            "Adductor canal block vs femoral nerve block: quad-sparing for knee surgery",
+            "Novel adjuvants: dexmedetomidine, liposomal bupivacaine, magnesium"
+          ],
+          subLinks: ["https://www.nysora.com/erector-spinae/","https://www.nysora.com/pecs-block/","https://www.nysora.com/quadratus-lumborum/","https://www.nysora.com/serratus-anterior/","https://www.nysora.com/adductor-canal/",""]
+        },
+        {
+          id: "chronic-pain-emerging",
+          name: "Emerging chronic pain interventions",
+          desc: "Novel interventional and pharmacologic treatments for chronic pain.",
+          refs: ["Pain Med 2024", "Reg Anesth Pain Med"],
+          sub: [
+            "Genicular nerve RFA for chronic knee pain: updated evidence",
+            "Cooled vs conventional RFA: outcomes for sacroiliac and facet pain",
+            "Spinal cord stimulation: closed-loop, high-frequency (10-kHz), burst paradigms",
+            "Dorsal root ganglion (DRG) stimulation: evidence compared to traditional SCS",
+            "Ketamine infusion therapy for chronic pain: protocols, risks, benefits"
+          ]
+        },
+        {
+          id: "continuous-catheter-regional",
+          name: "Continuous catheter techniques and drug delivery",
+          desc: "Advances in perineural catheters, infusion pumps, and ambulatory regional.",
+          refs: ["Reg Anesth Pain Med 2024", "BJA"],
+          sub: [
+            "Liposomal bupivacaine (Exparel): mechanism, evidence, meta-analysis results",
+            "Ambulatory continuous peripheral nerve blocks: catheter types, pump technology",
+            "Ultrasound-guided catheter placement: current practice and outcomes",
+            "Intermittent bolus vs continuous infusion: evidence for superior sensory blockade"
+          ]
+        }
+      ]
+    },
+    {
+      id: "pediatric-advances",
+      name: "Pediatric Anesthesia Updates",
+      desc: "Recent evidence and guidelines in pediatric anesthesia.",
+      topics: [
+        {
+          id: "pediatric-pharm-updates",
+          name: "Pediatric pharmacology updates",
+          desc: "New dosing guidelines, concerns, and approved drugs.",
+          refs: ["Pediatr Anesth 2024", "BJA Education"],
+          sub: [
+            "Dexmedetomidine in pediatrics: expanded use for sedation, emergence delirium",
+            "Remimazolam in children: emerging evidence for procedural sedation",
+            "Sugammadex dosing in neonates, infants: updated weight-based protocols",
+            "TIVA in pediatric patients: TC1 models, dosing challenges",
+            "APRICOT study follow-up: complications and safety in pediatric anesthesia"
+          ]
+        },
+        {
+          id: "pediatric-ultrasound-advances",
+          name: "Pediatric regional anesthesia advances",
+          desc: "Ultrasound-guided techniques and safety in children.",
+          refs: ["Pediatr Anesth 2024", "Reg Anesth Pain Med"],
+          sub: [
+            "LA dosing: maximum doses (mg/kg) for common LAs in children",
+            "Caudal blocks: dexmedetomidine as adjuvant, ultrasound vs landmark",
+            "Targeted blocks for specific surgeries: ilioinguinal/iliohypogastric, TAP, quadratus lumborum",
+            "Continuous perineural catheters in pediatrics: indications and safety",
+            "Emergence delirium prevention: new pharmacologic and non-pharmacologic approaches"
           ]
         }
       ]
     }
   ]
-}
+},
 ];
 
 if (typeof window !== "undefined") {

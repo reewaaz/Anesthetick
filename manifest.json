@@ -1,12 +1,12 @@
 {
-  "name": "Anestheticks",
-  "short_name": "Anestheticks",
+  "name": "Anesthetick",
+  "short_name": "Anesthetick",
   "description": "Comprehensive anesthesia study planner for EDAIC and FRCA preparation.",
-  "start_url": "/Anestheticks/index.html",
+  "start_url": "/Anesthetick/index.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0b1120",
-  "theme_color": "#0f172a",
+  "background_color": "#0f1117",
+  "theme_color": "#e88d5a",
   "icons": [
     { "src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "assets/icon-512.png", "sizes": "512x512", "type": "image/png" }
