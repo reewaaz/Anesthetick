@@ -63,6 +63,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
+  overflow: hidden;
 }
 
 body {
@@ -74,7 +75,6 @@ body {
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow: hidden;
   transition: background 0.3s var(--ease), color 0.3s var(--ease);
 }
 
@@ -82,7 +82,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100dvh;
-  height: 100vh;
+  position: relative;
 }
 
 .ic {
@@ -125,10 +125,12 @@ a:hover {
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-bottom: 1px solid var(--line);
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: 30;
   transition: background 0.3s var(--ease);
   min-height: var(--top-h);
+  flex-shrink: 0;
 }
 
 .top-title {
@@ -136,14 +138,20 @@ a:hover {
   font-weight: 700;
   color: #6366f1;
   white-space: nowrap;
-  transition: opacity 0.25s var(--ease), width 0.25s var(--ease);
-  overflow: hidden;
-  flex-shrink: 0;
+  transition: opacity 0.25s var(--ease);
+  flex: 1;
+  text-align: center;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
+
+[data-theme="dark"] .top-title {
+  color: #818cf8;
+}
+
 .top-title.hidden {
   opacity: 0;
-  width: 0;
-  margin: 0;
+  pointer-events: none;
 }
 
 .icon-btn {
@@ -167,7 +175,7 @@ a:hover {
 }
 
 .search-wrap {
-  flex: 1;
+  flex: 0;
   position: relative;
   display: flex;
   align-items: center;
@@ -177,13 +185,15 @@ a:hover {
   height: 42px;
   padding: 0 10px 0 10px;
   transition: 0.3s var(--ease);
-  max-width: 42px;
+  width: 42px;
   cursor: pointer;
   overflow: hidden;
+  flex-shrink: 0;
 }
 
 .search-wrap.open {
-  max-width: none;
+  flex: 1;
+  width: auto;
   padding: 0 10px 0 38px;
 }
 
@@ -232,9 +242,9 @@ main {
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
-  padding: 16px 14px calc(var(--nav-h) + var(--safe-b) + 24px);
-  scroll-behavior: smooth;
+  padding: 16px 14px calc(var(--nav-h) + var(--safe-b) + 16px);
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
 }
 
 main::-webkit-scrollbar {
@@ -779,20 +789,22 @@ main::-webkit-scrollbar-thumb {
   list-style: none;
   padding: 0;
   margin: 8px 0;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .sub-item {
   display: flex;
   align-items: flex-start;
-  gap: 14px;
-  padding: 14px 14px 14px 16px;
+  gap: 10px;
+  padding: 14px 14px;
   background: var(--surface);
-  border-left: 3px solid var(--accent2);
+  border-left: 4px solid var(--accent2);
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: background 0.2s, border-color 0.2s, transform 0.15s;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  margin-bottom: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -827,7 +839,8 @@ main::-webkit-scrollbar-thumb {
 
 .sub-item.done {
   border-left-color: var(--ok);
-  opacity: 0.75;
+  opacity: 0.8;
+  background: color-mix(in srgb, var(--ok) 6%, var(--surface));
 }
 
 .sub-item.done .check {
@@ -885,6 +898,87 @@ main::-webkit-scrollbar-thumb {
   background: var(--surface2);
   border-color: var(--accent2);
   text-decoration: none;
+}
+
+/* Sub-item bookmark */
+.sub-item .sub-bookmark {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  flex: 0 0 auto;
+  transition: 0.2s;
+  cursor: pointer;
+}
+.sub-item .sub-bookmark.active {
+  color: var(--warn);
+}
+.sub-item .sub-bookmark:active {
+  transform: scale(0.85);
+}
+.sub-item .sub-bookmark svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Sub-item notes */
+.sub-notes {
+  margin-top: 6px;
+}
+.sub-notes textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg2);
+  color: var(--text);
+  font-size: 12px;
+  padding: 6px 8px;
+  resize: vertical;
+  min-height: 32px;
+  font-family: var(--font);
+  line-height: 1.4;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.sub-notes textarea:focus {
+  border-color: var(--accent);
+}
+
+/* Custom sub add */
+.custom-sub-add {
+  display: flex;
+  gap: 8px;
+  margin: 12px 0;
+}
+.custom-sub-add input {
+  flex: 1;
+  background: var(--surface);
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  color: var(--text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.custom-sub-add input:focus {
+  border-color: var(--accent2);
+  border-style: solid;
+}
+.custom-sub-add button {
+  background: var(--surface2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 0 14px;
+  color: var(--accent2);
+  font-weight: 600;
+  font-size: 13px;
+  transition: 0.2s;
+}
+.custom-sub-add button:active {
+  transform: scale(0.94);
 }
 
 .sub-list-title {
@@ -1109,6 +1203,22 @@ main::-webkit-scrollbar-thumb {
   border-color: var(--accent2);
 }
 
+/* Distinct refs section in settings */
+.set-refs {
+  background: color-mix(in srgb, var(--accent2) 6%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent2) 20%, transparent);
+  border-radius: var(--radius);
+  padding: 18px 16px;
+  margin-top: 6px;
+}
+.set-refs .ref-grid {
+  gap: 8px;
+}
+.set-refs .ref-card {
+  background: color-mix(in srgb, var(--accent2) 4%, var(--surface));
+  border-color: color-mix(in srgb, var(--accent2) 14%, var(--line));
+}
+
 /* ── Settings ──────────────────────────────────────────── */
 .set-group {
   margin-bottom: 16px;
@@ -1263,16 +1373,19 @@ main::-webkit-scrollbar-thumb {
   margin-top: 12px;
 }
 
-/* ── Bottom nav ────────────────────────────────────────── */
+/* ── Bottom nav (MD3) ──────────────────────────────────── */
 .bottomnav {
   display: flex;
-  background: color-mix(in srgb, var(--bg2) 92%, transparent);
+  background: color-mix(in srgb, var(--bg2) 94%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
   border-top: 1px solid var(--line);
   height: calc(var(--nav-h) + var(--safe-b));
   padding-bottom: var(--safe-b);
-  position: relative;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 30;
   transition: background 0.3s var(--ease);
 }
@@ -1283,38 +1396,44 @@ main::-webkit-scrollbar-thumb {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
+  gap: 0;
   color: var(--muted);
   font-size: 10.5px;
   font-weight: 600;
   transition: 0.25s var(--ease);
   position: relative;
   letter-spacing: 0.02em;
+  padding: 4px 12px;
 }
 
 .navbtn::before {
   content: '';
   position: absolute;
-  top: 6px;
+  top: 4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 20px;
-  height: 3px;
-  border-radius: 2px;
+  width: 48px;
+  height: 28px;
+  border-radius: 20px;
   background: transparent;
   transition: 0.3s var(--ease);
 }
 
 .navbtn.active::before {
-  background: var(--accent2);
-  width: 32px;
+  background: color-mix(in srgb, var(--accent2) 16%, transparent);
 }
 
 .navbtn svg {
   width: 22px;
   height: 22px;
   position: relative;
-  top: 2px;
+  z-index: 1;
+}
+
+.navbtn span {
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
 }
 
 .navbtn.active {
@@ -1327,16 +1446,6 @@ main::-webkit-scrollbar-thumb {
 
 .navbtn:active {
   transform: scale(0.92);
-}
-
-.navbtn:active svg {
-  animation: navPress 0.2s var(--ease);
-}
-
-@keyframes navPress {
-  0% { transform: scale(1); }
-  50% { transform: scale(0.85); }
-  100% { transform: scale(1); }
 }
 
 @keyframes pop {
@@ -1609,7 +1718,7 @@ main::-webkit-scrollbar-thumb {
 /* ── Desktop enhancements ──────────────────────────────── */
 @media (min-width: 768px) {
   main {
-    padding: 24px 24px calc(var(--nav-h) + var(--safe-b) + 28px);
+    padding: 24px 24px calc(var(--nav-h) + var(--safe-b) + 20px);
   }
 
   .topbar {

@@ -6,7 +6,6 @@
 
   /* ── state ─────────────────────────────────────────────── */
   let state = loadState();
-  let viewStack = [];
   let searchResults = [];
 
   function loadState() {
@@ -15,7 +14,7 @@
       if (raw) return JSON.parse(raw);
     } catch (_) {}
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return { progress: {}, bookmarks: [], installDismissed: false, theme: prefersDark ? 'dark' : 'light' };
+    return { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, notes: {}, installDismissed: false, theme: prefersDark ? 'dark' : 'light' };
   }
 
   function saveState() {
@@ -116,6 +115,47 @@
     if (idx >= 0) state.bookmarks.splice(idx, 1);
     else state.bookmarks.push(topicId);
     saveStateDebounced();
+  }
+
+  function isSubBookmarked(uidStr) {
+    return state.subBookmarks.includes(uidStr);
+  }
+
+  function toggleSubBookmark(uidStr) {
+    const idx = state.subBookmarks.indexOf(uidStr);
+    if (idx >= 0) state.subBookmarks.splice(idx, 1);
+    else state.subBookmarks.push(uidStr);
+    saveStateDebounced();
+  }
+
+  function getSubNotes(uidStr) {
+    return state.notes[uidStr] || '';
+  }
+
+  function setSubNotes(uidStr, text) {
+    if (text.trim()) {
+      state.notes[uidStr] = text;
+    } else {
+      delete state.notes[uidStr];
+    }
+    saveStateDebounced();
+  }
+
+  function getCustomSubs(topicId) {
+    return state.customSubs[topicId] || [];
+  }
+
+  function addCustomSub(topicId, text) {
+    if (!state.customSubs[topicId]) state.customSubs[topicId] = [];
+    state.customSubs[topicId].push(text);
+    saveStateDebounced();
+  }
+
+  function removeCustomSub(topicId, idx) {
+    if (state.customSubs[topicId]) {
+      state.customSubs[topicId].splice(idx, 1);
+      saveStateDebounced();
+    }
   }
 
   function flattenTopics() {
@@ -228,17 +268,24 @@
     `;
   }
 
-  function renderSubItem(sub, idx, topic, catId, secId) {
-    const u = uid(catId, secId, topic.id, idx);
+  function renderSubItem(sub, idx, topic, catId, secId, isCustom) {
+    const u = uid(catId, secId, topic.id, idx + (isCustom ? 1000 : 0));
     const done = isDone(u);
     const subLinks = topic.subLinks && topic.subLinks[idx] ? topic.subLinks[idx] : null;
+    const sb = isSubBookmarked(u);
+    const note = getSubNotes(u);
+    const customAttr = isCustom ? ' data-custom="1"' : '';
     return html`
-      <div class="sub-item ${done ? 'done' : ''}" data-uid="${u}">
+      <div class="sub-item ${done ? 'done' : ''}" data-uid="${u}"${customAttr}>
         <div class="check">${ICONS.check}</div>
         <div class="sub-context">
           <span class="s-name">${sub}</span>
           ${subLinks ? html`<div class="sub-links">${subLinks.split(',').slice(0,2).map(sl => html`<a href="${sl.trim()}" target="_blank" rel="noopener">${ICONS.external} ${linkLabel(sl.trim())}</a>`).join('')}</div>` : ''}
+          <div class="sub-notes">
+            <textarea placeholder="Notes…" data-note="${u}" spellcheck="false">${note}</textarea>
+          </div>
         </div>
+        <button class="sub-bookmark ${sb ? 'active' : ''}" data-action="sub-bookmark" data-sub-uid="${u}">${sb ? ICONS['bookmark-filled'] : ICONS.bookmark}</button>
       </div>
     `;
   }
@@ -283,7 +330,7 @@
   function viewCategory(catId) {
     const cat = CURRICULUM.find(c => c.id === catId);
     if (!cat) return viewHome();
-    viewStack = [{ view: 'home', data: null }];
+    pushNav('home', null);
     const inner = document.createElement('div');
     inner.className = 'inner';
     inner.innerHTML = html`
@@ -306,10 +353,7 @@
     const all = ALL_TOPICS.find(t => t.id === topicId);
     if (!all) return viewHome();
     const { catId, secId, catName, secName } = all;
-    viewStack = [
-      { view: 'home', data: null },
-      { view: 'category', data: catId },
-    ];
+    pushNav('category', catId);
 
     const cat = CURRICULUM.find(c => c.id === catId);
     const sec = cat?.sections.find(s => s.id === secId);
@@ -318,6 +362,8 @@
 
     const pct = topicProgress({ ...topic, catId, secId });
     const bm = isBookmarked(topicId);
+    const customSubs = getCustomSubs(topicId);
+    const allSubs = [...(topic.sub || []), ...customSubs];
 
     const inner = document.createElement('div');
     inner.className = 'inner';
@@ -338,10 +384,15 @@
         <div class="refs">${topic.refs.map(r => html`<span class="ref">${r}</span>`).join('')}</div>
       ` : ''}
       ${renderTopicLinks(topic)}
-      ${topic.sub?.length ? html`
+      ${allSubs.length ? html`
         <div class="list-title" style="font-size:16px;font-weight:650;margin:16px 0 8px">Learning Objectives</div>
         <div class="sub-list" data-check-all>
           ${topic.sub.map((s, i) => renderSubItem(s, i, topic, catId, secId)).join('')}
+          ${customSubs.map((s, i) => renderSubItem(s, i, topic, catId, secId, true)).join('')}
+        </div>
+        <div class="custom-sub-add">
+          <input type="text" id="customSubInput" placeholder="Add custom objective…" />
+          <button data-action="add-custom-sub" data-topic-id="${topicId}">Add</button>
         </div>
         <div class="sheet-actions">
           <button class="btn-ghost" data-action="check-all">Check all</button>
@@ -521,7 +572,7 @@
         <div class="set-group-title">Appearance</div>
         <div class="set-row">
           <div class="set-info">
-            <div class="lbl">Dark Mode</div>
+            <div class="lbl">Light Mode</div>
             <div class="desc">Switch between dark and light theme</div>
           </div>
           <div class="theme-toggle ${isLight ? 'on' : ''}" data-action="toggle-theme">
@@ -544,38 +595,40 @@
 
       <div class="set-group">
         <div class="set-group-title">Data</div>
-        <div class="set-row">
+        <div class="set-row" style="border-color:color-mix(in srgb, var(--danger) 30%, var(--line))">
           <div class="set-info">
-            <div class="lbl">Reset All Progress</div>
+            <div class="lbl" style="color:var(--danger)">Reset All Progress</div>
             <div class="desc">Clear all checkmarks and start fresh</div>
           </div>
-          <button class="btn-ghost" data-action="reset-progress" style="font-size:12px">Reset</button>
+          <button class="btn-ghost" data-action="reset-progress" style="font-size:12px;color:var(--danger);border-color:color-mix(in srgb, var(--danger) 40%, var(--line))">Reset</button>
         </div>
-        <div class="set-row">
+        <div class="set-row" style="border-color:color-mix(in srgb, var(--danger) 30%, var(--line))">
           <div class="set-info">
-            <div class="lbl">Clear All Bookmarks</div>
+            <div class="lbl" style="color:var(--danger)">Clear All Bookmarks</div>
             <div class="desc">Remove all saved topics</div>
           </div>
-          <button class="btn-ghost" data-action="reset-bookmarks" style="font-size:12px">Clear</button>
+          <button class="btn-ghost" data-action="reset-bookmarks" style="font-size:12px;color:var(--danger);border-color:color-mix(in srgb, var(--danger) 40%, var(--line))">Clear</button>
         </div>
-        <div class="set-row">
+        <div class="set-row" style="border-color:color-mix(in srgb, var(--danger) 40%, var(--line))">
           <div class="set-info">
-            <div class="lbl">Reset Everything</div>
+            <div class="lbl" style="color:var(--danger)">Reset Everything</div>
             <div class="desc">Wipe all local data including theme preferences</div>
           </div>
-          <button class="btn-ghost" data-action="reset-all" style="font-size:12px;color:var(--danger)">Wipe</button>
+          <button class="btn-ghost" data-action="reset-all" style="font-size:12px;color:var(--danger);border-color:color-mix(in srgb, var(--danger) 40%, var(--line))">Wipe</button>
         </div>
       </div>
 
       <div class="set-group">
         <div class="set-group-title">References &amp; Resources</div>
-        <div class="ref-grid">${REFS.map((r, i) => html`
-          <div class="ref-card${r.url ? ' clickable' : ''}" data-url="${r.url || ''}">
-            <h3>${r.name}</h3>
-            <p>${r.desc}</p>
-            ${r.url ? html`<div class="ref-link"><svg viewBox="0 0 24 24" class="ic" style="width:14px;height:14px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Open resource</div>` : ''}
-          </div>
-        `).join('')}</div>
+        <div class="set-refs">
+          <div class="ref-grid">${REFS.map((r, i) => html`
+            <div class="ref-card${r.url ? ' clickable' : ''}" data-url="${r.url || ''}">
+              <h3>${r.name}</h3>
+              <p>${r.desc}</p>
+              ${r.url ? html`<div class="ref-link"><svg viewBox="0 0 24 24" class="ic" style="width:14px;height:14px"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14 21 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> Open resource</div>` : ''}
+            </div>
+          `).join('')}</div>
+        </div>
       </div>
 
       <div style="text-align:center;margin:30px 0;color:var(--muted);font-size:12px;font-weight:400">
@@ -653,7 +706,6 @@
   function navigate(view, data) {
     switch (view) {
       case 'home': showView(viewHome); break;
-      case 'progress': showView(viewProgress); break;
       case 'bookmarks': showView(viewBookmarks); break;
       case 'settings': showView(viewCombinedSettings); break;
       case 'category': showView(viewCategory, data); break;
@@ -661,7 +713,7 @@
       case 'search': showView(viewSearch, data); break;
       default: showView(viewHome);
     }
-    const navView = ['home', 'progress', 'bookmarks', 'settings'].includes(view) ? view : 'home';
+    const navView = ['home', 'bookmarks', 'settings'].includes(view) ? view : 'home';
     updateNav(navView);
   }
 
@@ -712,6 +764,47 @@
 
   /* ── event delegation ───────────────────────────────────── */
 
+  // View history for back navigation
+  let navHistory = [];
+
+  function pushNav(view, data) {
+    navHistory.push({ view, data });
+    if (navHistory.length > 20) navHistory.shift();
+  }
+
+  function goBack() {
+    if (navHistory.length < 2) { navigate('home'); return; }
+    navHistory.pop(); // current
+    const prev = navHistory.pop() || { view: 'home' };
+    navigate(prev.view, prev.data);
+  }
+
+  // Title click → home
+  $('#topTitle').addEventListener('click', () => {
+    sfxNav();
+    navigate('home');
+  });
+
+  // Swipe back gesture
+  let touchStartX = 0, touchStartY = 0;
+  document.addEventListener('touchstart', e => {
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }
+  }, { passive: true });
+  document.addEventListener('touchmove', e => {
+    if (e.touches.length !== 1) return;
+    const dx = e.touches[0].clientX - touchStartX;
+    const dy = e.touches[0].clientY - touchStartY;
+    // Swipe right from left edge → go back
+    if (dx > 80 && Math.abs(dy) < 60 && touchStartX < 40) {
+      e.preventDefault();
+      goBack();
+      touchStartX = 0;
+    }
+  }, { passive: false });
+
   // Main view events
   $view.addEventListener('click', e => {
     const target = e.target.closest('[data-nav], [data-cat], [data-action], [data-topic-id], [data-sec]');
@@ -729,6 +822,7 @@
 
     // Category card
     if (target.dataset.cat) {
+      pushNav('category', target.dataset.cat);
       sfxNav();
       navigate('category', target.dataset.cat);
       return;
@@ -736,6 +830,7 @@
 
     // Topic click (click on topic row)
     if (target.dataset.topicId && !target.dataset.action) {
+      pushNav('topic', target.dataset.topicId);
       sfxNav();
       navigate('topic', target.dataset.topicId);
       return;
@@ -743,6 +838,33 @@
 
     const action = target.dataset.action;
     if (!action) return;
+
+    // Add custom subtopic
+    if (action === 'add-custom-sub') {
+      const topicId = target.dataset.topicId;
+      const input = document.getElementById('customSubInput');
+      const text = input?.value.trim();
+      if (text && topicId) {
+        addCustomSub(topicId, text);
+        input.value = '';
+        navigate('topic', topicId);
+        toast('Added: ' + text);
+      }
+      return;
+    }
+
+    // Sub-item bookmark toggle
+    if (action === 'sub-bookmark') {
+      e.stopPropagation();
+      sfxBookmark();
+      const uidStr = target.dataset.subUid;
+      if (uidStr) {
+        toggleSubBookmark(uidStr);
+        target.classList.toggle('active', isSubBookmarked(uidStr));
+        toast(isSubBookmarked(uidStr) ? 'Sub-item saved' : 'Sub-item removed');
+      }
+      return;
+    }
 
     // Check toggle on topic
     if (action === 'check') {
@@ -814,7 +936,9 @@
 
     // Install from settings
     if (action === 'install-app') {
-      if (deferredPrompt) {
+      if (window.matchMedia('(display-mode: standalone)').matches) {
+        toast('App is already installed');
+      } else if (deferredPrompt) {
         deferredPrompt.prompt();
         deferredPrompt.userChoice.then(result => {
           if (result.outcome === 'accepted') {
@@ -824,7 +948,7 @@
           deferredPrompt = null;
         });
       } else {
-        toast('App already installed or not available on this browser');
+        toast('Open this page in Chrome and visit again — the install prompt will appear');
       }
       return;
     }
@@ -1004,12 +1128,18 @@
   $('#statsBtn').addEventListener('click', () => {
     sfxNav();
     collapseSearch();
-    navigate('progress');
+    navigate('bookmarks');
   });
 
   /* ── PWA install ────────────────────────────────────────── */
   const $installBanner = $('#installBanner');
   let deferredPrompt;
+
+  // Notes textarea live save
+  document.addEventListener('input', e => {
+    const ta = e.target.closest('textarea[data-note]');
+    if (ta) setSubNotes(ta.dataset.note, ta.value);
+  });
 
   window.addEventListener('beforeinstallprompt', e => {
     e.preventDefault();
