@@ -134,13 +134,14 @@ a:hover {
 }
 
 .top-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   font-size: 17px;
   font-weight: 700;
   color: #6366f1;
   white-space: nowrap;
   transition: opacity 0.25s var(--ease);
-  flex: 1;
-  text-align: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
