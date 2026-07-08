@@ -36,7 +36,7 @@ const CURRICULUM = [
             "Work, energy, power",
             "Newton's laws of motion"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "thermo-physics",
@@ -50,7 +50,7 @@ const CURRICULUM = [
             "Relevance to clinical anesthesia (heat loss in theatre)",
             "Humidity & absolute vs relative humidity"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "gas-laws-physics",
@@ -75,7 +75,7 @@ const CURRICULUM = [
             "Latent heat of vaporization",
             "Viscosity, density, Reynolds number"
           ],
-          subLinks: ["","","","","","","","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "flow-dynamics",
@@ -90,7 +90,7 @@ const CURRICULUM = [
             "Entrainment devices (nebulizers, Venturi masks)",
             "Orifice flow & flowmeters"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -111,7 +111,7 @@ const CURRICULUM = [
             "Laser types: CO2, Nd:YAG, KTP, Argon",
             "Laser safety & classification"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "spectrophotometry",
@@ -126,7 +126,7 @@ const CURRICULUM = [
             "CO-oximetry: multiple wavelength analysis",
             "Dyshemoglobin detection (COHb, MetHb)"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -146,7 +146,7 @@ const CURRICULUM = [
             "Alternating vs direct current",
             "Transformers (step-up/step-down)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "electrical-safety-theatre",
@@ -168,7 +168,7 @@ const CURRICULUM = [
             "Fire risk assessment score",
             "Waste anesthetic gas exposure limits"
           ],
-          subLinks: ["","","","","","","","https://litfl.com/","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -191,7 +191,7 @@ const CURRICULUM = [
             "Doppler effect principle & color Doppler",
             "Probes: linear, curvilinear, phased array"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -212,7 +212,7 @@ const CURRICULUM = [
             "Calibration principles (zeroing, spanning)",
             "Limits of monitoring equipment"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "specific-measurements",
@@ -230,7 +230,7 @@ const CURRICULUM = [
             "Flow measurement: pneumotachograph",
             "Electrical interference: causes and reduction"
           ],
-          subLinks: ["","","","","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -260,7 +260,7 @@ const CURRICULUM = [
             "Active vs passive transport mechanisms",
             "Genes and expression (DNA to RNA to protein)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "body-fluids",
@@ -275,7 +275,7 @@ const CURRICULUM = [
             "Special fluids: CSF, pleural, pericardial, peritoneal",
             "Lymphatic system structure and function"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -296,7 +296,7 @@ const CURRICULUM = [
             "Quaternary ammonium compounds (permanently charged drugs)",
             "Drug solubility and partition coefficients"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "metabolism-nutrition",
@@ -312,7 +312,7 @@ const CURRICULUM = [
             "Vitamins and minerals (cofactors)",
             "Body mass index and body composition"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -333,7 +333,7 @@ const CURRICULUM = [
             "Half-life calculation and time constants",
             "Clearance calculations"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -363,7 +363,7 @@ const CURRICULUM = [
             "Age-related changes (neonate to adult)",
             "Surface anatomy of the airway"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "lower-respiratory-tract",
@@ -379,7 +379,7 @@ const CURRICULUM = [
             "Diaphragm: attachments, apertures, innervation (phrenic C3-5)",
             "Intercostal muscles & neurovascular bundle orientation"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -408,7 +408,7 @@ const CURRICULUM = [
             "Dermatomes: clinical mapping and relevance",
             "Autonomic outflow from spinal cord"
           ],
-          subLinks: ["","","","","","","","","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -429,7 +429,7 @@ const CURRICULUM = [
             "Pericardium: layers and sinuses",
             "Great vessels: aorta, SVC, IVC, pulmonary arteries/veins"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "peripheral-vasculature",
@@ -444,7 +444,7 @@ const CURRICULUM = [
             "Arteries of upper and lower limbs",
             "Celiac plexus & autonomic ganglia"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -464,7 +464,7 @@ const CURRICULUM = [
             "Sacral plexus: roots and branches (sciatic, posterior cutaneous)",
             "Nerves of the abdominal wall (intercostals, ilioinguinal, iliohypogastric)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "head-neck-eye-anat",
@@ -480,7 +480,7 @@ const CURRICULUM = [
             "Trigeminal & facial nerve anatomy",
             "Surface markings of relevant structures"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -509,7 +509,7 @@ const CURRICULUM = [
             "Synaptic transmission (neurotransmitter release)",
             "Changes with advancing age"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -529,7 +529,7 @@ const CURRICULUM = [
             "Baroreceptor reflex",
             "Direct vs reflex effects of drugs"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -554,7 +554,7 @@ const CURRICULUM = [
             "Arrhythmia mechanisms (reentry, ectopic, afterdepolarizations)",
             "Effect of anesthetics on conduction"
           ],
-          subLinks: ["","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "haemodynamics",
@@ -575,7 +575,7 @@ const CURRICULUM = [
             "Peripheral circulation: endothelium, arteriolar smooth muscle",
             "Special circulations: pulmonary, coronary, cerebral, renal, fetal"
           ],
-          subLinks: ["","","","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "shock-oxygen-delivery",
@@ -588,7 +588,7 @@ const CURRICULUM = [
             "Compensated vs decompensated shock",
             "Lactate & base excess as markers"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -612,7 +612,7 @@ const CURRICULUM = [
             "Flow-volume loops",
             "Effect of IPPV on lungs"
           ],
-          subLinks: ["","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "gas-exchange",
@@ -636,7 +636,7 @@ const CURRICULUM = [
             "Effects of altitude and hyperbaric pressures",
             "Non-respiratory functions of the lungs"
           ],
-          subLinks: ["","","","","","","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "control-ventilation",
@@ -651,7 +651,7 @@ const CURRICULUM = [
             "Sleep-disordered breathing",
             "Acute and chronic ventilatory failure"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "anesthesia-resp-effects",
@@ -665,7 +665,7 @@ const CURRICULUM = [
             "Changes in dead space & compliance",
             "Positioning & cephalad diaphragm shift"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -686,7 +686,7 @@ const CURRICULUM = [
             "Assessment of renal function (GFR, clearance, urea/creatinine, cystatin C)",
             "Pathophysiology of acute kidney injury"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "tubular-function",
@@ -700,7 +700,7 @@ const CURRICULUM = [
             "RAAS & aldosterone",
             "Acid-base regulation by kidney"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "perioperative-renal",
@@ -714,7 +714,7 @@ const CURRICULUM = [
             "Contrast nephropathy & prevention",
             "Effects of drugs (NSAIDs, ACE-I)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -737,7 +737,7 @@ const CURRICULUM = [
             "Synthetic function (albumin, INR, clotting factors)",
             "Child-Pugh & MELD scoring"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "anesthesia-liver",
@@ -750,7 +750,7 @@ const CURRICULUM = [
             "Hepatorenal syndrome",
             "Hepatic encephalopathy"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -770,7 +770,7 @@ const CURRICULUM = [
             "Perioperative insulin management & glucose targets",
             "Hypoglycemia recognition"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "thyroid-adrenal",
@@ -790,7 +790,7 @@ const CURRICULUM = [
             "Physiological changes in starvation and exercise",
             "Body temperature regulation (including extremes of age)"
           ],
-          subLinks: ["","","","","","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -812,7 +812,7 @@ const CURRICULUM = [
             "Cerebral metabolic rate & effects of anesthetics",
             "Lund vs CPP-targeted therapy"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "pain-neurophysio",
@@ -829,7 +829,7 @@ const CURRICULUM = [
             "Neuropathic vs visceral pain mechanisms",
             "Physiology of nausea and vomiting"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "neuroprotection-eeg",
@@ -843,7 +843,7 @@ const CURRICULUM = [
             "Hypothermia for neuroprotection",
             "Glucose control in neuro injury"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -870,7 +870,7 @@ const CURRICULUM = [
             "Respiratory compensation limits",
             "Common perioperative derangements"
           ],
-          subLinks: ["","","","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "electrolyte-disorders",
@@ -884,7 +884,7 @@ const CURRICULUM = [
             "Magnesium: treatment of pre-eclampsia, arrhythmias",
             "Phosphate disorders"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -906,7 +906,7 @@ const CURRICULUM = [
             "Viscoelastic testing interpretation (TEG/ROTEM)",
             "Coagulation measurement (aPTT, PT/INR, anti-Xa)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "transfusion-physio",
@@ -920,7 +920,7 @@ const CURRICULUM = [
             "TACO vs TRALI",
             "Transfusion reactions"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -940,7 +940,7 @@ const CURRICULUM = [
             "Functions of the placenta and placental transfer",
             "Pain pathways relevant to stages of labour"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -974,7 +974,7 @@ const CURRICULUM = [
             "Target Controlled Infusion (TCI) principles",
             "Pharmacogenetics (CYP450 variants, pseudocholinesterase)"
           ],
-          subLinks: ["","","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "pd",
@@ -993,7 +993,7 @@ const CURRICULUM = [
             "Non-specific drug actions (chelation, adsorption)",
             "Drug interactions (synergism, additivity, isobolograms)"
           ],
-          subLinks: ["","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "uptake-distribution",
@@ -1008,7 +1008,7 @@ const CURRICULUM = [
             "Overpressurization technique",
             "Effect of minute ventilation"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1031,7 +1031,7 @@ const CURRICULUM = [
             "Metabolism & toxicity (halothane hepatitis, compound A, CO formation)",
             "Greenhouse & ozone effects of volatile agents"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "sevoflurane",
@@ -1045,7 +1045,7 @@ const CURRICULUM = [
             "Slow washout vs desflurane",
             "Use in inhalational induction"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "iso-des-nt",
@@ -1057,7 +1057,7 @@ const CURRICULUM = [
             "Desflurane: airway irritation, Tec 6 vaporizer, sympathetic surge",
             "N2O: diffusion hypoxia, expansion of gas spaces, B12/methionine synthase, PONV, teratogenicity"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "inha-clinical",
@@ -1068,7 +1068,7 @@ const CURRICULUM = [
             "Effects on CMR, CBF, ICP, cerebral autoregulation",
             "Effects on bronchial tone & hypoxic pulmonary vasoconstriction"
           ],
-          subLinks: ["",""]
+          subLinks: []
         }
       ]
     },
@@ -1089,7 +1089,7 @@ const CURRICULUM = [
             "Propofol infusion syndrome (PRIS)",
             "TCI models (Marsh, Schnider, Eleveld)"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "thiopental-etomidate",
@@ -1101,7 +1101,7 @@ const CURRICULUM = [
             "Etomidate: adrenal suppression, hemodynamic stability, myoclonus, pain",
             "Induction doses & contexts"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "ketamine-benzodiazepines",
@@ -1113,7 +1113,7 @@ const CURRICULUM = [
             "Midazolam vs diazepam vs lorazepam pharmacokinetics",
             "Flumazenil reversal & risks"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "dexmedetomidine",
@@ -1126,7 +1126,7 @@ const CURRICULUM = [
             "Hemodynamic effects (biphasic BP)",
             "Uses in extubation, awake intubation, delirium"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "droperidol-haloperidol",
@@ -1137,7 +1137,7 @@ const CURRICULUM = [
             "Droperidol: dopamine antagonist, QT prolongation, PONV dosing & black box warning",
             "Haloperidol for delirium"
           ],
-          subLinks: ["",""]
+          subLinks: []
         }
       ]
     },
@@ -1159,7 +1159,7 @@ const CURRICULUM = [
             "Methadone: NMDA action, long half-life",
             "Tramadol & tapentadol mechanisms"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "opioid-effects",
@@ -1174,7 +1174,7 @@ const CURRICULUM = [
             "Rapid opioid tolerance",
             "Serotonin syndrome risk (tramadol, meperidine, fentanyl)"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "nonopioid-analgesics",
@@ -1189,7 +1189,7 @@ const CURRICULUM = [
             "Ketamine (low dose), lidocaine infusion, dexmedetomidine",
             "Magnesium & alpha-2 agonists as adjuncts"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1212,7 +1212,7 @@ const CURRICULUM = [
             "Pseudocholinesterase deficiency (genetics, dibucaine number)",
             "Bradycardia, myalgia, increased ICP/IOP/Intragastric pressure"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "nondepolarizing",
@@ -1227,7 +1227,7 @@ const CURRICULUM = [
             "Vagolytic & sympathomimetic (pancuronium)",
             "Onset/duration comparison & dosing"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "reversal-nmb",
@@ -1242,7 +1242,7 @@ const CURRICULUM = [
             "Residual blockade detection & monitoring (TOF, double burst, PTC)",
             "Dantrolene & Malignant Hyperthermia management"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1263,7 +1263,7 @@ const CURRICULUM = [
             "Pregnancy effects on LA",
             "Anti-arrhythmic effects of LAs"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "la-toxicity",
@@ -1278,7 +1278,7 @@ const CURRICULUM = [
             "Prevention: test dose, incremental dosing, aspiration",
             "Treatment algorithm (ASRA)"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "la-additives",
@@ -1292,7 +1292,7 @@ const CURRICULUM = [
             "Dextran for prolonged effect",
             "EMLA cream"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "la-agents",
@@ -1305,7 +1305,7 @@ const CURRICULUM = [
             "Methemoglobinemia (prilocaine, benzocaine)",
             "Plain vs hyperbaric formulations for spinal"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1325,7 +1325,7 @@ const CURRICULUM = [
             "Dobutamine vs milrinone (PDE inhibitor comparison)",
             "Vasopressin in vasodilatory shock"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "antiarrhythmics",
@@ -1339,7 +1339,7 @@ const CURRICULUM = [
             "Nitroglycerin, nitroprusside, hydralazine",
             "ACE-I, ARBs, alpha-blockers"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "anticoag-antiplatelet",
@@ -1355,7 +1355,7 @@ const CURRICULUM = [
             "Coagulation monitoring (aPTT, anti-Xa, viscoelastic)",
             "Neuraxial timing guidelines (ASRA)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1376,7 +1376,7 @@ const CURRICULUM = [
             "Surfactant therapy",
             "Mucolytics"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1400,7 +1400,7 @@ const CURRICULUM = [
             "Antiepileptics: mechanisms, anaesthetic relevance",
             "Antidepressants: classes (SSRI, TCA, MAOI), toxicity/interactions"
           ],
-          subLinks: ["","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "fluids-blood-pharm",
@@ -1414,7 +1414,7 @@ const CURRICULUM = [
             "Electrolyte solutions (molar, %, mg/ml conversions)",
             "Diuretics: classification (loop, thiazide, K-sparing), mechanisms"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -1444,7 +1444,7 @@ const CURRICULUM = [
             "Fasting guidelines (ASA, RCoA)",
             "PONV risk scoring (Apfel, Koivuranta)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "aspiration-risk",
@@ -1456,7 +1456,7 @@ const CURRICULUM = [
             "Prevention: fasting, H2 blockers, PPIs, metoclopramide",
             "Rapid Sequence Induction (RSI) — drugs, cricoid pressure evidence"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "preop-cardiac",
@@ -1471,7 +1471,7 @@ const CURRICULUM = [
             "Coronary stent types & antiplatelet management",
             "Beta-blocker & statin continuation"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "preop-resp",
@@ -1485,7 +1485,7 @@ const CURRICULUM = [
             "Prehabilitation: inspiratory muscle training, exercise",
             "OSA screening (STOP-BANG, Berlin questionnaire)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1505,7 +1505,7 @@ const CURRICULUM = [
             "CVP waveform analysis",
             "Ultrasound-guided vascular access"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "gas-monitoring",
@@ -1519,7 +1519,7 @@ const CURRICULUM = [
             "Volumetric capnography & dead space calculation (Bohr, Enghoff)",
             "Ventilator modes during anaesthesia (VC, PC, PRVC, PSV)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "depth-monitoring",
@@ -1532,7 +1532,7 @@ const CURRICULUM = [
             "Awareness incidence and risk factors",
             "Techniques to reduce awareness (MAC-wake, end-tidal agent monitoring)"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "temperature",
@@ -1545,7 +1545,7 @@ const CURRICULUM = [
             "Malignant hyperthermia recognition and treatment",
             "Site-specific temperature monitoring (nasopharynx, esophagus, bladder, tympanic)"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "positioning",
@@ -1558,7 +1558,7 @@ const CURRICULUM = [
             "Nerve injury physics: stretch, compression, ischemia",
             "Pressure injuries (arms, eyes, genitalia)"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "electrical-safety",
@@ -1571,7 +1571,7 @@ const CURRICULUM = [
             "Explosion risk (alcohol prep, bowel gas)",
             "Fire triangle & airway fires during laser surgery"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1590,7 +1590,7 @@ const CURRICULUM = [
             "Second generation SADs",
             "LMA insertion, complications (aspiration, sore throat, nerve injuries)"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "endotracheal",
@@ -1604,7 +1604,7 @@ const CURRICULUM = [
             "Confirmation (ETCO2, auscultation, ultrasound)",
             "Complications: esophageal intubation, dental injury, laryngospasm"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "difficult-airway",
@@ -1620,7 +1620,7 @@ const CURRICULUM = [
             "CICO (Can't Intubate, Can't Oxygenate) management",
             "Difficult Airway Society 2015 guidelines"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "one-lung",
@@ -1635,7 +1635,7 @@ const CURRICULUM = [
             "TIVA vs volatile for OLV (effect on HPV)",
             "Prevention of lung injury (VILI, protective ventilation)"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1655,7 +1655,7 @@ const CURRICULUM = [
             "Context-sensitive half-time",
             "TIVA vs volatile comparison (PONV, emergence, cost)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "induction-maintenance",
@@ -1668,7 +1668,7 @@ const CURRICULUM = [
             "IV vs volatile maintenance and recovery profile",
             "LM vs circle system and fresh gas flow management"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "emergence",
@@ -1681,7 +1681,7 @@ const CURRICULUM = [
             "Atropine/neostigmine reversal",
             "Transport & handover to recovery"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1703,7 +1703,7 @@ const CURRICULUM = [
             "Aortic surgery, cerebral protection",
             "Off-pump vs on-pump CABG"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "neuro-anes",
@@ -1718,7 +1718,7 @@ const CURRICULUM = [
             "Awake craniotomy techniques",
             "Positioning: sitting (VAE risk), prone, park bench"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "thoracic-anes",
@@ -1733,7 +1733,7 @@ const CURRICULUM = [
             "Bronchopleural fistula management",
             "Mediastinal mass: anaesthetic risks & management"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "transplant-anes",
@@ -1745,7 +1745,7 @@ const CURRICULUM = [
             "Liver transplant: venovenous bypass, reperfusion syndrome",
             "Renal transplant: fluid, electrolyte, immunosuppression"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "ambulatory",
@@ -1758,7 +1758,7 @@ const CURRICULUM = [
             "PONV & pain management for day case",
             "Discharge criteria (Aldrete, PADSS)"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "bariatric",
@@ -1772,7 +1772,7 @@ const CURRICULUM = [
             "Positioning, RSI, PONV prophylaxis",
             "Enhanced recovery after bariatric surgery"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "trauma-anes",
@@ -1788,7 +1788,7 @@ const CURRICULUM = [
             "Traumatic brain injury & spinal cord injury management",
             "Polytrauma: prioritisation (ATLS framework)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1811,7 +1811,7 @@ const CURRICULUM = [
             "Surgical site infection (SSI) prevention",
             "VTE prophylaxis (Caprini score, mechanical, pharmacological)"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "enhanced-recovery",
@@ -1824,7 +1824,7 @@ const CURRICULUM = [
             "Prehabilitation, carbohydrate loading",
             "Audit & outcome measurement"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     }
@@ -1854,7 +1854,7 @@ const CURRICULUM = [
             "Gelatins: low molecular weight, allergic reactions",
             "Balanced solutions vs 0.9% saline: hyperchloraemic acidosis"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "fluid-assessment",
@@ -1868,7 +1868,7 @@ const CURRICULUM = [
             "Oesophageal Doppler, PiCCO, LiDCO, FloTrac",
             "Resuscitation end-points"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1889,7 +1889,7 @@ const CURRICULUM = [
             "Cerebral salt wasting",
             "Osmotic demyelination syndrome"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "k-mg-ca-phos",
@@ -1902,7 +1902,7 @@ const CURRICULUM = [
             "Hypocalcaemia & hypercalcaemia: causes, signs, treatment",
             "Phosphate: hypophosphataemia in refeeding, hyperphosphataemia in renal failure"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -1924,7 +1924,7 @@ const CURRICULUM = [
             "Liver disease coagulopathy",
             "Disseminated intravascular coagulation (DIC)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "blood-products",
@@ -1941,7 +1941,7 @@ const CURRICULUM = [
             "Cell salvage: indications, contraindications, leukocyte depletion",
             "Patient Blood Management (PBM) principles"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "anaemia",
@@ -1955,7 +1955,7 @@ const CURRICULUM = [
             "G6PD deficiency: triggers, hemolysis, drug avoidance",
             "Hereditary spherocytosis, elliptocytosis"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "antiplatelet-anticoag",
@@ -1969,7 +1969,7 @@ const CURRICULUM = [
             "Reversal: vitamin K, PCC, idarucizumab, andexanet alfa",
             "Neuraxial timing (ASRA/ESRA guidelines)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "haematological-malignancy",
@@ -1983,7 +1983,7 @@ const CURRICULUM = [
             "Thrombocytopenia: ITP, HIT (types I & II), TTP, aHUS",
             "HIT: 4Ts score, alternative anticoagulation (danaparoid, argatroban, fondaparinux)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -2013,7 +2013,7 @@ const CURRICULUM = [
             "Anti-platelet management & stent types (BMS vs DES)",
             "Management of perioperative myocardial injury (MINS)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "valvular",
@@ -2028,7 +2028,7 @@ const CURRICULUM = [
             "Prosthetic valves & anticoagulation",
             "Infective endocarditis prophylaxis (NICE guidelines)"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "arrhythmias",
@@ -2041,7 +2041,7 @@ const CURRICULUM = [
             "ECG interpretation: ischemia, electrolyte abnormalities, heart block",
             "Perioperative arrhythmia management"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "heart-failure",
@@ -2055,7 +2055,7 @@ const CURRICULUM = [
             "Dilated cardiomyopathy: low EF management",
             "Perioperative management of VADs and transplant patients"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "pulmonary-hypertension",
@@ -2067,7 +2067,7 @@ const CURRICULUM = [
             "Anaesthetic implications of PH",
             "Pulmonary vasodilators: NO, prostacyclin, sildenafil, bosentan"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "hypertension",
@@ -2080,7 +2080,7 @@ const CURRICULUM = [
             "Urgency vs emergency management",
             "End-organ damage assessment"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2100,7 +2100,7 @@ const CURRICULUM = [
             "Smoking cessation & perioperative pulmonary risk",
             "Risk of barotrauma & air trapping in COPD"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "osa-obesity",
@@ -2113,7 +2113,7 @@ const CURRICULUM = [
             "OHS: pathophysiology, perioperative care",
             "Sedation risks, airway challenges, CPAP continuation"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "restrictive-lung",
@@ -2126,7 +2126,7 @@ const CURRICULUM = [
             "Chest infections: pneumonia, bronchiectasis, cystic fibrosis",
             "Preoperative physiotherapy & pulmonary rehabilitation"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2147,7 +2147,7 @@ const CURRICULUM = [
             "Renal transplant: anaesthesia, fluid, immunosuppression",
             "Contrast-induced nephropathy prevention"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2170,7 +2170,7 @@ const CURRICULUM = [
             "Acute liver failure: ICP management, transplant listing",
             "Liver function test & synthetic function assessment"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "cholestasis",
@@ -2182,7 +2182,7 @@ const CURRICULUM = [
             "Gallstone pancreatitis",
             "Cholangitis"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         }
       ]
     },
@@ -2204,7 +2204,7 @@ const CURRICULUM = [
             "SGLT2i: euglycaemic DKA risk",
             "Long-term complications: autonomic neuropathy, gastroparesis, silent ischaemia"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "thyroid",
@@ -2220,7 +2220,7 @@ const CURRICULUM = [
             "Cushing's syndrome & Conn's syndrome",
             "Pituitary disease: acromegaly (airway), DI, SIADH"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "obesity-metabolic",
@@ -2233,7 +2233,7 @@ const CURRICULUM = [
             "Anaesthetic drug dosing in obesity",
             "Bariatric anaesthesia specific considerations"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "porphyria-mh",
@@ -2246,7 +2246,7 @@ const CURRICULUM = [
             "Pseudocholinesterase deficiency",
             "Carcinoid syndrome: perioperative management, octreotide"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2268,7 +2268,7 @@ const CURRICULUM = [
             "Guillain-Barré syndrome & Eaton-Lambert syndrome",
             "Spinal cord injury: autonomic hyperreflexia, sux risk (hyperkalemia)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "muscular-dystrophy",
@@ -2281,7 +2281,7 @@ const CURRICULUM = [
             "Mitochondrial myopathies: avoid propofol, lactate monitoring",
             "Rhabdomyolysis: causes, complications, management"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "cerebral-palsy",
@@ -2292,7 +2292,7 @@ const CURRICULUM = [
             "Perioperative management: communication, consent, behavioural challenges",
             "Associated comorbidities: reflux, scoliosis, seizures, contractures"
           ],
-          subLinks: ["",""]
+          subLinks: []
         }
       ]
     },
@@ -2312,7 +2312,7 @@ const CURRICULUM = [
             "Marfan syndrome: aortic root, valvular, pneumothorax",
             "Ehlers-Danlos: vascular fragility, easy bruising"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "renal-hepatic-transplant",
@@ -2324,7 +2324,7 @@ const CURRICULUM = [
             "Post-transplant renal/liver function & drug dosing",
             "Infection prophylaxis timing"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "psychiatric-substance",
@@ -2339,7 +2339,7 @@ const CURRICULUM = [
             "Opioid dependence: methadone, buprenorphine, pain management challenges",
             "Illicit drugs: cocaine (MI, arrhythmias), amphetamines, cannabis"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -2370,7 +2370,7 @@ const CURRICULUM = [
             "Pharmacological: MAC reduction, altered protein binding",
             "Pain pathways relevant to stages of labour"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "placental-physiology",
@@ -2384,7 +2384,7 @@ const CURRICULUM = [
             "Uteroplacental blood flow autoregulation",
             "Fetal drug distribution & elimination"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2404,7 +2404,7 @@ const CURRICULUM = [
             "Non-pharmacological: water immersion, TENS, positions",
             "Contraindications to neuraxial blockade in labour"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "cd-anaesthesia",
@@ -2419,7 +2419,7 @@ const CURRICULUM = [
             "Failed intubation in obstetrics: incidence, algorithm (OB DAS)",
             "Maternal hypotension: prevention (co-load, vasopressors, lateral tilt)"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "high-risk-obstetric",
@@ -2435,7 +2435,7 @@ const CURRICULUM = [
             "Cardiac disease in pregnancy (ESC guidelines)",
             "Obstetric DIC & transfusion"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "maternal-resus",
@@ -2448,7 +2448,7 @@ const CURRICULUM = [
             "Modified obstetric early warning systems (MEOWS)",
             "Maternal death review & reporting"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2468,7 +2468,7 @@ const CURRICULUM = [
             "Umbilical cord gases: interpretation",
             "Fetal heart rate patterns & anaesthetic implications"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "neonatal-resus",
@@ -2483,7 +2483,7 @@ const CURRICULUM = [
             "Meconium aspiration management",
             "Umbilical venous access & drugs"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -2514,7 +2514,7 @@ const CURRICULUM = [
             "Wind-up, long-term potentiation, referred pain",
             "Visceral vs somatic pain: differences"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "pain-classification",
@@ -2531,7 +2531,7 @@ const CURRICULUM = [
             "Catastrophising, kinesiophobia, central sensitisation syndromes",
             "Psychological aspects of pain: anxiety, depression, coping"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "pain-genetics",
@@ -2543,7 +2543,7 @@ const CURRICULUM = [
             "Placebo & nocebo mechanisms",
             "Conditioned pain modulation (CPM), diffuse noxious inhibitory control (DNIC)"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         }
       ]
     },
@@ -2565,7 +2565,7 @@ const CURRICULUM = [
             "NMDA antagonists: ketamine mechanisms, S-ketamine vs racemic",
             "Corticosteroids: single-dose dexamethasone effects"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "opioid-acute",
@@ -2580,7 +2580,7 @@ const CURRICULUM = [
             "Equianalgesic dosing charts",
             "Opioid induced hyperalgesia"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "regional-acute-pain",
@@ -2594,7 +2594,7 @@ const CURRICULUM = [
             "Interfascial plane blocks: TAP, erector spinae, quadratus lumborum, PECS",
             "Evidence for regional vs systemic analgesia"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "acute-pain-special",
@@ -2608,7 +2608,7 @@ const CURRICULUM = [
             "Sickle cell disease pain crisis",
             "Procedural sedation & analgesia"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2628,7 +2628,7 @@ const CURRICULUM = [
             "Quantitative sensory testing (QST) basics",
             "Psychosocial assessment: HADS, PHQ-9, PCS, Tampa Kinesiophobia"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "neuropathic-pain",
@@ -2644,7 +2644,7 @@ const CURRICULUM = [
             "Topical agents: lidocaine, capsaicin, amitriptyline/ketamine",
             "Cannabinoids for pain: evidence & legal status"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "interventional-chronic",
@@ -2663,7 +2663,7 @@ const CURRICULUM = [
             "Radiofrequency ablation: pulsed vs thermal",
             "Peripheral nerve stimulation"
           ],
-          subLinks: ["","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "chronic-pain-conditions",
@@ -2682,7 +2682,7 @@ const CURRICULUM = [
             "Pelvic pain: assessment, management",
             "Cancer pain: WHO ladder, neuropathic component, interventional options"
           ],
-          subLinks: ["","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "rehab-psychology",
@@ -2697,7 +2697,7 @@ const CURRICULUM = [
             "Biofeedback & relaxation techniques",
             "Physiotherapy & occupational therapy role"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -2730,7 +2730,7 @@ const CURRICULUM = [
             "EEG, BIS, entropy, evoked potentials in ICU",
             "Blood gas analysis: pH, PaO2, PaCO2, HCO3, BE, lactate, electrolytes"
           ],
-          subLinks: ["","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "icu-sedation",
@@ -2744,7 +2744,7 @@ const CURRICULUM = [
             "PAD (Pain, Agitation, Delirium) & ABCDEF bundle",
             "Early mobilisation & family engagement"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2769,7 +2769,7 @@ const CURRICULUM = [
             "Extubation: readiness testing, SBT, cuff leak test",
             "Tracheostomy: timing (TracMan), percutaneous vs surgical, complications"
           ],
-          subLinks: ["","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "non-invasive",
@@ -2782,7 +2782,7 @@ const CURRICULUM = [
             "NIV in acute respiratory failure vs cardiogenic pulmonary oedema",
             "Helmet NIV vs face mask"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "weaning",
@@ -2795,7 +2795,7 @@ const CURRICULUM = [
             "Respiratory muscle weakness: ICU-acquired weakness",
             "Weaning protocols: nurse-led, daily screening"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "ecmo",
@@ -2809,7 +2809,7 @@ const CURRICULUM = [
             "ECMO weaning & decannulation",
             "ECCO2R: indications, role in ARDS"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2831,7 +2831,7 @@ const CURRICULUM = [
             "Cardiogenic shock: IABP, Impella, LVAD, ECMO",
             "Obstructive shock: tension pneumothorax, tamponade, PE — diagnosis and management"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "sepsis",
@@ -2847,7 +2847,7 @@ const CURRICULUM = [
             "Vasopressor choice & timing: norepinephrine, vasopressin, angiotensin II",
             "Fluid resuscitation in sepsis: crystalloid, albumin, restrictive vs liberal"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2867,7 +2867,7 @@ const CURRICULUM = [
             "CRRT prescription & dose, fluid balance management",
             "Complications of RRT: hypotension, arrhythmias, electrolyte imbalance, filter clotting"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "neurocritical",
@@ -2882,7 +2882,7 @@ const CURRICULUM = [
             "Status epilepticus: treatment algorithm, EEG monitoring",
             "Spinal cord injury: MAP goals, steroids controversy, surgical timing"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "icu-gi-nutrition",
@@ -2896,7 +2896,7 @@ const CURRICULUM = [
             "Nutrition: enteral vs parenteral, timing, composition, overfeeding",
             "Refeeding syndrome: pathophysiology, prevention, monitoring"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "icu-endocrine",
@@ -2909,7 +2909,7 @@ const CURRICULUM = [
             "Diabetes insipidus & SIADH in ICU",
             "Electrolyte derangements: Na, K, Ca, Mg, phosphate — ICU-specific"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "icu-prognostication",
@@ -2922,7 +2922,7 @@ const CURRICULUM = [
             "Frailty scoring (Clinical Frailty Scale) in ICU prognostication",
             "Neuro-prognostication after cardiac arrest: SSEP, EEG, neuron-specific enolase"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -2944,7 +2944,7 @@ const CURRICULUM = [
             "Lumbar puncture: indications, technique, opening pressure, complications",
             "Death certification: legal requirements, MCCD, coroner referrals"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "icu-bioethics",
@@ -2959,7 +2959,7 @@ const CURRICULUM = [
             "Futility & best interests decisions",
             "Communication with families in ICU"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -2989,7 +2989,7 @@ const CURRICULUM = [
             "Hepatic/renal: immature metabolism, clearance (CYP450, GFR maturation)",
             "Neurological: immature blood-brain barrier, NMDA/GABA balance"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "paed-pharmacology",
@@ -3005,7 +3005,7 @@ const CURRICULUM = [
             "Paracetamol & NSAID dosing in children",
             "Inhalational induction technique"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -3026,7 +3026,7 @@ const CURRICULUM = [
             "Circuit: Mapleson F (Jackson-Rees), circle system with paediatric adaptations",
             "Preoxygenation limitations in children"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "paed-fluid",
@@ -3041,7 +3041,7 @@ const CURRICULUM = [
             "Blood volume: 80-100 ml/kg, transfusion triggers",
             "Massive haemorrhage in children"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "paed-regional",
@@ -3055,7 +3055,7 @@ const CURRICULUM = [
             "Femoral, sciatic, supraclavicular blocks in children",
             "Ultrasound guidance in paediatric regional"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -3077,7 +3077,7 @@ const CURRICULUM = [
             "Myelomeningocoele: positioning, latex allergy",
             "Exomphalos: large defect, abdominal compartment syndrome risk"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "paed-common",
@@ -3092,7 +3092,7 @@ const CURRICULUM = [
             "Strabismus surgery: oculocardiac reflex, PONV prophylaxis",
             "Myringotomy/grommets: day-case, sevoflurane induction"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "paed-trauma",
@@ -3106,7 +3106,7 @@ const CURRICULUM = [
             "Foreign body aspiration: anaesthetic concerns, rigid bronchoscopy",
             "Status epilepticus in children"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "paed-sedation",
@@ -3118,7 +3118,7 @@ const CURRICULUM = [
             "NICE sedation guidelines: competencies, monitoring, discharge criteria",
             "Scanning under anaesthesia: implications for transport, monitoring"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "paed-periop",
@@ -3132,7 +3132,7 @@ const CURRICULUM = [
             "Difficult airway in child: APA difficult airway algorithm",
             "PONV in children: risk factors, prophylaxis, rescue"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -3161,7 +3161,7 @@ const CURRICULUM = [
             "Factors affecting block: concentration, volume, pH, additives",
             "Anatomy of nerve plexuses: brachial, lumbar, sacral"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "regional-drugs",
@@ -3175,7 +3175,7 @@ const CURRICULUM = [
             "Clonidine, dexmedetomidine, opioids, bicarbonate",
             "Dexamethasone as adjunct: evidence, perineural vs IV"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "ultrasound-ns",
@@ -3189,7 +3189,7 @@ const CURRICULUM = [
             "In-plane vs out-of-plane technique",
             "Hydrodissection, perineural vs extrafascial injection"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "regional-complications",
@@ -3205,7 +3205,7 @@ const CURRICULUM = [
             "Phrenic nerve palsy (interscalene): risk, contraindications",
             "Horner's syndrome, recurrent laryngeal nerve block (stretched)"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -3225,7 +3225,7 @@ const CURRICULUM = [
             "Phrenic nerve palsy (100% at standard volumes)", 
             "Complications: vertebral artery injection, epidural spread, pneumothorax (rare)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "supraclavicular",
@@ -3239,7 +3239,7 @@ const CURRICULUM = [
             "Pneumothorax risk: US reduces but not eliminates",
             "Phrenic nerve involvement: ~20-30% risk"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "infraclavicular",
@@ -3252,7 +3252,7 @@ const CURRICULUM = [
             "Coverage: C7-T1 best, C5-6 variable (musculocutaneous often missed)",
             "Advantages: catheter site, lower pneumothorax vs supraclavicular"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "axillary",
@@ -3266,7 +3266,7 @@ const CURRICULUM = [
             "Advantages: no phrenic/pneumothorax risk",
             "Limitations: high tourniquet pain (lack of intercostobrachial)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "distal-upper",
@@ -3278,7 +3278,7 @@ const CURRICULUM = [
             "Wrist blocks: median, ulnar, radial",
             "Digital block: technique, contraindication to epinephrine (debate)"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         }
       ]
     },
@@ -3297,7 +3297,7 @@ const CURRICULUM = [
             "Coverage: femoral, obturator, lateral femoral cutaneous (LFCN)",
             "Complications: epidural spread, bilateral block, retroperitoneal haematoma"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "femoral",
@@ -3311,7 +3311,7 @@ const CURRICULUM = [
             "Quadriceps weakness: fall risk, discharge precautions",
             "Adductor canal block as alternative: motor sparing"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "adductor-canal",
@@ -3323,7 +3323,7 @@ const CURRICULUM = [
             "Approach: US (mid-thigh, femoral artery in sartorius canal)",
             "Coverage: saphenous nerve, vastus medialis (variable motor)"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         },
         {
           id: "sciatic",
@@ -3336,7 +3336,7 @@ const CURRICULUM = [
             "Popliteal fossa: tibial vs common peroneal bifurcation — US-guided",
             "Complete foot/ankle anaesthesia with saphenous block"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "ankle-foot",
@@ -3348,7 +3348,7 @@ const CURRICULUM = [
             "Field block vs individual nerve blocks",
             "Mayo block for hallux surgery"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         }
       ]
     },
@@ -3370,7 +3370,7 @@ const CURRICULUM = [
             "Total spinal: recognition, management",
             "Spinal vs epidural vs CSE comparison"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "epidural",
@@ -3386,7 +3386,7 @@ const CURRICULUM = [
             "Complications: dural puncture, PDPH, haematoma, abscess, catheter shearing",
             "Epidural top-up for emergency CS"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "caudal",
@@ -3399,7 +3399,7 @@ const CURRICULUM = [
             "Dosing: 0.5-1 ml/kg, bupivacaine 0.25% + additives",
             "Complications: IV injection, rectal puncture, failed block"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         }
       ]
     },
@@ -3420,7 +3420,7 @@ const CURRICULUM = [
             "Quadratus lumborum block: abdominal surgery (hip, nephrectomy, colectomy)",
             "Erector spinae plane block: thoracic, abdominal, hip — mechanism debate"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "truncal-other",
@@ -3432,7 +3432,7 @@ const CURRICULUM = [
             "Intercostal block: rib fractures, chest drain insertion",
             "Cervical plexus block: carotid endarterectomy (superficial vs deep)"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         }
       ]
     }
@@ -3462,7 +3462,7 @@ const CURRICULUM = [
             "Training portfolios (Lifetime Learning Log, ePortfolio)",
             "Trainer roles: ES, CS, TPD, ARCP panel"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "ed-assessment",
@@ -3476,7 +3476,7 @@ const CURRICULUM = [
             "Multi-source feedback (MSF / 360-degree)",
             "Portfolio reflection & quality improvement"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "ed-teaching",
@@ -3490,7 +3490,7 @@ const CURRICULUM = [
             "Case-based discussion (CbD) as teaching tool",
             "Near-peer teaching, e-learning, flipped classroom"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "ed-cpd",
@@ -3502,7 +3502,7 @@ const CURRICULUM = [
             "Appraisal & revalidation: supporting information, CPD diary",
             "Study leave & budget management"
           ],
-          subLinks: ["","",""]
+          subLinks: []
         }
       ]
     },
@@ -3524,7 +3524,7 @@ const CURRICULUM = [
             "Root cause analysis: fishbone, 5 whys, human factors",
             "Never events in anaesthesia: wrong-sided block, retained swabs"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "ed-leadership",
@@ -3538,7 +3538,7 @@ const CURRICULUM = [
             "Team dynamics: Tuckman model, hierarchy flattening, speaking up",
             "Fatigue & resilience: impact on performance, rest provisions"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "ed-health-economics",
@@ -3552,7 +3552,7 @@ const CURRICULUM = [
             "Budgeting: cost-effectiveness, cost-utility, service line reporting",
             "Theatre efficiency: utilisation, turnaround times, scheduling"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "ed-research",
@@ -3567,7 +3567,7 @@ const CURRICULUM = [
             "Research ethics: IRAS, REC, consent, data protection (GDPR)",
             "Good Clinical Practice (GCP) framework"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -3588,7 +3588,7 @@ const CURRICULUM = [
             "Safeguarding: vulnerable adults, children (Working Together to Safeguard Children)",
             "Mental Capacity Act 2005 & Deprivation of Liberty Safeguards (DoLS)"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "ed-consent",
@@ -3603,7 +3603,7 @@ const CURRICULUM = [
             "Advance decisions, lasting power of attorney",
             "Court of Protection & best interests decisions"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         },
         {
           id: "ed-medicolegal",
@@ -3618,7 +3618,7 @@ const CURRICULUM = [
             "Freedom of Information Act, Data Protection Act/GDPR",
             "Equality Act 2010: protected characteristics, reasonable adjustments"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -3646,7 +3646,7 @@ const CURRICULUM = [
             "Paediatric BLS (PBLS) modifications",
             "Recovery position & airway opening manoeuvres"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "als",
@@ -3662,7 +3662,7 @@ const CURRICULUM = [
             "Reversible causes: 4Hs & 4Ts (checklist approach)",
             "ROSC: post-resuscitation care, targeted temperature management"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "peri-arrest",
@@ -3675,7 +3675,7 @@ const CURRICULUM = [
             "AF, atrial flutter, SVT, VT — recognition and management",
             "Electrolyte management in arrest: K+, Ca2+, Mg2+"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         },
         {
           id: "pacd-resus",
@@ -3688,7 +3688,7 @@ const CURRICULUM = [
             "Transitional circulation implications",
             "Meconium aspiration management update"
           ],
-          subLinks: ["","","",""]
+          subLinks: []
         }
       ]
     },
@@ -3713,7 +3713,7 @@ const CURRICULUM = [
             "Burns: assessment (Wallace rule of 9s, Lund & Browder), Parkland formula, inhalational injury",
             "Trauma in pregnancy: perimortem C-section"
           ],
-          subLinks: ["","","","","","","","","",""]
+          subLinks: []
         },
         {
           id: "prehospital",
@@ -3727,7 +3727,7 @@ const CURRICULUM = [
             "Intrahospital transport: ventilated patient, monitoring standards, risk assessment",
             "Crew resource management in prehospital setting"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "toxicology",
@@ -3744,7 +3744,7 @@ const CURRICULUM = [
             "Organophosphate poisoning: atropine, pralidoxime (2-PAM)",
             "Carbon monoxide poisoning: hyperbaric oxygen indications"
           ],
-          subLinks: ["","","","","","","",""]
+          subLinks: []
         },
         {
           id: "environmental",
@@ -3759,7 +3759,7 @@ const CURRICULUM = [
             "Electrical injuries & lightning strike",
             "Radiation injury & decontamination"
           ],
-          subLinks: ["","","","","",""]
+          subLinks: []
         }
       ]
     }
@@ -3789,7 +3789,7 @@ const CURRICULUM = [
             "Resource allocation & distributive justice",
             "Research ethics: Helsinki Declaration, REC, vulnerable populations"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "end-of-life",
@@ -3805,7 +3805,7 @@ const CURRICULUM = [
             "Futility: definition, assessment, communication",
             "Palliative care: symptom management, end-of-life care pathways"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -3827,7 +3827,7 @@ const CURRICULUM = [
             "Domestic violence & mandatory reporting",
             "Modern slavery: identification, NRM referral"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "child-safeguarding",
@@ -3843,7 +3843,7 @@ const CURRICULUM = [
             "Prevent duty: radicalisation, Channel programme",
             "Safeguarding in foster care, residential care, youth offenders"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "vulnerable-groups",
@@ -3857,7 +3857,7 @@ const CURRICULUM = [
             "Consent for minors: age 16-17, parental responsibility hierarchy",
             "Emergency treatment for incapacitated adults"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     },
@@ -3879,7 +3879,7 @@ const CURRICULUM = [
             "GMC fitness to practise: MPTS, undertakings, sanctions",
             "Mental Health Act 1983: sections 2, 3, 4, 5(2), 136 — anaesthetic implications"
           ],
-          subLinks: ["","","","","","",""]
+          subLinks: []
         },
         {
           id: "coroner",
@@ -3893,7 +3893,7 @@ const CURRICULUM = [
             "Death in custody & state obligation",
             "Organ donation: Human Tissue Act 2004, opt-out system (England 2020)"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         },
         {
           id: "data-equality",
@@ -3907,7 +3907,7 @@ const CURRICULUM = [
             "Access to Health Records Act",
             "Freedom of Information Act 2000"
           ],
-          subLinks: ["","","","",""]
+          subLinks: []
         }
       ]
     }

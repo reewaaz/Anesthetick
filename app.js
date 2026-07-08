@@ -31,6 +31,7 @@
 
   function saveState() {
     try { localStorage.setItem(LS_KEY, JSON.stringify(state)); } catch (_) {}
+    updatePlannerPct?.();
     triggerAutoSync();
   }
 
@@ -555,6 +556,103 @@
     return inner;
   }
 
+  /* ── Planner view ────────────────────────────────────────── */
+  function viewPlanner() {
+    const ov = overallProgress();
+    const pct = ov.pct;
+    const inner = document.createElement('div');
+    inner.className = 'inner';
+
+    // Suggested topics: pick from categories with lowest progress
+    const catProgresses = CURRICULUM.map(c => ({ cat: c, pct: catProgress(c.id) }))
+      .sort((a, b) => a.pct - b.pct);
+    const suggested = [];
+    for (const cp of catProgresses) {
+      if (suggested.length >= 5) break;
+      for (const sec of cp.cat.sections) {
+        for (const t of sec.topics) {
+          const tPct = topicProgress({ ...t, catId: cp.cat.id, secId: sec.id });
+          if (tPct < 1 && suggested.length < 5 && !suggested.find(s => s.id === t.id)) {
+            suggested.push({ ...t, catId: cp.cat.id, secId: sec.id, catName: cp.cat.name, catColor: cp.cat.color, pct: tPct });
+          }
+        }
+      }
+    }
+
+    // Weekly target calculation
+    const remaining = ov.total - ov.done;
+    const WEEKS_TIL_EXAM = 26;
+    const weeklyTarget = Math.ceil(remaining / WEEKS_TIL_EXAM);
+    const dailyTarget = Math.ceil(weeklyTarget / 5);
+
+    inner.innerHTML = html`
+      <div class="planner-card">
+        <h3>📊 Study Overview</h3>
+        <div style="display:flex;align-items:center;gap:16px;margin:8px 0">
+          <svg viewBox="0 0 100 100" style="width:80px;height:80px;flex-shrink:0">
+            <circle cx="50" cy="50" r="36" fill="none" stroke="var(--surface2)" stroke-width="8"/>
+            <circle cx="50" cy="50" r="36" fill="none" stroke="var(--accent)" stroke-width="8" stroke-dasharray="${2 * Math.PI * 36}" stroke-dashoffset="${2 * Math.PI * 36 * (1 - pct)}" transform="rotate(-90 50 50)" stroke-linecap="round"/>
+            <text x="50" y="50" text-anchor="middle" dominant-baseline="central" font-size="18" font-weight="800" fill="var(--text)">${Math.round(pct * 100)}%</text>
+          </svg>
+          <div style="flex:1">
+            <div style="font-size:13px;font-weight:600">${ov.done} / ${ov.total} items done</div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px">${remaining} remaining &middot; ${Math.round(pct * 100)}% complete</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="planner-card">
+        <h3>🎯 Your Study Plan</h3>
+        <div class="p-grid">
+          <div class="p-stat"><div class="num">${dailyTarget}</div><div class="lbl">Daily target</div></div>
+          <div class="p-stat"><div class="num">${weeklyTarget}</div><div class="lbl">Weekly target</div></div>
+          <div class="p-stat ${remaining === 0 ? 'ok' : ''}"><div class="num">${remaining}</div><div class="lbl">Items left</div></div>
+          <div class="p-stat"><div class="num">${WEEKS_TIL_EXAM}</div><div class="lbl">Weeks til exam</div></div>
+        </div>
+        <div class="p-row"><span class="lbl">Pace</span><span class="val">${dailyTarget} items/day (${weeklyTarget}/week) to finish in ${WEEKS_TIL_EXAM} weeks</span></div>
+        <div class="p-row"><span class="lbl">Focus areas</span><span class="val warn">${catProgresses[0].cat.name}</span></div>
+      </div>
+
+      <div class="planner-card">
+        <h3>📚 Suggested Topics Today</h3>
+        ${suggested.length ? suggested.map(s => html`
+          <div class="planner-suggest" data-topic-id="${s.id}">
+            <div class="sg-ic" style="background:${s.catColor}22;color:${s.catColor}">${ICONS[s.catColor === '#0ea5e9' ? 'atom' : s.icon] || ICONS.target}</div>
+            <div>
+              <div class="sg-name">${s.name}</div>
+              <div class="sg-cat">${s.catName}</div>
+            </div>
+            <span class="sg-pct">${Math.round(s.pct * 100)}%</span>
+          </div>
+        `).join('') : '<div style="padding:12px;color:var(--muted);font-size:13px">All caught up! 🎉</div>'}
+      </div>
+
+      <div class="planner-card">
+        <h3>📈 Progress by Category</h3>
+        ${CURRICULUM.map(cat => {
+          const p = catProgress(cat.id);
+          return html`
+            <div class="cat-prog">
+              <div class="cp-head">
+                <span class="nm">${cat.name}</span><span class="pct">${Math.round(p * 100)}%</span>
+              </div>
+              <div class="cp-bar"><i style="width:${p * 100}%;background:${cat.color}"></i></div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+    `;
+
+    // Delegate click on suggested topics
+    requestAnimationFrame(() => {
+      inner.querySelectorAll('.planner-suggest').forEach(el => {
+        el.addEventListener('click', () => navigate('topic', el.dataset.topicId));
+      });
+    });
+
+    return inner;
+  }
+
   function viewBookmarks() {
     const inner = document.createElement('div');
     inner.className = 'inner';
@@ -770,6 +868,24 @@
       </div>
 
       <div class="set-group">
+        <div class="set-group-title">Data</div>
+        <div class="set-row" style="border-color:transparent">
+          <div class="set-info">
+            <div class="lbl">Export Data</div>
+            <div class="desc">Download a backup file</div>
+          </div>
+          <button class="btn-ghost" data-action="export-data" style="font-size:12px">${ICONS.download} Export</button>
+        </div>
+        <div class="set-row" style="border-color:transparent">
+          <div class="set-info">
+            <div class="lbl">Import Data</div>
+            <div class="desc">Restore from a backup file</div>
+          </div>
+          <button class="btn-ghost" data-action="import-data" style="font-size:12px">${ICONS.upload} Import</button>
+        </div>
+      </div>
+
+      <div class="set-group">
         <div class="set-group-title">References &amp; Resources</div>
         <div class="set-refs">
           <div class="ref-grid">${REFS.map((r, i) => html`
@@ -860,6 +976,7 @@
       case 'bookmarks': showView(viewBookmarks); break;
       case 'settings': showView(viewCombinedSettings); break;
       case 'progress': showView(viewProgress); break;
+      case 'planner': showView(viewPlanner); break;
       case 'category': showView(viewCategory, data); break;
       case 'topic': showView(viewTopic, data); break;
       case 'search': showView(viewSearch, data); break;
@@ -884,6 +1001,7 @@
       case 'bookmarks': showView(viewBookmarks); break;
       case 'settings': showView(viewCombinedSettings); break;
       case 'progress': showView(viewProgress); break;
+      case 'planner': showView(viewPlanner); break;
       case 'category': showView(viewCategory, state.data); break;
       case 'topic': showView(viewTopic, state.data); break;
       case 'search': showView(viewSearch, state.data); break;
@@ -1100,6 +1218,7 @@
         if (data.customSubs) { state.customSubs = data.customSubs; changed = true; }
         if (data.topicNotes) { state.topicNotes = data.topicNotes; changed = true; }
         if (changed) saveState();
+        updatePlannerPct?.();
       }).catch(() => {});
     }).catch(() => {
       // Credentials invalid — clear them
@@ -1119,14 +1238,14 @@
       dlg.style.maxWidth = '360px';
       dlg.innerHTML = `
         <h3>${mode === 'register' ? 'Create Cloud Account' : 'Cloud Login'}</h3>
-        <p style="margin-bottom:16px">${mode === 'register'
-          ? 'Your data will be stored securely in your GitHub repository. A Personal Access Token with <strong>repo</strong> scope is required.'
-          : 'Sign in to sync your data across devices.'}</p>
+        <p style="margin-bottom:16px;font-size:13px;line-height:1.5">${mode === 'register'
+          ? 'Your data syncs via GitHub. Create a <strong>classic Personal Access Token</strong> with <strong>repo</strong> scope, then enter it below.'
+          : 'Enter your GitHub username and personal access token to sync.'}</p>
         <div class="auth-form">
           <input type="text" id="authUser" placeholder="GitHub username" autocomplete="username" />
-          <input type="password" id="authPass" placeholder="Personal Access Token (PIN)" autocomplete="current-password" />
+          <input type="password" id="authPass" placeholder="Personal Access Token" autocomplete="current-password" />
           <p class="auth-hint">${mode === 'register'
-            ? 'Create a token at GitHub &rarr; Settings &rarr; Developer settings &rarr; Personal access tokens &rarr; Tokens (classic) with <strong>repo</strong> scope.'
+            ? '<a href="https://github.com/settings/tokens/new?description=anesthetick&scopes=repo" target="_blank" rel="noopener" style="color:var(--accent)">Create a token on GitHub &rarr;</a><br><span style="font-size:11px;color:var(--muted)">Requires a GitHub account and a classic token with repo scope.</span>'
             : 'Enter the same credentials you used to register.'}</p>
         </div>
         <div class="dialog-actions" style="justify-content:stretch">
@@ -1163,6 +1282,17 @@
     navigate('home');
   });
 
+  $('#plannerBtn').addEventListener('click', () => {
+    sfxNav();
+    navigate('planner');
+  });
+
+  function updatePlannerPct() {
+    const ov = overallProgress();
+    $('#plannerPct').textContent = Math.round(ov.pct * 100) + '%';
+  }
+  updatePlannerPct();
+
   // Swipe back gesture
   let touchStartX = 0, touchStartY = 0;
   document.addEventListener('touchstart', e => {
@@ -1187,7 +1317,7 @@
   let pullY = 0, pulling = false, pullDist = 0;
   let $pullEl = null;
 
-  const VIEW_FN = { home: viewHome, bookmarks: viewBookmarks, settings: viewCombinedSettings, progress: viewProgress, category: viewCategory, topic: viewTopic, search: viewSearch };
+  const VIEW_FN = { home: viewHome, bookmarks: viewBookmarks, settings: viewCombinedSettings, progress: viewProgress, planner: viewPlanner, category: viewCategory, topic: viewTopic, search: viewSearch };
 
   function createPullEl() {
     const el = document.createElement('div');
@@ -1470,6 +1600,57 @@
         toast('All data wiped');
         navigate('home');
       });
+      return;
+    }
+
+    if (action === 'export-data') {
+      const data = {
+        progress: state.progress,
+        bookmarks: state.bookmarks,
+        subBookmarks: state.subBookmarks,
+        customSubs: state.customSubs,
+        topicNotes: state.topicNotes,
+        exportedAt: new Date().toISOString()
+      };
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'anesthetick-backup-' + new Date().toISOString().slice(0, 10) + '.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      toast('Data exported');
+      return;
+    }
+
+    if (action === 'import-data') {
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = '.json';
+      input.addEventListener('change', () => {
+        const file = input.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+          try {
+            const data = JSON.parse(e.target.result);
+            if (data.progress) state.progress = data.progress;
+            if (data.bookmarks) state.bookmarks = data.bookmarks;
+            if (data.subBookmarks) state.subBookmarks = data.subBookmarks;
+            if (data.customSubs) state.customSubs = data.customSubs;
+            if (data.topicNotes) state.topicNotes = data.topicNotes;
+            saveState();
+            toast('Data imported successfully');
+            navigate('home');
+          } catch (_) {
+            toast('Invalid backup file');
+          }
+        };
+        reader.readAsText(file);
+      });
+      input.click();
       return;
     }
   });
