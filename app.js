@@ -32,11 +32,12 @@
         if (typeof parsed.planWeeksAhead !== 'number') parsed.planWeeksAhead = 26;
         if (typeof parsed.studyDays !== 'number') parsed.studyDays = 5;
         if (!parsed.cloudSha) parsed.cloudSha = '';
+        if (typeof parsed.tutorialSeen !== 'boolean') parsed.tutorialSeen = false;
         return parsed;
       }
     } catch (_) {}
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', githubLogin: '', githubScopes: '', cloudSha: '', installDismissed: false, theme: prefersDark ? 'dark' : 'light', pomodoro: { sessions: 0, total: 0, date: '', focusMin: 25, breakMin: 5, endTs: 0, mode: 'Focus', running: false }, examDate: '', planWeeksAhead: 26, studyDays: 5 };
+    return { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', githubLogin: '', githubScopes: '', cloudSha: '', installDismissed: false, theme: prefersDark ? 'dark' : 'light', pomodoro: { sessions: 0, total: 0, date: '', focusMin: 25, breakMin: 5, endTs: 0, mode: 'Focus', running: false }, examDate: '', planWeeksAhead: 26, studyDays: 5, tutorialSeen: false };
   }
 
   function saveState(opts) {
@@ -1517,6 +1518,125 @@
     dlg.querySelector('[data-dlg="confirm"]').addEventListener('click', () => { haptic(10); close(); if (onConfirm) onConfirm(); });
   }
 
+  /* ── First-run tutorial ─────────────────────────────────── */
+  function showTutorial() {
+    const swipeDemo = `
+      <div class="tut-swipe-demo">
+        <div class="tut-swipe-row">
+          <span class="tut-swipe-chip tick">${ICONS.check}<span>Right = Tick</span></span>
+          <span class="tut-swipe-arrow">→</span>
+        </div>
+        <div class="tut-swipe-item">Learning objective</div>
+        <div class="tut-swipe-row rev">
+          <span class="tut-swipe-arrow">←</span>
+          <span class="tut-swipe-chip save">${ICONS.bookmark}<span>Left = Save</span></span>
+        </div>
+      </div>`;
+
+    const slides = [
+      {
+        grad: 'var(--accent-gradient2)',
+        icon: ICONS['graduation-cap'],
+        title: 'Welcome to Anesthetick',
+        desc: 'Your study companion for <b>EDAIC</b> &amp; <b>FRCA</b> anaesthesia prep. Here&rsquo;s a quick 20-second tour.'
+      },
+      {
+        grad: 'linear-gradient(135deg,#6366f1,#5bc0be)',
+        icon: ICONS.layers,
+        title: 'Browse the curriculum',
+        desc: 'Tap a <b>category</b> to open its sections, then a <b>topic</b> to reveal its Learning Objectives and references.'
+      },
+      {
+        grad: 'linear-gradient(135deg,#22c55e,#5bc0be)',
+        custom: swipeDemo,
+        title: 'Swipe to take action',
+        desc: 'Swipe any item <b>right to tick</b> it done, or <b>left to bookmark</b> it. Works on topics, sections &amp; objectives.'
+      },
+      {
+        grad: 'var(--accent-gradient)',
+        icon: ICONS.bookmark,
+        title: 'Save &amp; track progress',
+        desc: 'Bookmarked items live in the <b>Saved</b> tab. The progress ring in the top bar fills as you master each objective.'
+      },
+      {
+        grad: 'linear-gradient(135deg,#818cf8,#e88d5a)',
+        icon: ICONS.download,
+        title: 'Sync across devices',
+        desc: 'Optionally connect a <b>GitHub account</b> in Settings to keep your progress in sync on every device.'
+      }
+    ];
+
+    let idx = 0;
+    const backdrop = document.createElement('div');
+    backdrop.className = 'tut-backdrop';
+    backdrop.innerHTML = `
+      <div class="tut-card" role="dialog" aria-modal="true">
+        <button class="tut-skip" data-tut="skip">Skip</button>
+        <div class="tut-viewport">
+          <div class="tut-track">
+            ${slides.map(s => `
+              <div class="tut-slide">
+                <div class="tut-visual">
+                  ${s.custom ? s.custom : `<div class="tut-bubble" style="background:${s.grad}">${s.icon}</div>`}
+                </div>
+                <h2 class="tut-title">${s.title}</h2>
+                <p class="tut-desc">${s.desc}</p>
+              </div>`).join('')}
+          </div>
+        </div>
+        <div class="tut-dots">
+          ${slides.map((_, i) => `<span class="tut-dot${i === 0 ? ' active' : ''}"></span>`).join('')}
+        </div>
+        <div class="tut-nav">
+          <button class="btn-ghost tut-back" data-tut="back">Back</button>
+          <button class="btn-primary tut-next" data-tut="next">Next</button>
+        </div>
+      </div>`;
+    document.body.appendChild(backdrop);
+    requestAnimationFrame(() => backdrop.classList.add('show'));
+
+    const track = backdrop.querySelector('.tut-track');
+    const dots = Array.from(backdrop.querySelectorAll('.tut-dot'));
+    const backBtn = backdrop.querySelector('.tut-back');
+    const nextBtn = backdrop.querySelector('.tut-next');
+
+    function render() {
+      track.style.transform = `translateX(${-idx * 100}%)`;
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      backBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+      nextBtn.textContent = idx === slides.length - 1 ? 'Get started' : 'Next';
+    }
+    function finish() {
+      backdrop.classList.remove('show');
+      setTimeout(() => backdrop.remove(), 300);
+      state.tutorialSeen = true;
+      saveState({ silent: true });
+    }
+    function go(n) {
+      idx = Math.max(0, Math.min(slides.length - 1, n));
+      render();
+      haptic(8);
+    }
+
+    backdrop.addEventListener('click', e => {
+      const act = e.target.closest('[data-tut]')?.dataset.tut;
+      if (act === 'skip') { haptic(8); finish(); }
+      else if (act === 'back') go(idx - 1);
+      else if (act === 'next') { if (idx === slides.length - 1) { haptic(12); finish(); } else go(idx + 1); }
+    });
+
+    // Swipe navigation on the tutorial itself
+    let tx = 0, tActive = false;
+    backdrop.querySelector('.tut-viewport').addEventListener('touchstart', e => { tx = e.touches[0].clientX; tActive = true; }, { passive: true });
+    backdrop.querySelector('.tut-viewport').addEventListener('touchend', e => {
+      if (!tActive) return; tActive = false;
+      const dx = e.changedTouches[0].clientX - tx;
+      if (Math.abs(dx) > 45) { if (dx < 0) go(idx + 1); else go(idx - 1); }
+    }, { passive: true });
+
+    render();
+  }
+
   /* ── Cloud sync (GitHub) ─────────────────────────────────── */
   const GITHUB_API = 'https://api.github.com';
   const GITHUB_DATA_PATH = 'anesthetick-data.json';
@@ -2849,4 +2969,5 @@
 
   navigate('home');
   tryAutoLogin();
+  if (!state.tutorialSeen) setTimeout(showTutorial, 450);
 })();
