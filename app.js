@@ -2636,7 +2636,8 @@
         g.swiped = true;
         const off = Math.max(-65, Math.min(65, dx));
         g.el.style.transition = 'none';
-        g.el.style.transform = 'translateX(' + off + 'px)';
+        // !important beats the finished "rise" entrance animation on .topic/.secg
+        g.el.style.setProperty('transform', 'translateX(' + off + 'px)', 'important');
       }
     }, { passive: false });
 
@@ -2647,9 +2648,9 @@
       const dy = e.changedTouches[0].clientY - g.y;
       const el = g.el;
       el.style.transition = 'transform .25s ease';
-      el.style.transform = '';
+      el.style.setProperty('transform', 'translateX(0)', 'important');
       removeUnderlay(g.underlay, g.el);
-      setTimeout(() => { el.style.transition = ''; }, 300);
+      setTimeout(() => { el.style.transition = ''; el.style.removeProperty('transform'); }, 300);
       if (g.swiped && Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy)) {
         suppressClick = true;
         setTimeout(() => { suppressClick = false; }, 400);
@@ -2664,10 +2665,11 @@
     root.addEventListener('touchcancel', () => {
       if (g) {
         if (g.lp) clearTimeout(g.lp);
-        g.el.style.transition = 'transform .25s ease';
-        g.el.style.transform = '';
+        const cel = g.el;
+        cel.style.transition = 'transform .25s ease';
+        cel.style.setProperty('transform', 'translateX(0)', 'important');
         removeUnderlay(g.underlay, g.el);
-        setTimeout(() => { if (g && g.el) g.el.style.transition = ''; }, 300);
+        setTimeout(() => { cel.style.transition = ''; cel.style.removeProperty('transform'); }, 300);
         g = null;
       }
     });
