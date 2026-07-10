@@ -2510,7 +2510,6 @@
         const all = ALL_TOPICS.find(x => x.id === tid);
         if (all) { const p = topicProgress(all); tp.classList.toggle('done', p === 1); }
       });
-      haptic(25);
       if (anyUndone) { sfxCelebrate(); celebrate(); toast('Section done!'); } else { toast('Section unmarked'); }
       return;
     }
@@ -2521,7 +2520,6 @@
       state.progress[u] = !was;
       saveState();
       el.classList.toggle('done', !was);
-      haptic(18);
       if (!was) { sfxCelebrate(); celebrate(); toast('Done!'); } else { toast('Undone'); }
       refreshTopicPct(el.closest('[data-topic-id]'));
     } else {
@@ -2534,7 +2532,6 @@
       saveState();
       el.classList.toggle('done', setVal);
       el.querySelectorAll('.sub-item').forEach(s => s.classList.toggle('done', setVal));
-      haptic(25);
       if (setVal) { sfxCelebrate(); celebrate(); toast('Topic complete!'); } else { toast('Unmarked'); }
       refreshTopicPct(el);
     }
@@ -2558,7 +2555,6 @@
         el.querySelectorAll('.sec-bookmark-btn').forEach(b => { b.classList.add('active'); b.innerHTML = ICONS['bookmark-filled']; });
       }
       saveState();
-      haptic(18);
       toast(anyAdded ? 'Section bookmarked' : 'Section bookmarks removed');
       return;
     }
@@ -2568,7 +2564,6 @@
       toggleSubBookmark(u);
       const bm = el.querySelector('.sub-bookmark');
       if (bm) { bm.classList.toggle('active', isSubBookmarked(u)); bm.innerHTML = isSubBookmarked(u) ? ICONS['bookmark-filled'] : ICONS.bookmark; }
-      haptic(18);
       toast(isSubBookmarked(u) ? 'Saved' : 'Removed');
     } else {
       const tid = el.dataset.topicId;
@@ -2576,7 +2571,6 @@
       toggleBookmark(tid);
       const btns = el.querySelectorAll('.bookmark-btn');
       btns.forEach(b => { b.classList.toggle('active'); b.innerHTML = isBookmarked(tid) ? ICONS['bookmark-filled'] : ICONS.bookmark; });
-      haptic(18);
       toast(isBookmarked(tid) ? 'Topic saved' : 'Removed');
     }
   }
@@ -2601,7 +2595,7 @@
       const el = e.target.closest('.sub-item, .topic, .secg');
       if (!el || e.touches.length !== 1) { g = null; return; }
       const isSub = el.classList.contains('sub-item') || el.classList.contains('secg');
-      g = { el, isSub, x: e.touches[0].clientX, y: e.touches[0].clientY, moved: false, swiped: false, longPressed: false, lp: null, underlay: null };
+      g = { el, isSub, x: e.touches[0].clientX, y: e.touches[0].clientY, moved: false, swiped: false, longPressed: false, lp: null, underlay: null, commitHapticsDone: false };
       g.lp = setTimeout(() => {
         if (g && !g.moved && !g.swiped) {
           g.longPressed = true;
@@ -2617,7 +2611,7 @@
       if (Math.abs(dx) > 8 || Math.abs(dy) > 8) { g.moved = true; if (g.lp) clearTimeout(g.lp); }
       const ratioOk = Math.abs(dx) > Math.abs(dy) * 1.2;
       if (ratioOk && Math.abs(dx) > 8) { e.preventDefault(); }
-      // Show underlay early (before movement starts) so color/icon are visible immediately
+      // Show underlay early so color/icon are visible immediately
       if (Math.abs(dx) > 8 && ratioOk && !g.underlay) {
         g.underlay = createUnderlay(g.el);
         if (g.lp) clearTimeout(g.lp);
@@ -2631,8 +2625,13 @@
           g.underlay.className = 'swipe-underlay left';
           g.underlay.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;color:#818cf8;opacity:' + (0.3 + 0.7 * intensity) + '"><path d="M6 3h12v18l-6-4-6 4z" fill="none" stroke="#818cf8" stroke-width="2" stroke-linejoin="round"/></svg>';
         }
+        // Haptic at commit threshold (28px) – fires once mid-gesture
+        if (Math.abs(dx) > 28 && !g.commitHapticsDone) {
+          g.commitHapticsDone = true;
+          haptic(18);
+        }
       }
-      if (Math.abs(dx) > 15 && ratioOk) {
+      if (Math.abs(dx) > 8 && ratioOk) {
         if (g.lp) clearTimeout(g.lp);
         g.swiped = true;
         const off = Math.max(-65, Math.min(65, dx));
