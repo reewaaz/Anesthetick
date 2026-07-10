@@ -2585,15 +2585,18 @@
     let g = null;
     function createUnderlay(el) {
       const r = el.getBoundingClientRect();
-      const app = document.getElementById('app');
-      const ar = app.getBoundingClientRect();
       const u = document.createElement('div');
       u.className = 'swipe-underlay';
-      u.style.cssText = `top:${r.top - ar.top - app.scrollTop}px;left:${r.left - ar.left - app.scrollLeft}px;width:${r.width}px;height:${r.height}px;`;
-      app.appendChild(u);
+      u.style.cssText = `top:${r.top}px;left:${r.left}px;width:${r.width}px;height:${r.height}px;`;
+      document.body.appendChild(u);
+      el.style.zIndex = '10000';
+      el.style.position = 'relative';
       return u;
     }
-    function removeUnderlay(u) { if (u) { u.remove(); } }
+    function removeUnderlay(u, el) {
+      if (u) { u.remove(); }
+      if (el) { el.style.zIndex = ''; el.style.position = ''; }
+    }
     root.addEventListener('touchstart', e => {
       const el = e.target.closest('.sub-item, .topic, .secg');
       if (!el || e.touches.length !== 1) { g = null; return; }
@@ -2646,7 +2649,7 @@
       const el = g.el;
       el.style.transition = 'transform .25s ease';
       el.style.transform = '';
-      removeUnderlay(g.underlay);
+      removeUnderlay(g.underlay, g.el);
       setTimeout(() => { el.style.transition = ''; }, 300);
       if (g.swiped && Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy)) {
         suppressClick = true;
@@ -2664,7 +2667,7 @@
         if (g.lp) clearTimeout(g.lp);
         g.el.style.transition = 'transform .25s ease';
         g.el.style.transform = '';
-        removeUnderlay(g.underlay);
+        removeUnderlay(g.underlay, g.el);
         setTimeout(() => { if (g && g.el) g.el.style.transition = ''; }, 300);
         g = null;
       }
