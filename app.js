@@ -95,15 +95,24 @@
     } catch (_) {}
   }
 
-  function sfxCheck() { playTone(880, 0.15, 'sine', 0.12); }
-  function sfxUncheck() { playTone(440, 0.12, 'triangle', 0.08); }
-  function sfxNav() { playTone(660, 0.08, 'sine', 0.06); }
+  function sfxCheck() {
+    playTone(660, 0.08, 'sine', 0.08);
+    playTone(880, 0.06, 'sine', 0.05);
+  }
+  function sfxUncheck() {
+    playTone(300, 0.10, 'triangle', 0.05);
+    playTone(240, 0.08, 'sine', 0.03);
+  }
+  function sfxNav() { playTone(1000, 0.04, 'sine', 0.03); }
   function sfxCelebrate() {
     [523, 659, 784, 1047].forEach((f, i) => {
-      setTimeout(() => playTone(f, 0.3, 'sine', 0.1), i * 80);
+      setTimeout(() => playTone(f, 0.18, 'sine', 0.07), i * 70);
     });
   }
-  function sfxBookmark() { playTone(1200, 0.1, 'sine', 0.06); }
+  function sfxBookmark() {
+    playTone(880, 0.08, 'sine', 0.06);
+    playTone(1100, 0.10, 'triangle', 0.04);
+  }
 
   /* ── helpers ───────────────────────────────────────────── */
   const $ = (s, p = document) => p.querySelector(s);
@@ -963,6 +972,7 @@
     }
 
     startBtn.onclick = () => {
+      haptic(10);
       if (timerRunning) {
         timerRunning = false;
         state.pomodoro.running = false;
@@ -979,6 +989,7 @@
     };
 
     resetBtn.onclick = () => {
+      haptic(10);
       if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
       timerRunning = false;
       state.pomodoro.running = false;
@@ -1112,6 +1123,7 @@
     requestAnimationFrame(() => {
       inner.querySelectorAll('.ref-card.clickable').forEach(card => {
         card.addEventListener('click', () => {
+          haptic(8);
           const url = card.dataset.url;
           if (url) window.open(url, '_blank', 'noopener');
         });
@@ -1304,6 +1316,7 @@
     requestAnimationFrame(() => {
       inner.querySelectorAll('.ref-card.clickable').forEach(card => {
         card.addEventListener('click', () => {
+          haptic(8);
           const url = card.dataset.url;
           if (url) window.open(url, '_blank', 'noopener');
         });
@@ -1508,9 +1521,9 @@
         setTimeout(() => backdrop.remove(), 300);
         resolve(result);
       };
-      backdrop.addEventListener('click', e => { if (e.target === backdrop) close(false); });
-      dlg.querySelector('[data-dlg="cancel"]').addEventListener('click', () => close(false));
-      dlg.querySelector('[data-dlg="confirm"]').addEventListener('click', () => close(true));
+      backdrop.addEventListener('click', e => { if (e.target === backdrop) { haptic(8); close(false); } });
+      dlg.querySelector('[data-dlg="cancel"]').addEventListener('click', () => { haptic(8); close(false); });
+      dlg.querySelector('[data-dlg="confirm"]').addEventListener('click', () => { haptic(10); close(true); });
     });
   }
 
@@ -1858,9 +1871,10 @@
         setTimeout(() => backdrop.remove(), 300);
         resolve(result);
       };
-      backdrop.addEventListener('click', e => { if (e.target === backdrop) close(null); });
-      dlg.querySelector('[data-dlg="cancel"]').addEventListener('click', () => close(null));
+      backdrop.addEventListener('click', e => { if (e.target === backdrop) { haptic(8); close(null); } });
+      dlg.querySelector('[data-dlg="cancel"]').addEventListener('click', () => { haptic(8); close(null); });
       dlg.querySelector('[data-dlg="confirm"]').addEventListener('click', () => {
+        haptic(10);
         const user = dlg.querySelector('#authUser').value.trim();
         const pass = dlg.querySelector('#authPass').value.trim();
         if (user && pass) close({ user, pass });
@@ -1982,7 +1996,7 @@
 
     if (target.dataset.nav) {
       const nav = target.dataset.nav;
-      sfxNav();
+      haptic(8); sfxNav();
       if (nav === 'home') navigate('home');
       else if (nav === 'category') navigate('category', target.dataset.cat);
       return;
@@ -1990,14 +2004,14 @@
 
     // Category card
     if (target.dataset.cat) {
-      sfxNav();
+      haptic(8); sfxNav();
       navigate('category', target.dataset.cat);
       return;
     }
 
     // Topic click (click on topic row, not inside sub-item)
     if (target.dataset.topicId && !target.dataset.action && !e.target.closest('.sub-item, .sub-bookmark, .sub-del')) {
-      sfxNav();
+      haptic(8); sfxNav();
       navigate('topic', target.dataset.topicId);
       return;
     }
@@ -2011,6 +2025,7 @@
       const input = document.getElementById('customSubInput');
       const text = input?.value.trim();
       if (text && topicId) {
+        haptic(10);
         addCustomSub(topicId, text);
         input.value = '';
         navigate('topic', topicId);
@@ -2024,6 +2039,7 @@
       const topicId = target.dataset.topicId;
       const idx = parseInt(target.dataset.customIdx);
       if (!isNaN(idx) && topicId) {
+        haptic(10);
         removeCustomSub(topicId, idx);
         navigate('topic', topicId);
         toast('Custom objective removed');
@@ -2048,6 +2064,7 @@
     // Check toggle on topic
     if (action === 'check') {
       e.stopPropagation();
+      haptic(12);
       const topicEl = target.closest('.topic');
       if (topicEl?.dataset.topicId) {
         const all = ALL_TOPICS.find(t => t.id === topicEl.dataset.topicId);
@@ -2117,6 +2134,7 @@
 
     // Install from settings
       if (action === 'install-app') {
+        haptic(10);
         if (window.matchMedia('(display-mode: standalone)').matches) {
           toast('App is already installed');
         } else if (deferredPrompt) {
@@ -2136,6 +2154,7 @@
 
       // Cloud account actions
       if (action === 'cloud-login') {
+        haptic(10);
         showAuthDialog('login').then(creds => {
           if (!creds) return;
           toast('Connecting…');
@@ -2144,6 +2163,7 @@
         return;
       }
       if (action === 'cloud-register') {
+        haptic(10);
         showAuthDialog('register').then(creds => {
           if (!creds) return;
           toast('Registering…');
@@ -2152,17 +2172,20 @@
         return;
       }
       if (action === 'cloud-logout') {
+        haptic(10);
         showConfirm('Logout', 'Disconnect cloud account? Local data will be kept.', 'Logout', 'Cancel').then(ok => {
           if (ok) cloudLogout();
         });
         return;
       }
       if (action === 'cloud-sync') {
+        haptic(10);
         toast('Saving…');
         syncToGithub(cloudPayload()).then(() => toast('Saved to cloud')).catch(err => { console.error('[anesthetick] save failed:', err); toast('Save failed: ' + err.message); });
         return;
       }
       if (action === 'cloud-check') {
+        haptic(10);
         toast('Checking…');
         (async () => {
           try {
@@ -2190,6 +2213,7 @@
 
     // Reset actions in settings
     if (action === 'reset-progress') {
+      haptic(12);
       showConfirm('Reset Progress', 'Clear all checkmarks? This cannot be undone.', 'Reset', 'Cancel').then(ok => {
         if (!ok) return;
         state.progress = {};
@@ -2199,6 +2223,7 @@
       return;
     }
     if (action === 'reset-bookmarks') {
+      haptic(12);
       showConfirm('Clear Bookmarks', 'Remove all saved topics and sub-items? This cannot be undone.', 'Clear', 'Cancel').then(ok => {
         if (!ok) return;
         state.bookmarks = [];
@@ -2209,6 +2234,7 @@
       return;
     }
     if (action === 'reset-all') {
+      haptic(12);
       showConfirm('Reset Everything', 'Wipe all local data including progress, bookmarks, notes, and theme? This cannot be undone.', 'Wipe', 'Cancel').then(ok => {
         if (!ok) return;
         state = { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', githubScopes: '', installDismissed: false, theme: 'dark' };
@@ -2221,6 +2247,7 @@
     }
 
     if (action === 'export-data') {
+      haptic(10);
       const data = {
         progress: state.progress,
         bookmarks: state.bookmarks,
@@ -2243,6 +2270,7 @@
     }
 
     if (action === 'import-data') {
+      haptic(10);
       const input = document.createElement('input');
       input.type = 'file';
       input.accept = '.json';
@@ -2582,6 +2610,7 @@
   });
 
   $('#installBtn').addEventListener('click', async () => {
+    haptic(10);
     if (deferredPrompt) {
       deferredPrompt.prompt();
       const result = await deferredPrompt.userChoice;
@@ -2595,6 +2624,7 @@
   });
 
   $('#installDismiss').addEventListener('click', () => {
+    haptic(8);
     $installBanner.hidden = true;
     state.installDismissed = true;
     saveState();
