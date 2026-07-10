@@ -1722,18 +1722,9 @@
       for (let attempt = 0; attempt < 6; attempt++) {
         const existing = await readCloudFile(GITHUB_DATA_PATH).catch(e => { if (e.transient && attempt < 5) return 'RETRY'; throw e; });
         if (existing === 'RETRY') { await sleep(1200 * attempt); continue; }
-        // Merge remote changes into local state before pushing so no change is ever lost
-        if (existing && existing.content) {
-          try {
-            const text = decodeURIComponent(escape(atob(existing.content)));
-            const remote = JSON.parse(text);
-            mergeIntoState(remote);
-          } catch (_) {}
-        }
         const sha = existing ? existing.sha : null;
-        // Rebuild payload from the now-merged state
-        const mergedContentB64 = encodePayload(cloudPayload());
-        const res = await writeCloudFile(GITHUB_DATA_PATH, mergedContentB64, sha);
+        const contentB64 = encodePayload(data);
+        const res = await writeCloudFile(GITHUB_DATA_PATH, contentB64, sha);
         if (res.ok) {
           try { const body = await res.json(); if (body?.content?.sha) { state.cloudSha = body.content.sha; cloudLastPushTime = Date.now(); saveState({ silent: true }); } } catch (_) {}
           return true;
@@ -1745,6 +1736,15 @@
         const conflict = res.status === 409 || res.status === 422 || /does not match/i.test(msg) || /branch was modified/i.test(msg);
         const transient = res.status >= 500 || res.status === 0 || /rate limit/i.test(msg) || /<!DOCTYPE/i.test(msg);
         if ((conflict || transient) && attempt < 5) {
+          // On conflict, merge remote into our payload so no change is lost
+          if (conflict && existing && existing.content) {
+            try {
+              const text = decodeURIComponent(escape(atob(existing.content)));
+              const remote = JSON.parse(text);
+              const merged = { ...remote, progress: { ...remote.progress, ...data.progress }, bookmarks: [...new Set([...(remote.bookmarks||[]), ...(data.bookmarks||[])])], subBookmarks: [...new Set([...(remote.subBookmarks||[]), ...(data.subBookmarks||[])])], customSubs: { ...remote.customSubs, ...data.customSubs }, topicNotes: { ...remote.topicNotes, ...data.topicNotes } };
+              data = merged;
+            } catch (_) {}
+          }
           await sleep(1000 * Math.pow(1.5, attempt));
           continue;
         }
@@ -1848,42 +1848,26 @@
   let cloudLastPushTime = 0;
   let cloudPollTimer = null;
 
-  // Merge remote data into local state without re-rendering (used inside syncToGithub)
-  function mergeIntoState(remote) {
+  // Full state replace from remote data (used by polling)
+  function applyCloudState(remote) {
+    if (!remote || typeof remote !== 'object') return false;
     let changed = false;
-    if (remote.progress) {
-      for (const key in remote.progress) {
-        if (remote.progress[key] && !state.progress[key]) { state.progress[key] = true; changed = true; }
-      }
-    }
-    if (remote.bookmarks) {
-      for (const bm of remote.bookmarks) { if (!state.bookmarks.includes(bm)) { state.bookmarks.push(bm); changed = true; } }
-    }
-    if (remote.subBookmarks) {
-      for (const sb of remote.subBookmarks) { if (!state.subBookmarks.includes(sb)) { state.subBookmarks.push(sb); changed = true; } }
-    }
-    if (remote.topicNotes) {
-      for (const key in remote.topicNotes) { if (!state.topicNotes[key]) { state.topicNotes[key] = remote.topicNotes[key]; changed = true; } }
-    }
-    if (remote.customSubs) {
-      for (const tid in remote.customSubs) {
-        const rl = remote.customSubs[tid] || [];
-        const ll = state.customSubs[tid] || [];
-        for (const item of rl) { if (!ll.includes(item)) { ll.push(item); changed = true; } }
-        state.customSubs[tid] = ll;
-      }
-    }
-    if (remote.examDate && !state.examDate) { state.examDate = remote.examDate; changed = true; }
-    if (typeof remote.planWeeksAhead === 'number' && !state.planWeeksAhead) { state.planWeeksAhead = remote.planWeeksAhead; changed = true; }
-    if (typeof remote.studyDays === 'number' && !state.studyDays) { state.studyDays = remote.studyDays; changed = true; }
+    if (remote.progress && typeof remote.progress === 'object') { state.progress = remote.progress; changed = true; }
+    if (remote.bookmarks && Array.isArray(remote.bookmarks)) { state.bookmarks = remote.bookmarks; changed = true; }
+    if (remote.subBookmarks && Array.isArray(remote.subBookmarks)) { state.subBookmarks = remote.subBookmarks; changed = true; }
+    if (remote.customSubs && typeof remote.customSubs === 'object') { state.customSubs = remote.customSubs; changed = true; }
+    if (remote.topicNotes && typeof remote.topicNotes === 'object') { state.topicNotes = remote.topicNotes; changed = true; }
+    if (typeof remote.examDate === 'string') { state.examDate = remote.examDate; changed = true; }
+    if (typeof remote.planWeeksAhead === 'number') { state.planWeeksAhead = remote.planWeeksAhead; changed = true; }
+    if (typeof remote.studyDays === 'number') { state.studyDays = remote.studyDays; changed = true; }
     if (changed) saveState({ silent: true });
     return changed;
   }
 
-  // Same merge but also re-renders the current view (used by polling)
+  // Replace local state with remote + re-render (used by polling)
   function mergeCloudData(remote) {
-    const changed = mergeIntoState(remote);
-    if (changed && state.view) navigate(state.view);
+    const changed = applyCloudState(remote);
+    if (changed && history.state) navigateToState(history.state);
     return changed;
   }
 
