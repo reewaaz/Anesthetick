@@ -311,33 +311,32 @@ main::-webkit-scrollbar-thumb {
   width: 100%;
 }
 
-/* ── Pull to refresh ──────────────────────────────────── */
-.pull-indicator {
+/* Bookmarks tabs */
+.bm-tabs {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 60px;
-  color: var(--muted);
+  gap: 0;
+  margin: 0 0 16px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.bm-tab {
+  flex: 1;
+  padding: 10px;
   font-size: 13px;
-  font-weight: 500;
-  pointer-events: none;
-  transition: opacity 0.2s;
+  font-weight: 600;
+  color: var(--muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s var(--ease);
 }
-.pull-indicator.loading {
-  opacity: 0.5;
+.bm-tab.active {
+  background: var(--surface2);
+  color: var(--accent2);
 }
-.pull-arrow {
-  display: grid;
-  place-items: center;
-  width: 28px;
-  height: 28px;
-  font-size: 18px;
-  transition: transform 0.2s ease-out;
-  flex-shrink: 0;
-}
-.pull-text {
-  white-space: nowrap;
+.bm-tab:not(.active):hover {
+  background: color-mix(in srgb, var(--surface2) 50%, transparent);
 }
 
 /* ── Hero ──────────────────────────────────────────────── */
@@ -1934,31 +1933,34 @@ main::-webkit-scrollbar-thumb {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0;
+  gap: 2px;
   color: var(--muted);
   font-size: 10.5px;
   font-weight: 600;
-  transition: 0.25s var(--ease);
   position: relative;
   letter-spacing: 0.02em;
-  padding: 4px 12px;
+  padding: 6px 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.navbtn::before {
+.navbtn::after {
   content: '';
   position: absolute;
   top: 4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 48px;
-  height: 28px;
+  width: 40px;
+  height: 24px;
   border-radius: 20px;
   background: transparent;
-  transition: 0.3s var(--ease);
+  transition: background 0.2s var(--ease);
 }
 
-.navbtn.active::before {
-  background: color-mix(in srgb, var(--accent2) 16%, transparent);
+.navbtn.active::after {
+  background: color-mix(in srgb, var(--accent2) 20%, transparent);
 }
 
 .navbtn svg {
@@ -1966,39 +1968,22 @@ main::-webkit-scrollbar-thumb {
   height: 22px;
   position: relative;
   z-index: 1;
-}
-
-.navbtn span {
-  position: relative;
-  z-index: 1;
-  margin-top: 0;
+  transition: transform 0.2s var(--ease);
 }
 
 .navbtn.active {
   color: var(--accent2);
 }
 
+.navbtn.active svg {
+  transform: scale(1.1);
+}
+
 .navbtn.is-back {
   color: var(--accent2);
 }
 
-.navbtn.active svg {
-  animation: pop 0.25s var(--ease);
-}
 
-
-
-@keyframes pop {
-  0% {
-    transform: scale(0.85);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 
 /* ── Animations ────────────────────────────────────────── */
 @keyframes rise {
@@ -2412,7 +2397,6 @@ main::-webkit-scrollbar-thumb {
   }
   .confetti { display: none !important; }
   .ripple { display: none !important; }
-  .navbtn:active svg { animation: none !important; }
 }
 
 /* ── Confirm dialog ────────────────────────────────────── */

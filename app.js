@@ -1019,7 +1019,8 @@
     if (startBtn) startBtn.textContent = timerRunning ? 'Pause' : (currentTimerSeconds() > 0 ? 'Start' : 'Restart');
   }
 
-  function viewBookmarks() {
+  function viewBookmarks(activeTab) {
+    if (!activeTab) activeTab = 'topics';
     const inner = document.createElement('div');
     inner.className = 'inner';
 
@@ -1039,28 +1040,26 @@
     }
 
     const hasBm = bmTopics.length > 0 || Object.keys(subBmMap).length > 0;
+
+    let htmlStr = '<div class="bm-tabs"><button class="bm-tab' + (activeTab === 'topics' ? ' active' : '') + '" data-bm-tab="topics">Topics</button><button class="bm-tab' + (activeTab === 'subs' ? ' active' : '') + '" data-bm-tab="subs">Sub-topics</button></div>';
+
     if (!hasBm) {
-      inner.innerHTML = '<div class="empty"><p>No saved topics yet.</p><p style="font-size:12px;margin-top:8px;font-weight:400">Tap the bookmark icon on any topic to save it here.</p></div>';
+      htmlStr += '<div class="empty"><p>No saved items yet.</p><p style="font-size:12px;margin-top:8px;font-weight:400">Tap the bookmark icon on any topic or sub-item to save it here.</p></div>';
+      inner.innerHTML = htmlStr;
       return inner;
     }
 
-    let htmlStr = '';
-
-    // Topic bookmarks
-    if (bmTopics.length) {
-      htmlStr += '<div class="list-title">Saved Topics</div>';
+    if (activeTab === 'topics' && bmTopics.length) {
       htmlStr += '<div>' + bmTopics.map(t => renderTopicItem(t)).join('') + '</div>';
     }
 
-    // Sub-item bookmarks
-    if (Object.keys(subBmMap).length) {
-      htmlStr += '<div class="list-title" style="margin-top:20px">Saved Sub-items</div>';
+    if (activeTab === 'subs' && Object.keys(subBmMap).length) {
       for (const key of Object.keys(subBmMap)) {
         const [catId, secId, topicId] = key.split('|');
         const topic = ALL_TOPICS.find(t => t.id === topicId);
         if (!topic) continue;
         htmlStr += '<div class="saved-sub-group" data-topic-id="' + topicId + '">';
-        htmlStr += '<div class="saved-sub-cat">' + topic.catName + ' &middot; ' + topic.secName + '</div>';
+        htmlStr += '<div class="saved-sub-cat">' + topic.catName + ' &#183; ' + topic.secName + '</div>';
         htmlStr += '<div class="saved-sub-topic">' + topic.name + '</div>';
         for (const uidStr of subBmMap[key]) {
           const parts = uidStr.split('/');
@@ -1072,7 +1071,6 @@
             ? (customSubs[actualIdx] || '(deleted)')
             : (((topic.sub && topic.sub[actualIdx] && topic.sub[actualIdx].t) || (topic.sub && topic.sub[actualIdx]) || '(deleted)'));
           const doneClass = isDone(uidStr) ? ' done' : '';
-          const sb = isSubBookmarked(uidStr);
           htmlStr += '<div class="sub-item' + doneClass + '" data-uid="' + uidStr + '">';
           htmlStr += '<div class="check">' + ICONS.check + '</div>';
           htmlStr += '<div class="sub-context"><span class="s-name">' + subText + '</span></div>';
@@ -1081,6 +1079,10 @@
         }
         htmlStr += '</div>';
       }
+    }
+
+    if (!hasBm || (activeTab === 'topics' && !bmTopics.length) || (activeTab === 'subs' && !Object.keys(subBmMap).length)) {
+      htmlStr += '<div class="empty" style="margin-top:24px"><p>No items in this tab.</p></div>';
     }
 
     inner.innerHTML = htmlStr;
@@ -1211,20 +1213,6 @@
               <div class="desc">Saves to cloud after every change</div>
             </div>
             <span class="sync-status" id="syncStatus">${syncStatusLabel()}</span>
-          </div>
-          <div class="set-row" style="border-color:transparent">
-            <div class="set-info">
-              <div class="lbl">Sync Now</div>
-              <div class="desc">Upload current data to cloud</div>
-            </div>
-            <button class="btn-ghost" data-action="cloud-sync" style="font-size:12px">${ICONS.upload} Save</button>
-          </div>
-          <div class="set-row" style="border-color:transparent">
-            <div class="set-info">
-              <div class="lbl">Check Connection</div>
-              <div class="desc">Test repo access and permissions</div>
-            </div>
-            <button class="btn-ghost" data-action="cloud-check" style="font-size:12px">${ICONS.radio} Test</button>
           </div>
           <div class="set-row" style="border-color:transparent">
             <div class="set-info">
@@ -1818,9 +1806,21 @@
     stopCloudPolling();
     state.githubUser = '';
     state.githubPin = '';
+    state.githubLogin = '';
+    state.githubScopes = '';
+    state.cloudSha = null;
+    state.progress = {};
+    state.bookmarks = [];
+    state.subBookmarks = [];
+    state.customSubs = {};
+    state.topicNotes = {};
+    state.examDate = '';
+    state.planWeeksAhead = 26;
+    state.studyDays = 5;
+    state.pomodoro = { total: 0, sessions: 0 };
     saveState();
-    toast('Logged out');
-    navigate('settings');
+    toast('Logged out — all local data cleared');
+    navigate('home');
   }
 
   // Debounced auto-save after every local change
@@ -2010,65 +2010,21 @@
     }
   }, { passive: false });
 
-  // Pull to refresh
-  let pullY = 0, pullX = 0, pulling = false, pullDist = 0;
-  let $pullEl = null;
-
   const VIEW_FN = { home: viewHome, bookmarks: viewBookmarks, settings: viewCombinedSettings, progress: viewProgress, planner: viewPlanner, category: viewCategory, topic: viewTopic, search: viewSearch };
 
-  function createPullEl() {
-    const el = document.createElement('div');
-    el.className = 'pull-indicator';
-    el.innerHTML = '<div class="pull-arrow">↓</div><div class="pull-text">Pull to refresh</div>';
-    return el;
-  }
 
-  function pullRefresh() {
-    const state = history.state;
-    if (!state) return;
-    if ($pullEl) $pullEl.classList.add('loading');
-    const fn = VIEW_FN[state.view] || viewHome;
-    showView(fn, state.data);
-    toast('Refreshed');
-  }
-
-  $view.addEventListener('touchstart', e => {
-    if (Math.round($view.scrollTop) > 0 || e.touches.length !== 1) return;
-    pullY = e.touches[0].clientY;
-    pullX = e.touches[0].clientX;
-    pullDist = 0;
-    pulling = true;
-  }, { passive: true });
-
-  $view.addEventListener('touchmove', e => {
-    if (!pulling || e.touches.length !== 1) return;
-    const dy = e.touches[0].clientY - pullY;
-    const dx = Math.abs(e.touches[0].clientX - pullX);
-    if (dy < 0 || dx > 12) { pulling = false; removePullEl(); return; }
-    e.preventDefault();
-    pullDist = Math.min(dy * 0.4, 140);
-    if (!$pullEl) { $pullEl = createPullEl(); $view.prepend($pullEl); }
-    $pullEl.style.transform = `translateY(${pullDist - 60}px)`;
-    const arrow = $pullEl.querySelector('.pull-arrow');
-    if (arrow) arrow.style.transform = `rotate(${Math.min(pullDist / 80 * 180, 180)}deg)`;
-    const text = $pullEl.querySelector('.pull-text');
-    if (text) text.textContent = pullDist > 75 ? 'Release to refresh' : 'Pull to refresh';
-  }, { passive: false });
-
-  function removePullEl() {
-    if ($pullEl) { $pullEl.remove(); $pullEl = null; }
-  }
-
-  $view.addEventListener('touchend', () => {
-    if (!pulling) return;
-    pulling = false;
-    if (pullDist > 75) pullRefresh();
-    removePullEl();
-    pullDist = 0;
-  }, { passive: true });
 
   // Main view events
   $view.addEventListener('click', e => {
+    // Bookmarks tab switching
+    const bmTab = e.target.closest('[data-bm-tab]');
+    if (bmTab) {
+      haptic(8);
+      const tab = bmTab.dataset.bmTab;
+      const viewFn = history.state?.view === 'bookmarks' ? () => viewBookmarks(tab) : viewBookmarks;
+      showView(viewFn);
+      return;
+    }
     const target = e.target.closest('[data-nav], [data-cat], [data-action], [data-topic-id], [data-sec]');
 
     if (!target) return;
@@ -2270,7 +2226,7 @@
       }
       if (action === 'cloud-logout') {
         haptic(10);
-        showConfirm('Logout', 'Disconnect cloud account? Local data will be kept.', () => cloudLogout(), null, 'Logout', 'Cancel');
+        showConfirm('Logout', 'Disconnect cloud account? All local progress, bookmarks, and data will be cleared.', () => cloudLogout(), null, 'Logout', 'Cancel');
         return;
       }
       if (action === 'cloud-sync') {
@@ -2623,12 +2579,12 @@
       if (Math.abs(dx) > 8 || Math.abs(dy) > 8) { g.moved = true; if (g.lp) clearTimeout(g.lp); }
       const ratioOk = Math.abs(dx) > Math.abs(dy) * 1.2;
       // Show underlay early (before movement starts) so color/icon are visible immediately
-      if (Math.abs(dx) > 12 && ratioOk && !g.underlay) {
+      if (Math.abs(dx) > 8 && ratioOk && !g.underlay) {
         g.underlay = createUnderlay(g.el);
         if (g.lp) clearTimeout(g.lp);
       }
       if (g.underlay && ratioOk) {
-        const intensity = Math.min(1, Math.abs(dx) / 60);
+        const intensity = Math.min(1, Math.abs(dx) / 30);
         if (dx > 0) {
           g.underlay.className = 'swipe-underlay right';
           g.underlay.innerHTML = '<svg viewBox="0 0 24 24" style="width:20px;height:20px;color:#22c55e;opacity:' + (0.3 + 0.7 * intensity) + '"><path d="M5 13l4 4 10-10" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
@@ -2637,10 +2593,10 @@
           g.underlay.innerHTML = '<svg viewBox="0 0 24 24" style="width:18px;height:18px;color:#818cf8;opacity:' + (0.3 + 0.7 * intensity) + '"><path d="M6 3h12v18l-6-4-6 4z" fill="none" stroke="#818cf8" stroke-width="2" stroke-linejoin="round"/></svg>';
         }
       }
-      if (Math.abs(dx) > 30 && ratioOk) {
+      if (Math.abs(dx) > 15 && ratioOk) {
         if (g.lp) clearTimeout(g.lp);
         g.swiped = true;
-        const off = Math.max(-130, Math.min(130, dx));
+        const off = Math.max(-65, Math.min(65, dx));
         g.el.style.transition = 'none';
         g.el.style.transform = 'translateX(' + off + 'px)';
       }
@@ -2656,7 +2612,7 @@
       el.style.transform = '';
       removeUnderlay(g.underlay);
       setTimeout(() => { el.style.transition = ''; }, 300);
-      if (g.swiped && Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) {
+      if (g.swiped && Math.abs(dx) > 28 && Math.abs(dx) > Math.abs(dy)) {
         suppressClick = true;
         setTimeout(() => { suppressClick = false; }, 400);
         if (dx > 0) swipeRight(el, g.isSub); else swipeLeft(el, g.isSub);
