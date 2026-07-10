@@ -2596,6 +2596,31 @@ main::-webkit-scrollbar-thumb {
 .ref-btn .ic { width: 16px; height: 16px; }
 @media (hover: hover) and (pointer: fine) { .ref-btn { display: inline-flex; } }
 
+/* Section bookmark button (category page) — styled like ref-btn */
+.sec-bookmark-btn {
+  width: 28px;
+  height: 28px;
+  flex: 0 0 auto;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  background: var(--bg2);
+  color: var(--muted);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.sec-bookmark-btn.active {
+  color: var(--warn);
+  border-color: color-mix(in srgb, var(--warn) 40%, var(--line));
+}
+@media (hover: hover) and (pointer: fine) {
+  .sec-bookmark-btn { display: inline-flex; }
+  .sec-bookmark-btn:hover { background: var(--surface2); border-color: var(--accent2); color: var(--warn); }
+  .sec-bookmark-btn.active:hover { background: var(--surface2); }
+}
+
 /* ── Revealable references panel (long-press / hyperlink) ── */
 .sub-refs {
   display: flex;

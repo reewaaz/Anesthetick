@@ -534,7 +534,7 @@
         <div class="secg" data-sec="${sec.id}">
           <div style="display:flex;align-items:center;gap:10px;margin:18px 4px 10px">
             <div class="sec-name" style="margin:0">${sec.name}</div>
-            <button class="bookmark-btn ${allBm ? 'active' : ''}" data-action="section-bookmark" data-sec-id="${sec.id}" style="width:28px;height:28px;flex-shrink:0">${allBm ? ICONS['bookmark-filled'] : ICONS.bookmark}</button>
+            <button class="sec-bookmark-btn ${allBm ? 'active' : ''}" data-action="section-bookmark">${allBm ? ICONS['bookmark-filled'] : ICONS.bookmark}</button>
           </div>
           ${sec.desc ? html`<div class="sec-desc">${sec.desc}</div>` : ''}
           ${sec.topics.map(t => renderTopicItem({ ...t, catId: cat.id, catName: cat.name, secId: sec.id, secName: sec.name, catColor: cat.color })).join('')}
@@ -2223,33 +2223,8 @@
     if (action === 'section-bookmark') {
       e.stopPropagation();
       sfxBookmark();
-      haptic(12);
-      const secId = target.dataset.secId;
-      if (!secId) return;
-      const allTopics = ALL_TOPICS.filter(t => t.secId === secId);
-      let anyAdded = false;
-      for (const t of allTopics) {
-        if (!isBookmarked(t.id)) { state.bookmarks.push(t.id); anyAdded = true; }
-      }
-      if (!anyAdded) {
-        state.bookmarks = state.bookmarks.filter(id => !allTopics.some(t => t.id === id));
-      }
       const secg = target.closest('.secg');
-      if (secg) {
-        secg.querySelectorAll('.bookmark-btn').forEach(b => {
-          const topicId = b.closest('[data-topic-id]')?.dataset.topicId;
-          if (topicId) {
-            const active = isBookmarked(topicId);
-            b.classList.toggle('active', active);
-            b.innerHTML = active ? ICONS['bookmark-filled'] : ICONS.bookmark;
-          } else if (b.dataset.action === 'section-bookmark') {
-            b.classList.toggle('active', !anyAdded);
-            b.innerHTML = anyAdded ? ICONS['bookmark-filled'] : ICONS.bookmark;
-          }
-        });
-      }
-      saveState();
-      toast(anyAdded ? 'Section saved' : 'Section bookmarks removed');
+      if (secg) swipeLeft(secg, true);
       return;
     }
 
@@ -2610,8 +2585,10 @@
       if (!anyAdded) {
         state.bookmarks = state.bookmarks.filter(id => !allTopics.some(t => t.id === id));
         el.querySelectorAll('.bookmark-btn').forEach(b => { b.classList.remove('active'); b.innerHTML = ICONS.bookmark; });
+        el.querySelectorAll('.sec-bookmark-btn').forEach(b => { b.classList.remove('active'); b.innerHTML = ICONS.bookmark; });
       } else {
         el.querySelectorAll('.bookmark-btn').forEach(b => { b.classList.add('active'); b.innerHTML = ICONS['bookmark-filled']; });
+        el.querySelectorAll('.sec-bookmark-btn').forEach(b => { b.classList.add('active'); b.innerHTML = ICONS['bookmark-filled']; });
       }
       saveState();
       haptic(18);
