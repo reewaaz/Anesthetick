@@ -23,6 +23,7 @@
         if (!parsed.githubUser) parsed.githubUser = '';
         if (!parsed.githubPin) parsed.githubPin = '';
         if (!parsed.githubLogin) parsed.githubLogin = '';
+        if (!parsed.githubScopes) parsed.githubScopes = '';
         if (!parsed.pomodoro) parsed.pomodoro = { sessions: 0, total: 0, date: '', focusMin: 25, breakMin: 5, endTs: 0, mode: 'Focus', running: false };
         if (typeof parsed.pomodoro.total !== 'number') parsed.pomodoro.total = 0;
         if (typeof parsed.pomodoro.endTs !== 'number') parsed.pomodoro.endTs = 0;
@@ -34,7 +35,7 @@
       }
     } catch (_) {}
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    return { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', githubLogin: '', installDismissed: false, theme: prefersDark ? 'dark' : 'light', pomodoro: { sessions: 0, total: 0, date: '', focusMin: 25, breakMin: 5, endTs: 0, mode: 'Focus', running: false }, examDate: '', planWeeksAhead: 26, studyDays: 5 };
+    return { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', githubLogin: '', githubScopes: '', installDismissed: false, theme: prefersDark ? 'dark' : 'light', pomodoro: { sessions: 0, total: 0, date: '', focusMin: 25, breakMin: 5, endTs: 0, mode: 'Focus', running: false }, examDate: '', planWeeksAhead: 26, studyDays: 5 };
   }
 
   function saveState() {
@@ -1572,6 +1573,12 @@
   function authHeader() {
     return 'Basic ' + btoa(state.githubUser + ':' + state.githubPin);
   }
+  function wantsPrivate() {
+    const s = (state.githubScopes || '').toLowerCase();
+    if (!s) return true; // fine-grained or unknown — try private
+    const scopes = s.split(',').map(x => x.trim());
+    return scopes.includes('repo'); // full repo scope → private; only public_repo → public
+  }
 
   // Timeout-protected fetch so a hung/proxied request can never stall the UI
   async function ghFetch(url, opts) {
@@ -1602,6 +1609,8 @@
       if (/<!DOCTYPE/i.test(t)) throw new Error('GitHub is unreachable (rate limit or outage). Try again shortly.');
       throw new Error('Invalid credentials (' + res.status + ')');
     }
+    const scopes = (res.headers && res.headers.get ? res.headers.get('x-oauth-scopes') : '') || '';
+    state.githubScopes = scopes;
     const json = await res.json().catch(() => null);
     if (!json || !json.login) throw new Error('Could not read GitHub account.');
     return json.login;
@@ -1652,12 +1661,20 @@
     const check = await ghFetch(GITHUB_API + '/repos/' + githubOwner() + '/' + GITHUB_REPO, { headers: ghHeaders() });
     if (check.ok) {
       const repo = await check.json().catch(() => null);
-      // Ensure previously-created (possibly public) repos are made private.
-      if (repo && repo.private !== true) {
-        await ghFetch(GITHUB_API + '/repos/' + githubOwner() + '/' + GITHUB_REPO, {
-          method: 'PATCH', headers: ghHeaders({ 'Content-Type': 'application/json' }),
-          body: JSON.stringify({ private: true })
-        }).catch(() => {});
+      // Sync repo visibility to match token scope
+      if (repo) {
+        const wantPrivate = wantsPrivate();
+        if (repo.private !== true && wantPrivate) {
+          await ghFetch(GITHUB_API + '/repos/' + githubOwner() + '/' + GITHUB_REPO, {
+            method: 'PATCH', headers: ghHeaders({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({ private: true })
+          }).catch(() => {});
+        } else if (repo.private === true && !wantPrivate) {
+          await ghFetch(GITHUB_API + '/repos/' + githubOwner() + '/' + GITHUB_REPO, {
+            method: 'PATCH', headers: ghHeaders({ 'Content-Type': 'application/json' }),
+            body: JSON.stringify({ private: false })
+          }).catch(() => {});
+        }
       }
       const branch = repo && repo.default_branch ? repo.default_branch : 'main';
       const ref = await ghFetch(GITHUB_API + '/repos/' + githubOwner() + '/' + GITHUB_REPO + '/git/refs/heads/' + branch, { headers: ghHeaders() });
@@ -1667,12 +1684,13 @@
     const res = await ghFetch(GITHUB_API + '/user/repos', {
       method: 'POST',
       headers: ghHeaders({ 'Content-Type': 'application/json' }),
-      body: JSON.stringify({ name: GITHUB_REPO, description: 'Anesthetick study sync', private: true, auto_init: true })
+      body: JSON.stringify({ name: GITHUB_REPO, description: 'Anesthetick study sync', private: wantsPrivate(), auto_init: true })
     });
     if (res.status === 422) {
       // Repo exists but wasn't readable above (scope/permissions) — surface clearly
       const m = await res.json().catch(() => ({}));
-      throw new Error('Repo "' + GITHUB_REPO + '" exists but is not accessible. ' + (m.message || 'Ensure your PAT has the "repo" scope.'));
+      const hint = wantsPrivate() ? 'Ensure your PAT has the "repo" scope.' : 'Ensure your PAT has at least "public_repo" scope, or the repo belongs to your account.';
+      throw new Error('Repo "' + GITHUB_REPO + '" exists but is not accessible. ' + (m.message || hint));
     }
     if (!res.ok) {
       const m = await res.json().catch(() => ({}));
@@ -1712,7 +1730,12 @@
           await sleep(1000 * Math.pow(1.5, attempt));
           continue;
         }
-        if (res.status === 403) throw new Error('Save rejected (403): PAT likely lacks "repo" scope.');
+        if (res.status === 403) {
+          const hint = wantsPrivate()
+            ? 'Your PAT needs full "repo" scope (not just "public_repo") to write to a private repo. Create a new PAT with repo scope at https://github.com/settings/tokens'
+            : 'Your PAT needs at least "public_repo" scope. Create a new PAT at https://github.com/settings/tokens';
+          throw new Error('Save rejected (403). ' + hint);
+        }
         if (res.status === 404) throw new Error('Repo "' + GITHUB_REPO + '" not found on GitHub.');
         throw new Error('Save failed: ' + msg);
       }
@@ -1828,8 +1851,8 @@
       dlg.innerHTML = `
         <h3>${mode === 'register' ? 'Create Cloud Account' : 'Cloud Login'}</h3>
         <p style="margin-bottom:16px;font-size:13px;line-height:1.5">${mode === 'register'
-          ? 'Your data syncs via GitHub to a <strong>private</strong> repo named &ldquo;anesthetick&rdquo; in your own account. Create a <strong>classic Personal Access Token</strong> with <strong>repo</strong> scope, then enter it below.'
-          : 'Enter your GitHub username and personal access token to sync. Your data lives in a <strong>private</strong> repo in your own account.'}</p>
+          ? 'Your data syncs via GitHub to a repo named &ldquo;anesthetick&rdquo; in your account. Create a <strong>classic PAT</strong> with <strong>repo</strong> scope (private sync) or <strong>public_repo</strong> (public), then enter it below.'
+          : 'Enter your GitHub username and PAT to sync. Data lives in the &ldquo;anesthetick&rdquo; repo (private if your PAT has repo scope).'}</p>
         <div class="auth-form">
           <input type="text" id="authUser" placeholder="GitHub username" autocomplete="username" />
           <input type="password" id="authPass" placeholder="Personal Access Token" autocomplete="current-password" />
@@ -2201,7 +2224,7 @@
     if (action === 'reset-all') {
       showConfirm('Reset Everything', 'Wipe all local data including progress, bookmarks, notes, and theme? This cannot be undone.', 'Wipe', 'Cancel').then(ok => {
         if (!ok) return;
-        state = { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', installDismissed: false, theme: 'dark' };
+        state = { progress: {}, bookmarks: [], subBookmarks: [], customSubs: {}, topicNotes: {}, githubUser: '', githubPin: '', githubScopes: '', installDismissed: false, theme: 'dark' };
         applyTheme('dark');
         saveState();
         toast('All data wiped');
